@@ -16,11 +16,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
         rel="stylesheet">
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
     <!-- navbar-->
-    <nav class="navbar navbar-expand-lg bg-none fixed-top">
+    <nav class="navbar navbar-expand-lg bg-none fixed-top" style="top: -20px">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="img/logo.png" alt="" class="img-fluid" width="30" height="24">
@@ -46,7 +51,11 @@
                 <span class="navbar-text">
                     <a href="#login" class="me-3">
                         <img src="img/user.png" alt="" class="img-fluid align-top me-1" width="25" height="20"
-                            style="font-family: 'Quicksand';">
+                            style="display: none">
+                    </a>
+                    <a href="#login" class="me-3">
+                        <img src="users/pict1.jpeg" alt="" class="img-fluid rounded-circle align-top me-1" width="40"
+                            style="display: block; border: none;">
                     </a>
                 </span>
             </div>
@@ -86,9 +95,9 @@
                         <img src="img/satu.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">DIY Recipe</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                            <h5 class="card-title">Find Recipes</h5>
+                            <p class="card-text">Dive into a world of beauty secrets and find the ideal recipe to
+                                nourish and pamper your skin. Your next glow-up is just a click away!</p>
                         </div>
                     </div>
                 </div>
@@ -97,9 +106,9 @@
                         <img src="img/dua.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Share Recipe</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                            <h5 class="card-title">Do DIY skincare</h5>
+                            <p class="card-text">Unleash your creativity by crafting unique beauty recipes with pure,
+                                natural ingredients. Make it personal, make it yours!</p>
                         </div>
                     </div>
                 </div>
@@ -108,9 +117,10 @@
                         <img src="img/tiga.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Save Recipe</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                            <h5 class="card-title">Glow Up</h5>
+                            <p class="card-text">Elevate your skincare routine and let your radiance shine through!
+                                Discover the transformative power of natural beauty recipes designed to bring out your
+                                best glow.</p>
                         </div>
                     </div>
                 </div>
@@ -125,38 +135,45 @@
         <div class="container">
             <div class="row">
                 <div class="col-8">
-                    <div class="card-group d-block">
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to
-                                            additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
+                    <div id="...." class="card border-secondary mx-2 my-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-5 pt-4">
+                                    <img src="users/pict1.jpeg" alt=""
+                                        style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
+                                    <div class="container">
+                                        <div class="row" style="position: relative; top: -50px; border: none;">
+                                            <div class="col-6">
+                                                <img src="users/pict1.jpeg" class="img-thumbnail rounded-circle mb-1"
+                                                    alt="..." width="100px">
+                                                <p style="font-size: 14px;">@cherrygirl</p>
+                                            </div>
+                                            <div class="col-6 text-end pt-5">
+                                                <p style="font-size: 14px;" class="p-1">10 Nov</p>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card mb-3">
-                            <div class=" row g-0">
-                                <div class="col-md-4">
-                                    <img src="..." class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to
-                                            additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                <div class="col-7 pt-4">
+                                    <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
+                                    <hr>
+                                    <p class="card-text">Calling all moon babes! ✨ Get your glow on with this
+                                        creamy,
+                                        soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌
+                                    </p>
+                                    <div class="d-flex flex-wrap">
+                                        <button class="btn btn-outline-warning me-3 mb-3">Face Mist</button>
+                                        <button class="btn btn-outline-dark me-3 mb-3">Markisa</button>
+                                    </div>
+                                    <div class="d-flex flex-column mt-3 text-end">
+                                        <p style="font-family: 'Quicksand'; font-weight:600;">
+                                            <i class="fa-regular fa-star"></i> 4
                                         </p>
+                                        <a href="fullrecipe.php#commentar"
+                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
+                                            9 commentar
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +205,8 @@
                                 <div class="my-2">
                                     <label for="" class="form-label text-start ms-1"
                                         style="font-family: 'Quicksand';">Username</label>
-                                    <input type="text" class="form-control rounded-pill" name="username" id="usernameLogin" placeholder="Username" style="font-family: 'Quicksand';">
+                                    <input type="text" class="form-control rounded-pill" name="username"
+                                        id="usernameLogin" placeholder="Username" style="font-family: 'Quicksand';">
                                     <div id="usernameHelp" class="form-text" style="font-family: 'Quicksand';">
                                         Username not found.
                                     </div>
@@ -196,7 +214,8 @@
                                 <div class="my-3">
                                     <label for="" class="form-label ms-1"
                                         style="font-family: 'Quicksand';">Password</label>
-                                    <input type="password" class="form-control rounded-pill"  name="password" id="passwordLogin" placeholder="Password" style="font-family: 'Quicksand';">
+                                    <input type="password" class="form-control rounded-pill" name="password"
+                                        id="passwordLogin" placeholder="Password" style="font-family: 'Quicksand';">
                                     <div id="passwordHelp" class="form-text" style="font-family: 'Quicksand';">
                                         Wrong Password.
                                     </div>
@@ -207,8 +226,9 @@
                                         style="background-color: rgb(140, 186, 159);">
 
                                 </div>
-                                
-                                <p class="pt-5" style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">Haven't an account? Register <a href="#regist" id="regist">here</a></p>
+
+                                <p class="pt-5" style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">
+                                    Haven't an account? Register <a href="#regist" id="regist">here</a></p>
                             </form>
                         </div>
                     </div>
@@ -230,11 +250,12 @@
                         <div class="col-5 p-4">
                             <h2 style="text-align: center">Beauty Recipe</h2>
 
-                            <form action="regist.php" method="post" class="mt-4 px-5" >
-                                <div class="my-2" >
+                            <form action="regist.php" method="post" class="mt-4 px-5">
+                                <div class="my-2">
                                     <label for="" class="form-label text-start ms-1"
                                         style="font-family: 'Quicksand';">Username</label>
-                                    <input type="text" class="form-control rounded-pill" name="username" id="usernameRegist" placeholder="Username" style="font-family: 'Quicksand';">
+                                    <input type="text" class="form-control rounded-pill" name="username"
+                                        id="usernameRegist" placeholder="Username" style="font-family: 'Quicksand';">
                                     <div id="usernameHelpR" class="form-text" style="font-family: 'Quicksand';">
                                         Username already used.
                                     </div>
@@ -243,7 +264,8 @@
                                 <div class="my-4">
                                     <label for="" class="form-label ms-1"
                                         style="font-family: 'Quicksand';">Password</label>
-                                    <input type="password" class="form-control rounded-pill" name="password" id="passwordRegist" placeholder="Password" style="font-family: 'Quicksand';">
+                                    <input type="password" class="form-control rounded-pill" name="password"
+                                        id="passwordRegist" placeholder="Password" style="font-family: 'Quicksand';">
                                     <div id="passwordHelpR" class="form-text" style="font-family: 'Quicksand';">
                                         Your password must be 8-20 characters long.
                                     </div>
@@ -252,7 +274,8 @@
                                 <div class="my-4">
                                     <label for="" class="form-label ms-1" style="font-family: 'Quicksand';">Confirm
                                         Password</label>
-                                    <input type="password" class="form-control rounded-pill" id="confirmPassword" placeholder="Confirm Password" style="font-family: 'Quicksand';">
+                                    <input type="password" class="form-control rounded-pill" id="confirmPassword"
+                                        placeholder="Confirm Password" style="font-family: 'Quicksand';">
                                     <div id="ConfirmPasswordHelpR" class="form-text" style="font-family: 'Quicksand';">
                                         Passwords do not match.
                                     </div>
@@ -274,7 +297,8 @@
 
     <footer class="px-4 pt-4">
         <div class="container">
-            <h4 class="pt-3" style="font-family: 'Playfair Display'; font-weight: 400;">DIY Beauty Recipe Sharing</h4>
+            <h4 class="pt-3" style="font-family: 'Playfair Display'; font-weight: 400;">DIY Beauty Recipe Sharing
+            </h4>
             <div class="row my-4 pb-5">
                 <div class="col-4">
                     <h6 class="my-2">MENU</h6>
@@ -286,7 +310,7 @@
 
                 </div>
                 <div class="col-4">
-                    
+
                 </div>
             </div>
         </div>
