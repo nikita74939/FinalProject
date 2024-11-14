@@ -6,6 +6,14 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="explore.php">Explore recipes</a></li>
+            <li><a href="uploud.php">Upload Recipes</a></li>
+        </ul>
+        <a href="profil.php">Profile</a>
+    </nav>
     <h1>Upload Recipes</h1>
     <form action="proses_uploud.php" method="POST" enctype="multipart/form-data">
         <p class="label-input">Title</p>
