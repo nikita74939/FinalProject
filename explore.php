@@ -28,6 +28,8 @@
         <img src="img/<?php echo $result['main_image']; ?>" alt="foto" style="width: 100px;" />
         <h3><?php echo $result['title']; ?></h3>
         <p><?php echo $result['description']; ?></p>
+        <a href="fullrecipe.php?lihat=<?php echo $result['recipe_id']; ?>">full recipe</a>
+        <br>
     <?php
         }
     ?>
