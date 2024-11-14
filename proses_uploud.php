@@ -1,7 +1,7 @@
 <?php
     include 'koneksi.php';
 
-    
+
 
     if (isset($_POST['aksiUp'])) {
         if ($_POST['aksiUp'] == "add") {
@@ -22,12 +22,12 @@
             //tempat simpan foto sebelum up database
             $dir = "img/";
             //ambil file temporary
-            $tmpFile = $files['main_image']['tmp_name'];
+            $tmpFile = $_FILES['main_image']['tmp_name'];
             //memindah dari temporary ke directory
-            move_uploaded_file($tmp_file, $dir.$main_image);
+            move_uploaded_file($tmpFile, $dir.$main_image);
 
             //belum termasuk id user dan rating
-            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step');";
+            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step', '$main_image', NULL, NULL);";
             $sql = mysqli_query($conn, $query);
 
             header("location: explore.php");
