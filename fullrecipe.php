@@ -1,12 +1,27 @@
 <?php
     include 'koneksi.php';
 
-    if (isset($_GET['lihat'])) {
-        $recipe_id = $_GET['lihat'];
+    $recipe_id = $_GET['lihat'];
 
-        $query = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
-        $sql = mysqli_query($conn, $query);
+    if (isset($_POST['aksiComment'])) {
+        if ($_POST['aksiComment'] == "add") {
+            $comment_text = $_POST['comment_text'];
+
+            $query = "INSERT INTO comments VALUES(NULL, '$recipe_id', NULL, '$comment_text', NULL);";
+            $sql = mysqli_query($conn, $query);
+
+            header("location: fullrecipe.php?lihat=$recipe_id");
+        }
     }
+
+    $query = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
+    $sql = mysqli_query($conn, $query);
+
+        
+
+    $query_comment = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
+    $sql_comment = mysqli_query($conn, $query_comment);
+
 ?>
 
 <!DOCTYPE html>
@@ -41,5 +56,20 @@
     <?php
         }
     ?>
+    <div class="comments">
+        <form action="" method="POST">
+            <input name="comment_text" id="comment_text" type="text" placeholder="Add comment...">
+            <button type="submit" name="aksiComment" value="add">add</button>
+        </form>
+        <?php
+            while($result_comment = mysqli_fetch_assoc($sql_comment)) {
+        ?>
+            <h5>user belum dibikin</h5>
+            <p><?php echo $result_comment['created_at']; ?></p>
+            <p><?php echo $result_comment['comment_text']; ?></p>
+        <?php
+            }
+        ?>
+    </div>
 </body>
 </html>
