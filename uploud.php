@@ -18,6 +18,8 @@
             <option value="Body">Body</option>
             <option value="Hair">Hair</option>
         </select>
+        <p class="label-input">Description</p>
+        <textarea name="description" id="description"></textarea>
         <p class="label-input">Ingredients</p>
         <textarea name="ingredient" id="ingredient"></textarea>
         <p class="label-input">Step by step</p>
