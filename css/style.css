@@ -1,0 +1,64 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    font-family: 'Playfair Display', 'Quicksand';
+}
+
+body {
+    position: relative;
+    height: 100vh;
+}
+
+/* hero */
+.hero {
+    align-content: center;
+    height: 100vh;
+    background-color:ivory;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h6 {
+    font-family: 'Quicksand';
+    text-align: justify;
+}
+
+/* content */
+.content {
+    align-content: center;
+    height: 100vh;
+    background-color:white;
+}
+
+.card {
+    background-color: ivory;
+    z-index: 1;
+}
+
+/* populer */
+.populer {
+    height: 100vh;
+    background-color:white;
+}
+
+.populer .card {
+    background-color: white;
+}
+
+.login {
+    align-content: center;
+    height: 100vh;
+    background-color:white;
+}
+
+/*footer*/
+footer {
+    background-color: rgb(140, 186, 159);
+}
+
