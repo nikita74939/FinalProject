@@ -169,14 +169,80 @@
     <!-- most populer end -->
 
     <!-- login -->
-    <div class="login">
+    <div class="login p-5" id="login"  style="display: none">
+        <div class="card m-5">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 p-5">
+                        
+                        </div>
+                        <div class="col-6 p-5">
+                            <h4 style="font-family: 'Quicksand'; font-weight: 400; text-align: center">Login to</h4>
+                            <h2 style="text-align: center">Beauty Recipe</h2>
 
+                            <form action="cek_login.php" method="post" class="mt-5 px-5">
+                                <div class="my-2">
+                                    <label for="" class="form-label text-start ms-1" style="font-family: 'Quicksand';">Username</label>
+                                    <input type="text" class="form-control rounded-pill">
+
+                                </div>
+                                <div class="my-4">
+                                    <label for="" class="form-label ms-1" style="font-family: 'Quicksand';">Password</label>
+                                    <input type="password" class="form-control rounded-pill">
+
+                                </div>
+
+                                <div style="text-align: center">
+                                    <input type="submit" class="btn btn-outline-dark mt-3" value="LOGIN" style="background-color: rgb(140, 186, 159);">
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- login end -->
 
     <!-- regist -->
-    <div class="register">
+    <div class="register" id="regist"  style="display: block">
+    <div class="card m-5">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 p-5">
+                        
+                        </div>
+                        <div class="col-6 p-5">
+                            <h4 style="font-family: 'Quicksand'; font-weight: 400; text-align: center">Join to</h4>
+                            <h2 style="text-align: center">Beauty Recipe</h2>
 
+                            <form action="cek_login.php" method="post" class="mt-5 px-5">
+                                <div class="my-2">
+                                    <label for="" class="form-label text-start ms-1" style="font-family: 'Quicksand';">Username</label>
+                                    <input type="text" class="form-control rounded-pill">
+
+                                </div>
+                                <div class="my-4">
+                                    <label for="" class="form-label ms-1" style="font-family: 'Quicksand';">Password</label>
+                                    <input type="password" class="form-control rounded-pill">
+
+                                </div>
+
+                                <div style="text-align: center">
+                                    <input type="submit" class="btn btn-outline-dark mt-3" value="LOGIN" style="background-color: rgb(140, 186, 159);">
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- regist end -->
 
