@@ -16,107 +16,127 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
         rel="stylesheet">
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
-    <!-- navbar-->
-    <nav class="navbar navbar-expand-lg bg-none fixed-top" style="border-bottom: 1px solid black">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="" class="img-fluid" width="30" height="24">
-                Beauty Recipe
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php"
-                            style="font-family: 'Quicksand';">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="explore.php" style="font-family: 'Quicksand';">Explore</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="uploud.php" style="font-family: 'Quicksand';">Uploud Recipe</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-                    <a href="#login" class="me-3">
-                        <img src="img/user.png" alt="" class="img-fluid align-top me-1" width="25" height="20"
-                            style="font-family: 'Quicksand';">
-                    </a>
-                </span>
-            </div>
-        </div>
-    </nav>
+    <div class="container mx-3">
+        <div class="row">
+            <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
+                <div class="pt-5">
+                    <h5 class="ps-3">Beauty Recipe</h5>
+                    <ul class="list-group list-group-flush my-4">
+                        <li class="list-group-item" style="border: none">
+                            <h6>Home</h6>
+                        </li>
+                        <li class="list-group-item" style="border: none">
+                            <h6>Explore</h6>
+                        </li>
+                        <li class="list-group-item" style="border: none">
+                            <h6>Uploud</h6>
+                        </li>
+                        <li class="list-group-item" style="border: none">
+                            <h6>Activity</h6>
+                        </li>
+                    </ul>
 
-    <nav class="navbar navbar-expand-lg bg-white navbar-dark" > 
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                Beauty Recipe
-            </a>
-        </div>
-    </nav>
-    <!-- navbar end-->
-
-    <!-- profil -->
-    <div class="page" id="profilDisplay" style="display: block">
-        <div class="container m-0">
-            <div class="row m-0">
-                <div class="col-3-primary m-0">
-                    <p>halo</p>
-                </div>
-                <div class="col-9">
-
+                    <div class="fixed-bottom">
+                        <a href="logout.php">
+                            <h6 class="ps-5 pb-2">Logout</h6>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- profil end -->
-
-    <!-- edit profil -->
-    <div class="page" id="profilEdit" style="display: none">
-
-    </div>
-    <!-- edit profil end -->
-    
-    <!-- favorit -->
-    <div class="page" id="fav" style="display: none">
-
-    </div>
-    <!-- favorit end -->
-
-    <!-- my recipes -->
-    <div class="page" id="recipes" style="display: none">
-
-    </div>
-    <!-- my recipes end -->
-
-    <footer class="px-4 pt-4">
-        <div class="container">
-            <h4 class="pt-3" style="font-family: 'Playfair Display'; font-weight: 400;">DIY Beauty Recipe Sharing</h4>
-            <div class="row my-4 pb-5">
-                <div class="col-4">
-                    <h6 class="my-2">MENU</h6>
-                    <p class="my-2" style="font-family: 'Quicksand';">Home</p>
-                    <p class="my-2" style="font-family: 'Quicksand';">Explore</p>
-                    <p class="my-2" style="font-family: 'Quicksand';">Uploud</p>
+            <div class="col-10">
+                <div class="card mt-1" style="height: 200px; background-color: indianred; border:none">
+                    <div class="card-body">
+                    </div>
                 </div>
-                <div class="col-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="users/pict1.jpeg" class="img-thumbnail rounded-circle mx-5" alt="..."
+                                width="200px" style="position: relative; top: -100px; border: none;">
+                        </div>
+                        <div class="col-9 text-end">
+                            <a href="edit_profil.php" class="p-2 px-3 mt-4 btn btn-dark rounded-pill">Edit Profil</a>
+                        </div>
+                    </div>
+                    <div class="row pt-3" style="position: relative; top: -100px;">
+                        <h6 style="font-size: 32px; font-weight: 700">nami</h6>
+                        <p style="font-size: 16px;">@cherrygirl</p>
+                    </div>
+                    <div class="row pt-1" style="position: relative; top: -100px;">
+                        <p class="pb-4">casting spells for dewy skin 🌙✨ | plant-based potions, homemade magic | your
+                            skin’s BFF</p>
+                        <hr>
+                    </div>
 
-                </div>
-                <div class="col-4">
-                    
+                    <div class="row text-center" style="position: relative; top: -100px;">
+                        <div class="col-6" style="border-bottom: solid 1px black;">
+                            <p style="font-weight: 700; color: black">post</p>
+                        </div>
+                        <div class="col-6" style="border-bottom: none;">
+                            <p style="font-weight: 400; color: gray">saved</p>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="row pt-1 px-4" style="position: relative; top: -100px;">
+                        <div class="col-6">
+                            <div class="card border-secondary m-2 my-3">
+                                <div class="card-header">Header</div>
+                                <div class="card-body text-secondary">
+                                    <h5 class="card-title">Secondary card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="card border-secondary m-2 my-3">
+                                <div class="card-header">Header</div>
+                                <div class="card-body text-secondary">
+                                    <h5 class="card-title">Secondary card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="card border-secondary m-2 my-3">
+                                <div class="card-header">Header</div>
+                                <div class="card-body text-secondary">
+                                    <h5 class="card-title">Secondary card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="card border-secondary m-2 my-3">
+                                <div class="card-header">Header</div>
+                                <div class="card-body text-secondary">
+                                    <h5 class="card-title">Secondary card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="mt-5 p-2">
-            halo
-        </div>
-    </footer>
+    </div>
 
     <!-- java script-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
