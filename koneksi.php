@@ -5,7 +5,7 @@
     $db = 'beautyrecipe';
     $conn = mysqli_connect($hostname, $user, $pass, $db);
     if($conn) {
-        echo "koneksi berhasil";
+        //echo "koneksi berhasil";
     }
 
     mysqli_select_db($conn, $db);

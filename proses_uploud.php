@@ -1,11 +1,14 @@
 <?php
     include 'koneksi.php';
 
+    
+
     if (isset($_POST['aksiUp'])) {
         if ($_POST['aksiUp'] == "add") {
             //ambil variable
             $title = $_POST['title'];
             $category = $_POST['category'];
+            $description = $_POST['description'];
             $ingredient = $_POST['ingredient'];
             $step = $_POST['step'];
             //memisah nama dan format dg '.'
@@ -23,7 +26,11 @@
             //memindah dari temporary ke directory
             move_uploaded_file($tmp_file, $dir.$main_image);
 
-            $query = "INSERT INTO "
+            //belum termasuk id user dan rating
+            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step');";
+            $sql = mysqli_query($conn, $query);
+
+            header("location: explore.php");
         }
     }
 ?>

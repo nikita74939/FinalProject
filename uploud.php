@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Upload Recipes</h1>
-    <form action="proses.uploud.php" method="PUSH" enctype="multipart/form-data">
+    <form action="proses_uploud.php" method="POST" enctype="multipart/form-data">
         <p class="label-input">Title</p>
         <input required type="text" name="title" id="title">
         <p class="label-input">Picture</p>
