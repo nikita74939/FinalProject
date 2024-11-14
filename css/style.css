@@ -52,7 +52,6 @@ h6 {
 
 .login {
     align-content: center;
-    height: 100vh;
     background-color:white;
 }
 
@@ -63,7 +62,6 @@ footer {
 
 .register {
     align-content: center;
-    height: 100vh;
     background-color:white;
 }
 
