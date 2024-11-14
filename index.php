@@ -82,7 +82,7 @@
         <div class="container mx-5">
             <div class="row mx-5">
                 <div class="col-4">
-                    <div class="card mx-3">
+                    <div class="card mx-3" style="border: none; background-color: white">
                         <img src="img/satu.png" class="card-img-top px-5 pt-3" width="50%" alt="...">
                         <div class="card-body pb-5">
                             <h5 class="card-title">DIY Recipe</h5>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="card mx-3">
+                    <div class="card mx-3" style="border: none; background-color: white">
                         <img src="img/dua.png" class="card-img-top px-5 pt-3" width="50%" alt="...">
                         <div class="card-body pb-5">
                             <h5 class="card-title">Share Recipe</h5>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="card mx-3">
+                    <div class="card mx-3" style="border: none; background-color: white">
                         <img src="img/tiga.png" class="card-img-top px-5 pt-3" width="50%" alt="...">
                         <div class="card-body pb-5">
                             <h5 class="card-title">Save Recipe</h5>
@@ -140,37 +140,45 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-3"">
+                        <div class="card mb-3">
                             <div class=" row g-0">
-                            <div class="col-md-4">
-                                <img src="..." class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural
+                                            lead-in to
+                                            additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
+                <div class="col-4">
 
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- most populer end -->
 
     <!-- login -->
-     <div class="login">
-        
-     </div>
+    <div class="login">
+
+    </div>
     <!-- login end -->
+
+    <!-- regist -->
+    <div class="register">
+
+    </div>
+    <!-- regist end -->
 
     <footer class="p-4">
         <h4 style="font-family: 'Playfair Display'; font-weight: 400;">DIY Beauty Recipe Sharing</h4>
