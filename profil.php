@@ -26,36 +26,55 @@
 <body>
     <div class="container mx-3">
         <div class="row">
+
+            <!-- left -->
+
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-5">
                     <h5 class="ps-3">Beauty Recipe</h5>
                     <ul class="list-group list-group-flush my-4">
-                        <li class="list-group-item" style="border: none">
-                            <h6>Home</h6>
-                        </li>
-                        <li class="list-group-item" style="border: none">
-                            <h6>Explore</h6>
-                        </li>
-                        <li class="list-group-item" style="border: none">
-                            <h6>Uploud</h6>
-                        </li>
-                        <li class="list-group-item" style="border: none">
-                            <h6>Activity</h6>
-                        </li>
+                        <a href="index.php" style="text-decoration: none; color: black">
+                            <li class="list-group-item" style="border: none">
+                                <h6>Home</h6>
+                            </li>
+                        </a>
+                        <a href="explore.php" style="text-decoration: none; color: black">
+                            <li class="list-group-item" style="border: none">
+                                <h6>Explore</h6>
+                            </li>
+                        </a>
+                        <a href="uploud.php" style="text-decoration: none; color: black">
+                            <li class="list-group-item" style="border: none">
+                                <h6>Uploud</h6>
+                            </li>
+                        </a>
+                        <a href="#activity" style="text-decoration: none; color: black">
+                            <li class="list-group-item" style="border: none">
+                                <h6>Activity</h6>
+                            </li>
+                        </a>
                     </ul>
 
                     <div class="fixed-bottom">
-                        <a href="logout.php">
-                            <h6 class="ps-5 pb-2">Logout</h6>
+                        <a href="logout.php" style="color: black">
+                            <h6 class="ps-5 pb-3">Logout</h6>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-10">
+
+            <!-- left end -->
+
+            <!-- right -->
+
+            <div class="col-10" id="profilView">
                 <div class="card mt-1" style="height: 200px; background-color: indianred; border:none">
                     <div class="card-body">
                     </div>
                 </div>
+
+                <!-- info profil -->
+
                 <div class="container">
                     <div class="row">
                         <div class="col-3">
@@ -76,65 +95,129 @@
                         <hr>
                     </div>
 
+                    <!-- info profil end -->
+
+                    <!-- button -->
+
                     <div class="row text-center" style="position: relative; top: -100px;">
                         <div class="col-6" style="border-bottom: solid 1px black;">
+                            <a href="#postRecipe" id="postButton"></a>
                             <p style="font-weight: 700; color: black">post</p>
                         </div>
                         <div class="col-6" style="border-bottom: none;">
+                            <a href="#savedRecipe" id="savedButton"></a>
                             <p style="font-weight: 400; color: gray">saved</p>
                         </div>
                         <hr>
                     </div>
 
-                    <div class="row pt-1 px-4" style="position: relative; top: -100px;">
+                    <div id="postRecipe" class="row pt-1 px-4" style="position: relative; top: -100px; display: block">
                         <div class="col-6">
-                            <div class="card border-secondary m-2 my-3">
-                                <div class="card-header">Header</div>
-                                <div class="card-body text-secondary">
-                                    <h5 class="card-title">Secondary card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
+                            <div id="...." class="card border-secondary m-2 my-3">
+                                <div class="card-header">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Face mist
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                bintang 4,5
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img src="users/pict1.jpeg" alt=""
+                                        style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
+                                    <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
+                                    <hr>
+                                    <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
+                                        soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
+                                    <div class="container p-0 pt-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="text-secondary">Bahan utama: pisang</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <a href="fullrecipe.php#commentar"
+                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                                    commentar</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px; display: none">
                         <div class="col-6">
-                            <div class="card border-secondary m-2 my-3">
-                                <div class="card-header">Header</div>
-                                <div class="card-body text-secondary">
-                                    <h5 class="card-title">Secondary card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
+                            <div id="...." class="card border-secondary m-2 my-3">
+                                <div class="card-header">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                Face mist
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                bintang 4,5
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <img src="users/pict1.jpeg" alt=""
+                                        style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
+                                    <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
+                                    <hr>
+                                    <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
+                                        soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
+                                    <div class="container p-0 pt-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="text-secondary">Bahan utama: pisang</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <a href="fullrecipe.php#commentar"
+                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                                    commentar</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <footer class="px-4 pt-4" style="background-color: white">
+                            <div class="container">
+                                <h4 class="pt-3" style="font-family: 'Playfair Display'; font-weight: 400;">DIY Beauty
+                                    Recipe Sharing</h4>
+                                <div class="row my-4 pb-5">
+                                    <div class="col-4">
+                                        <h6 class="my-2">MENU</h6>
+                                        <p class="my-2" style="font-family: 'Quicksand';">Home</p>
+                                        <p class="my-2" style="font-family: 'Quicksand';">Explore</p>
+                                        <p class="my-2" style="font-family: 'Quicksand';">Uploud</p>
+                                    </div>
+                                    <div class="col-4">
 
-                        <div class="col-6">
-                            <div class="card border-secondary m-2 my-3">
-                                <div class="card-header">Header</div>
-                                <div class="card-body text-secondary">
-                                    <h5 class="card-title">Secondary card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
+                                    </div>
+                                    <div class="col-4">
 
-                        <div class="col-6">
-                            <div class="card border-secondary m-2 my-3">
-                                <div class="card-header">Header</div>
-                                <div class="card-body text-secondary">
-                                    <h5 class="card-title">Secondary card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        
+                            <div class="mt-5 p-2">
+                                halo
+                            </div>
+                        </footer>
+
                     </div>
                 </div>
             </div>
+
+            <!-- right end -->
         </div>
     </div>
 
