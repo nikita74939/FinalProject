@@ -73,7 +73,8 @@ $sql = mysqli_query($conn, $query);
 
             <!-- middle -->
 
-            <div class="col-7">
+            <div class="col-7" style="display: none">
+                <!-- card -->
                 <div class="container pt-4">
                     <div class="row text-center">
                         <div class="col-6" style="border-bottom: solid 1px black;">
@@ -101,13 +102,13 @@ $sql = mysqli_query($conn, $query);
                                                     <img src="users/pict1.jpeg"
                                                         class="img-thumbnail rounded-circle mb-1" alt="..."
                                                         width="100px">
-                                                        <p style="font-size: 14px;">@cherrygirl</p>
+                                                    <p style="font-size: 14px;">@cherrygirl</p>
                                                 </div>
                                                 <div class="col-6 text-end pt-5">
-                                                <p style="font-size: 14px;" class="p-1">10 Nov</p>
+                                                    <p style="font-size: 14px;" class="p-1">10 Nov</p>
                                                 </div>
                                             </div>
-                                        
+
                                         </div>
                                     </div>
                                     <div class="col-7 pt-4">
@@ -123,7 +124,8 @@ $sql = mysqli_query($conn, $query);
                                         </div>
                                         <div class="d-flex flex-column mt-3 text-end">
                                             <p style="font-family: 'Quicksand'; font-weight:600;">
-                                                <i class="fa-regular fa-star"></i> 4</p>
+                                                <i class="fa-regular fa-star"></i> 4
+                                            </p>
                                             <a href="fullrecipe.php#commentar"
                                                 style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
                                                 9 commentar
@@ -139,6 +141,47 @@ $sql = mysqli_query($conn, $query);
             </div>
 
             <!-- middle end -->
+
+            <!-- detail -->
+            <div class="col-7">
+                <div class="pt-4">
+                    <h4 class="ps-3" style="font-family: 'Quicksand';"><i class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
+                </div>
+                <div id="...." class="card border-secondary m-2 my-3">
+                    <div class="card-header">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    Face mist
+                                </div>
+                                <div class="col-6 text-end">
+                                    bintang 4,5
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <img src="users/pict1.jpeg" alt=""
+                            style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
+                        <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
+                        <hr>
+                        <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
+                            soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
+                        <div class="container p-0 pt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="text-secondary">Bahan utama: pisang</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a href="fullrecipe.php#commentar"
+                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                        commentar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- right -->
 
