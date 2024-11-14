@@ -27,7 +27,7 @@
             move_uploaded_file($tmpFile, $dir.$main_image);
 
             //belum termasuk id user dan rating
-            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step', '$main_image', NULL, NULL);";
+            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step', '$main_image', '', NULL);";
             $sql = mysqli_query($conn, $query);
 
             header("location: explore.php");
