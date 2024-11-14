@@ -33,14 +33,14 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"
+                        <a class="nav-link active" aria-current="page" href="index.php"
                             style="font-family: 'Quicksand';">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="font-family: 'Quicksand';">Explore</a>
+                        <a class="nav-link" href="explore.php" style="font-family: 'Quicksand';">Explore</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="font-family: 'Quicksand';">Uploud Recipe</a>
+                        <a class="nav-link" href="uploud.php" style="font-family: 'Quicksand';">Uploud Recipe</a>
                     </li>
                 </ul>
                 <span class="navbar-text">
