@@ -30,7 +30,7 @@
             <!-- left -->
 
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
-                <div class="pt-5">
+                <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
                     <ul class="list-group list-group-flush my-4">
                         <a href="index.php" style="text-decoration: none; color: black">
@@ -189,28 +189,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <footer class="px-4 pt-4" style="background-color: white">
-                            <div class="container">
-                                <h4 class="pt-3" style="font-family: 'Playfair Display'; font-weight: 400;">DIY Beauty
-                                    Recipe Sharing</h4>
-                                <div class="row my-4 pb-5">
-                                    <div class="col-4">
-                                        <h6 class="my-2">MENU</h6>
-                                        <p class="my-2" style="font-family: 'Quicksand';">Home</p>
-                                        <p class="my-2" style="font-family: 'Quicksand';">Explore</p>
-                                        <p class="my-2" style="font-family: 'Quicksand';">Uploud</p>
-                                    </div>
-                                    <div class="col-4">
-
-                                    </div>
-                                    <div class="col-4">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5 p-2">
-                                halo
-                            </div>
+                        <footer class="p-5 text-center" style="background-color: white">
+                            Home Explore Uploud About Us
                         </footer>
 
                     </div>

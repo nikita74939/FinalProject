@@ -79,3 +79,7 @@ footer {
     object-fit: cover; 
     object-position: center;
 }
+
+.list-group-item {
+    font-family: 'Quicksand';
+}
