@@ -2,9 +2,11 @@
     include 'koneksi.php';
     session_start();
 
-    if (isset($_SESSION['username'])) {
-            $username = $_SESSION['username'];
-        }
+    if(empty($_SESSION['username'])) {
+        header("location:index.php?pesan=belum_login");
+    } else if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+    }
 
     $q = "SELECT * FROM users WHERE username = '$username'";
     $query = mysqli_query($conn, $q);
@@ -46,7 +48,7 @@
             $query = "INSERT INTO recipes VALUES('', $id, '$title', '$category', '$description', '$ingredient', '$step', '$main_ingredient', '$main_image', '$time');";
             $sql = mysqli_query($conn, $query);
 
-            header("location: explore.php");
+            header("location: explore.php?pesan=postingan_baru");
         }
     }
 ?>

@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
                                 <button id="addButtonIngredient" class="btn btn-outline-secondary py-0">+</button>
-                                <ul id="ingredientList" class="list-group mt-3"></ul>
+                                <ul id="ingredientList" class="list-group mt-3" style="display: none"></ul>
                             </div>
 
                             <input type="hidden" name="ingredient" id="ingredient" style="display: none">
@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
                                 <button id="addButtonStep" class="btn btn-outline-secondary py-0">+</button>
-                                <ul id="stepList" class="list-group mt-3"></ul>
+                                <ul id="stepList" class="list-group mt-3" style="display: none"></ul>
                             </div>
 
                             <input type="hidden" name="step" id="step" style="display: none">
