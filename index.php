@@ -1,3 +1,11 @@
+<?php
+    include 'koneksi.php';
+
+    $username = $_SESSION['username'];
+    $query = "SELECT p.url FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$username';";
+    $sql = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,18 +56,29 @@
                         <a class="nav-link" href="#login" style="font-family: 'Quicksand';">Uploud Recipe</a>
                     </li>
                 </ul>
-                <span class="navbar-text" id="belumLogin">
-                    <a href="#login" class="me-3">
-                        <img src="img/user.png" alt="" class="img-fluid align-top me-1" width="25" height="20">
-                    </a>
-                </span>
-                <span class="navbar-text">
-                    </a>
-                    <a href="#login" class="me-3" id="sudahLogin">
-                        <img src="users/pict1.jpeg" alt="" class="img-fluid rounded-circle align-top me-1" width="40"
-                            style="border: none;">
-                    </a>
-                </span>
+                <?php
+                if (isset($_GET['pesan'])) {
+                    if ($_GET['pesan'] == "udah_login") {
+                        echo "<span class='navbar-text' id='sudahLogin'>
+                                <a href='profil.php' class='me-3'>
+                                    <img src='".$data['url']."' alt='' class='img-fluid align-top me-1 rounded-circle' width='40' height='20'>
+                                </a>
+                            </span>";
+                    } else {
+                        echo "<span class='navbar-text' id='belumLogin'>
+                                <a href='#login' class='me-3'>
+                                    <img src='img/user.png' alt='' class='img-fluid align-top me-1' width='25' height='20' style='border: none;'>
+                                </a>
+                            </span>";      
+                    }
+                } else {
+                    echo "<span class='navbar-text' id='belumLogin'>
+                            <a href='#login' class='me-3'>
+                                <img src='img/user.png' alt='' class='img-fluid align-top me-1' width='25' height='20'>
+                            </a>
+                        </span>";
+                }
+                ?>
             </div>
         </div>
     </nav>
@@ -123,8 +142,7 @@
                             <h5 class="card-title">Step #3 Glow Up</h5>
                             <hr>
                             <p class="card-text" style="font-family: 'Quicksand';">get ready into your creation and
-                                enjoy
-                                the glow!<br> </p>
+                                enjoy the glow!<br> </p>
                         </div>
                     </div>
                 </div>
@@ -193,7 +211,7 @@
     <!-- most populer end -->
 
     <!-- login -->
-    <div class="login p-5 mb-5" id="login" style="display: block">
+    <div class="login p-5 mb-5 align-middle" id="login" style="display: block">
         <div class="card m-5">
             <div class="card-body">
                 <div class="container">
@@ -201,29 +219,47 @@
                         <div class="col-7 p-5 text-center">
                             <img src="img/login_girl.png" alt="" class="img-fluid" style="transform: scaleX(-1);"
                                 width="70%">
+                            <p>"Let's log in first to get things started!"</p>
                         </div>
                         <div class="col-5 p-4">
                             <h4 style="font-family: 'Quicksand'; font-weight: 400; text-align: center">Login to</h4>
                             <h2 style="text-align: center">Beauty Recipe</h2>
 
-                            <form action="cek_login.php" method="post" class="mt-4 px-5">
+                            <form action="cek_login.php" method="post" class="mt-5 px-5">
                                 <div class="my-2">
                                     <label for="" class="form-label text-start ms-1"
                                         style="font-family: 'Quicksand';">Username</label>
                                     <input type="text" class="form-control rounded-pill" name="username"
                                         id="usernameLogin" placeholder="Username" style="font-family: 'Quicksand';">
-                                    <div id="usernameHelp" class="form-text" style="font-family: 'Quicksand';">
-                                        Username not found.
-                                    </div>
+                                    <?php
+                                    if (isset($_GET['pesan'])) {
+                                        if ($_GET['pesan'] == "user_tidak_ditemukan") {
+                                            echo "<div id='usernameHelp' class='form-text' style='font-family: 'Quicksand'; color: red;'>Username not found.</div>";
+                                        } else {
+                                            echo "<br>";
+                                        }
+                                    } else {
+                                        echo "<br>";
+                                    }
+                                    ?>
+
                                 </div>
                                 <div class="my-3">
                                     <label for="" class="form-label ms-1"
                                         style="font-family: 'Quicksand';">Password</label>
                                     <input type="password" class="form-control rounded-pill" name="password"
                                         id="passwordLogin" placeholder="Password" style="font-family: 'Quicksand';">
-                                    <div id="passwordHelp" class="form-text" style="font-family: 'Quicksand';">
-                                        Wrong Password.
-                                    </div>
+                                    <?php
+                                    if (isset($_GET['pesan'])) {
+                                        if ($_GET['pesan'] == "user_tidak_ditemukan") {
+                                            echo "<div id='usernameHelp' class='form-text' style='font-family: 'Quicksand'; color: red;'>Wrong password.</div>";
+                                        } else {
+                                            echo "<br>";
+                                        }
+                                    } else {
+                                        echo "<br>";
+                                    }
+                                    ?>
                                 </div>
 
                                 <div style="text-align: center">
@@ -259,7 +295,7 @@
                         <div class="col-5 p-4">
                             <h2 style="text-align: center">Beauty Recipe</h2>
 
-                            <form action="regist.php" method="post" class="mt-4 px-5">
+                            <form action="regist.php" method="post" class="mt-5 px-5">
                                 <div class="my-2">
                                     <label for="" class="form-label text-start ms-1"
                                         style="font-family: 'Quicksand';">Username</label>
@@ -335,8 +371,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#belumLogin').show();
-            $('#sudahLogin').hide();
             $('.login').show();
             $('#regist').hide();
 
