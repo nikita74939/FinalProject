@@ -4,5 +4,5 @@
     $_POST['username']
     $_POST['password']
 
-    location arahin ke index ya
+    location arahin ke index
 */

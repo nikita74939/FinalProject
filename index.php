@@ -25,7 +25,7 @@
 
 <body>
     <!-- navbar-->
-    <nav class="navbar navbar-expand-lg bg-none fixed-top" style="top: -20px">
+    <nav class="navbar navbar-expand-lg bg-none fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="img/logo.png" alt="" class="img-fluid" width="30" height="24">
@@ -48,14 +48,16 @@
                         <a class="nav-link" href="uploud.php" style="font-family: 'Quicksand';">Uploud Recipe</a>
                     </li>
                 </ul>
-                <span class="navbar-text">
+                <span class="navbar-text" id="belumLogin">
                     <a href="#login" class="me-3">
-                        <img src="img/user.png" alt="" class="img-fluid align-top me-1" width="25" height="20"
-                            style="display: none">
+                        <img src="img/user.png" alt="" class="img-fluid align-top me-1" width="25" height="20">
                     </a>
-                    <a href="#login" class="me-3">
+                </span>
+                <span class="navbar-text">
+                    </a>
+                    <a href="#login" class="me-3" id="sudahLogin">
                         <img src="users/pict1.jpeg" alt="" class="img-fluid rounded-circle align-top me-1" width="40"
-                            style="display: block; border: none;">
+                            style="border: none;">
                     </a>
                 </span>
             </div>
@@ -95,9 +97,10 @@
                         <img src="img/satu.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Find Recipes</h5>
-                            <p class="card-text">Dive into a world of beauty secrets and find the ideal recipe to
-                                nourish and pamper your skin. Your next glow-up is just a click away!</p>
+                            <h5 class="card-title">Step #1 Find Recipes</h5>
+                            <p class="card-text" style="font-family: 'Quicksand';">explore our collection of beauty
+                                recipes crafted with natural ingredients and effective formulas. find the one that
+                                matches your skin type and beauty goals to get started on your journey.</p>
                         </div>
                     </div>
                 </div>
@@ -106,9 +109,10 @@
                         <img src="img/dua.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Do DIY skincare</h5>
-                            <p class="card-text">Unleash your creativity by crafting unique beauty recipes with pure,
-                                natural ingredients. Make it personal, make it yours!</p>
+                            <h5 class="card-title">Step #2 Make Your Own</h5>
+                            <p class="card-text" style="font-family: 'Quicksand';">customize each recipe to make it
+                                uniquely yours! add your own twist with favorite ingredients or adjust the formulas to
+                                suit your needs, making your self-care truly personalized.</p>
                         </div>
                     </div>
                 </div>
@@ -117,10 +121,10 @@
                         <img src="img/tiga.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Glow Up</h5>
-                            <p class="card-text">Elevate your skincare routine and let your radiance shine through!
-                                Discover the transformative power of natural beauty recipes designed to bring out your
-                                best glow.</p>
+                            <h5 class="card-title">Step #3 Glow Up</h5>
+                            <p class="card-text" style="font-family: 'Quicksand';">indulge in your creation and enjoy
+                                the glow! embrace the radiance and confidence that comes from using beauty treatments
+                                made just for you.</p>
                         </div>
                     </div>
                 </div>
@@ -228,7 +232,7 @@
                                 </div>
 
                                 <p class="pt-5" style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">
-                                    Haven't an account? Register <a href="#regist" id="regist">here</a></p>
+                                    Haven't an account? Register <a href="#regist" class="registLink">here</a></p>
                             </form>
                         </div>
                     </div>
@@ -239,13 +243,14 @@
     <!-- login end -->
 
     <!-- regist -->
-    <div class="register my-5" id="regist" style="display: block">
+    <div class="register my-5" id="regist" style="display: none">
         <div class="card m-5">
             <div class="card-body">
                 <div class="container">
                     <div class="row">
                         <div class="col-7 p-5">
-
+                        <p class="pt-5 align-bottom" style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">
+                        Already have an account? Login <a href="#login" class="loginLink">here</a></p>
                         </div>
                         <div class="col-5 p-4">
                             <h2 style="text-align: center">Beauty Recipe</h2>
@@ -324,7 +329,27 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/scriptIndex.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#belumLogin').show();
+            $('#sudahLogin').hide();
+            $('.login').show();
+            $('#regist').hide();
+
+            
+            $(document).on('click', '.registLink', function (e) {
+                e.preventDefault(); 
+                $(".login").hide();
+                $("#regist").show(); 
+            });
+
+            $(document).on('click', '.loginLink', function (e) {
+                e.preventDefault(); 
+                $(".login").show();
+                $("#regist").hide(); 
+            });
+        });
+    </script>
 </body>
 
 </html>
