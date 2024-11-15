@@ -72,6 +72,7 @@ $sql = mysqli_query($conn, $query);
             <!-- left end -->
 
             <!-- middle -->
+             <!-- disini kutaruh while buat nampilin semua recipe tapi file img buat recipenya blm ada di folder jadi ga keluar gambarnya -->
             <?php
                 while ($result = mysqli_fetch_assoc($sql)) {
             ?>
