@@ -1,9 +1,13 @@
 <?php
     include 'koneksi.php';
+    session_start();
 
-    $username = $_SESSION['username'];
-    $query = "SELECT p.url FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$username';";
-    $sql = mysqli_query($conn, $query);
+    if (isset($_SESSION['username'])) {
+
+        $username = $_SESSION['username'];
+        $query = "SELECT p.url FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$username';";
+        $sql = mysqli_query($conn, $query);
+    }
 ?>
 
 <!DOCTYPE html>
