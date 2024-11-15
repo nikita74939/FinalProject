@@ -13,7 +13,7 @@ if (mysqli_num_rows($user_check) > 0) {
     if ($user_data['password'] == $password) {
         $_SESSION['username'] = $username;
         $_SESSION['status'] = "login";
-        header("location:index.php?pesan=udah_login");
+        header("location:explore.php?pesan=udah_login");
     } else {
         header("location:index.php#login?pesan=password_salah");
     }

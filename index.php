@@ -75,28 +75,20 @@ if (isset($_SESSION['username'])) {
                     ?>
                 </ul>
                 <?php
-                if (isset($_GET['pesan'])) {
-                    if ($_GET['pesan'] == "udah_login") {
-                        $q = "SELECT * FROM users WHERE username = '$username'";
-                        $query = mysqli_query($conn, $q);
-                        if ($query) {
-                            while ($data = mysqli_fetch_array($query)) {
-                                echo "<span class='navbar-text' id='sudahLogin'>
+                if (isset($_SESSION['username'])) {
+                    $q = "SELECT * FROM users WHERE username = '$username'";
+                    $query = mysqli_query($conn, $q);
+                    if ($query) {
+                        while ($data = mysqli_fetch_array($query)) {
+                            echo "<span class='navbar-text icnn' id='sudahLogin'>
                                 <a href='profil.php' class='me-3'>
                                     <img src='users/pict" . $data['id_pict'] . ".jpg' alt='' class='img-fluid align-top me-1 rounded-circle' width='40' height='20'>
                                 </a>
                             </span>";
-                            }
                         }
-                    } else {
-                        echo "<span class='navbar-text' id='belumLogin'>
-                                <a href='#login' class='me-3'>
-                                    <img src='img/user.png' alt='' class='img-fluid align-top me-1' width='25' height='20' style='border: none;'>
-                                </a>
-                            </span>";
                     }
                 } else {
-                    echo "<span class='navbar-text' id='belumLogin'>
+                    echo "<span class='navbar-text icnn' id='belumLogin'>
                             <a href='#login' class='me-3'>
                                 <img src='img/user.png' alt='' class='img-fluid align-top me-1' width='25' height='20'>
                             </a>
@@ -398,6 +390,10 @@ if (isset($_SESSION['username'])) {
             $('.login').show();
             $('#regist').hide();
 
+            if ($('#sudahLogin').length) {
+                $('.login').hide(); 
+                $('#regist').hide(); 
+            }       
 
             $(document).on('click', '.registLink', function (e) {
                 e.preventDefault();
