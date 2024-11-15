@@ -9,6 +9,7 @@
             $title = $_POST['title'];
             $category = $_POST['category'];
             $description = $_POST['description'];
+            $main_ingredient = $_POST['main_ingredient'];
             $ingredient = $_POST['ingredient'];
             $step = $_POST['step'];
             //memisah nama dan format dg '.'
@@ -27,7 +28,7 @@
             move_uploaded_file($tmpFile, $dir.$main_image);
 
             //belum termasuk id user dan rating
-            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step', '$main_image', '', NULL);";
+            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step', '$main_ingredient', '$main_image', '', NULL);";
             $sql = mysqli_query($conn, $query);
 
             header("location: explore.php");

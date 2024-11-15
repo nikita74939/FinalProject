@@ -1,3 +1,11 @@
+<?php
+    include 'koneksi.php';
+
+    $query = "SELECT user_id, username, nama, bio FROM users;";
+    $sql = mysqli_query($conn, $query);
+    $result = mysqli_fetch_assoc($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,16 +90,15 @@
                                 width="200px" style="position: relative; top: -100px; border: none;">
                         </div>
                         <div class="col-9 text-end">
-                            <a href="edit_profil.php" class="p-2 px-3 mt-4 btn btn-dark rounded-pill">Edit Profil</a>
+                            <a href="edit_profil.php?edit=<?php echo $result['user_id']; ?>" class="p-2 px-3 mt-4 btn btn-dark rounded-pill">Edit Profil</a>
                         </div>
                     </div>
                     <div class="row pt-3" style="position: relative; top: -100px;">
-                        <h6 style="font-size: 32px; font-weight: 700">nami</h6>
-                        <p style="font-size: 16px;">@cherrygirl</p>
+                        <h6 style="font-size: 32px; font-weight: 700"><?php echo $result['nama']; ?></h6>
+                        <p style="font-size: 16px;">@<?php echo $result['username']; ?></p>
                     </div>
                     <div class="row pt-1" style="position: relative; top: -100px;">
-                        <p class="pb-4">casting spells for dewy skin 🌙✨ | plant-based potions, homemade magic | your
-                            skin’s BFF</p>
+                        <p class="pb-4"><?php echo $result['bio']; ?></p>
                         <hr>
                     </div>
 

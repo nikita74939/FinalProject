@@ -72,8 +72,10 @@ $sql = mysqli_query($conn, $query);
             <!-- left end -->
 
             <!-- middle -->
-
-            <div class="col-7" style="display: none">
+            <?php
+                while ($result = mysqli_fetch_assoc($sql)) {
+            ?>
+            <div class="col-7" style="display: block">
                 <!-- card -->
                 <div class="container pt-4">
                     <div class="row text-center">
@@ -94,7 +96,7 @@ $sql = mysqli_query($conn, $query);
                             <div class="container">
                                 <div class="row">
                                     <div class="col-5 pt-4">
-                                        <img src="users/pict1.jpeg" alt=""
+                                        <img src="img/<?php echo $result['main_image']; ?>" alt=""
                                             style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
                                         <div class="container">
                                             <div class="row" style="position: relative; top: -50px; border: none;">
@@ -106,21 +108,22 @@ $sql = mysqli_query($conn, $query);
                                                 </div>
                                                 <div class="col-6 text-end pt-5">
                                                     <p style="font-size: 14px;" class="p-1">10 Nov</p>
+                                                    
+                                                    <a href="save.php?save=<?php echo $result['recipe_id']; ?>" class="">Favorites</a>
+
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-7 pt-4">
-                                        <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
+                                        <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
                                         <hr>
-                                        <p class="card-text">Calling all moon babes! ✨ Get your glow on with this
-                                            creamy,
-                                            soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌
+                                        <p class="card-text"><?php echo $result['description']; ?>
                                         </p>
                                         <div class="d-flex flex-wrap">
-                                            <button class="btn btn-outline-warning me-3 mb-3">Face Mist</button>
-                                            <button class="btn btn-outline-dark me-3 mb-3">Markisa</button>
+                                            <button class="btn btn-outline-warning me-3 mb-3"><?php echo $result['category']; ?></button>
+                                            <button class="btn btn-outline-dark me-3 mb-3"><?php echo $result['main_ingredient']; ?></button>
                                         </div>
                                         <div class="d-flex flex-column mt-3 text-end">
                                             <p style="font-family: 'Quicksand'; font-weight:600;">
@@ -139,6 +142,9 @@ $sql = mysqli_query($conn, $query);
                     </div>
                 </div>
             </div>
+            <?php
+                }
+            ?>
 
             <!-- middle end -->
 
