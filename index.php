@@ -42,10 +42,10 @@
                             style="font-family: 'Quicksand';">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="explore.php" style="font-family: 'Quicksand';">Explore</a>
+                        <a class="nav-link" href="#login" style="font-family: 'Quicksand';">Explore</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="uploud.php" style="font-family: 'Quicksand';">Uploud Recipe</a>
+                        <a class="nav-link" href="#login" style="font-family: 'Quicksand';">Uploud Recipe</a>
                     </li>
                 </ul>
                 <span class="navbar-text" id="belumLogin">
@@ -68,20 +68,18 @@
     <!-- hero -->
     <div class="hero">
         <div class="container">
-            <div class="row">
-                <div class="col-6">
+            <div class="row justify-content-center">
+                <div class="col-6 d-flex align-items-center">
                     <div class="mx-3">
                         <h1>Glow Up<br><span style="font-size: 4rem; color:darkslategray;">Naturally</span></h1>
                         <h6 class="pt-2">Dive into DIY Beauty Recipes Made from Everyday Ingredients! Create Your Own,
                             Feel the Vibe, and Embrace Your Unique Glow!</h6>
-                        <a href="" class="btn btn-outline-dark mt-3"
+                        <a href="#login" class="btn btn-outline-dark mt-3"
                             style="background-color: rgb(140, 186, 159);">Explore Now !</a>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="m-5">
-
-                    </div>
+                <div class="col-6 text-end">
+                    <img src="img/main_image.png" alt="" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -93,38 +91,40 @@
         <div class="container mx-5">
             <div class="row mx-5">
                 <div class="col-4">
-                    <div class="card mx-3" style="border: none; background-color: white">
+                    <div class="card mx-3 pb-3" style="background-color: white">
                         <img src="img/satu.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
                             <h5 class="card-title">Step #1 Find Recipes</h5>
+                            <hr>
                             <p class="card-text" style="font-family: 'Quicksand';">explore our collection of beauty
-                                recipes crafted with natural ingredients and effective formulas. find the one that
-                                matches your skin type and beauty goals to get started on your journey.</p>
+                                recipes crafted with natural ingredients and effective formulas. </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="card mx-3" style="border: none; background-color: white">
+                    <div class="card mx-3 pb-3" style="background-color: white">
                         <img src="img/dua.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
                             <h5 class="card-title">Step #2 Make Your Own</h5>
+                            <hr>
                             <p class="card-text" style="font-family: 'Quicksand';">customize each recipe to make it
-                                uniquely yours! add your own twist with favorite ingredients or adjust the formulas to
-                                suit your needs, making your self-care truly personalized.</p>
+                                uniquely yours!<br>
+                            <p>
                         </div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="card mx-3" style="border: none; background-color: white">
+                    <div class="card mx-3 pb-3" style="background-color: white">
                         <img src="img/tiga.png" class="card-img-top pt-3" width="50%" alt="..."
                             style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
                             <h5 class="card-title">Step #3 Glow Up</h5>
-                            <p class="card-text" style="font-family: 'Quicksand';">indulge in your creation and enjoy
-                                the glow! embrace the radiance and confidence that comes from using beauty treatments
-                                made just for you.</p>
+                            <hr>
+                            <p class="card-text" style="font-family: 'Quicksand';">get ready into your creation and
+                                enjoy
+                                the glow!<br> </p>
                         </div>
                     </div>
                 </div>
@@ -184,8 +184,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-
+                <div class="col-4 pb-5 ps-5 text-end">
+                    <img src="img/popular.png" alt="" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -198,8 +198,9 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-7 p-5">
-
+                        <div class="col-7 p-5 text-center">
+                            <img src="img/login_girl.png" alt="" class="img-fluid" style="transform: scaleX(-1);"
+                                width="70%">
                         </div>
                         <div class="col-5 p-4">
                             <h4 style="font-family: 'Quicksand'; font-weight: 400; text-align: center">Login to</h4>
@@ -248,9 +249,12 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-7 p-5">
-                        <p class="pt-5 align-bottom" style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">
-                        Already have an account? Login <a href="#login" class="loginLink">here</a></p>
+                        <div class="col-7 p-5 text-center">
+                            <img src="img/regist_girl.png" alt="" class="img-fluid" style="transform: scaleX(-1);"
+                                width="60%">
+                            <p class="pt-5 align-bottom"
+                                style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">
+                                Already have an account? Login <a href="#login" class="loginLink">here</a></p>
                         </div>
                         <div class="col-5 p-4">
                             <h2 style="text-align: center">Beauty Recipe</h2>
@@ -336,17 +340,17 @@
             $('.login').show();
             $('#regist').hide();
 
-            
+
             $(document).on('click', '.registLink', function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 $(".login").hide();
-                $("#regist").show(); 
+                $("#regist").show();
             });
 
             $(document).on('click', '.loginLink', function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
                 $(".login").show();
-                $("#regist").hide(); 
+                $("#regist").hide();
             });
         });
     </script>

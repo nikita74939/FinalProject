@@ -68,7 +68,7 @@
             <!-- right -->
 
             <div class="col-10" id="profilView">
-                <div class="card mt-1" style="height: 200px; background-color: indianred; border:none">
+                <div class="card mt-1" style="height: 200px; background-color: burlywood; border:none">
                     <div class="card-body">
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-3">
-                            <img src="users/pict1.jpeg" class="img-thumbnail rounded-circle mx-5" alt="..."
+                            <img src="users/pict2.jpg" class="img-thumbnail rounded-circle mx-5" alt="..."
                                 width="200px" style="position: relative; top: -100px; border: none;">
                         </div>
                         <div class="col-9 text-end">
