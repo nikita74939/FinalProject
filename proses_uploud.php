@@ -1,6 +1,18 @@
 <?php
     include 'koneksi.php';
+    session_start();
 
+    if (isset($_SESSION['username'])) {
+            $username = $_SESSION['username'];
+        }
+
+    $q = "SELECT * FROM users WHERE username = '$username'";
+    $query = mysqli_query($conn, $q);
+        if ($query) {
+            while ($data = mysqli_fetch_array($query)) {
+                $id = $data['user_id'];
+            }
+        }
 
 
     if (isset($_POST['aksiUp'])) {
@@ -27,8 +39,11 @@
             //memindah dari temporary ke directory
             move_uploaded_file($tmpFile, $dir.$main_image);
 
+            $currentDateTime = new DateTime();
+            $time = $currentDateTime->format("Y-m-d H:i:s");
+
             //belum termasuk id user dan rating
-            $query = "INSERT INTO recipes VALUES(NULL, NULL, '$title', '$category', '$description', '$ingredient', '$step', '$main_ingredient', '$main_image', '');";
+            $query = "INSERT INTO recipes VALUES('', $id, '$title', '$category', '$description', '$ingredient', '$step', '$main_ingredient', '$main_image', '$time');";
             $sql = mysqli_query($conn, $query);
 
             header("location: explore.php");

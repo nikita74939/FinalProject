@@ -1,13 +1,10 @@
 <?php
-    include 'koneksi.php';
-    session_start();
+include 'koneksi.php';
+session_start();
 
-    if (isset($_SESSION['username'])) {
-
-        $username = $_SESSION['username'];
-        $query = "SELECT p.url FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$username';";
-        $sql = mysqli_query($conn, $query);
-    }
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +32,12 @@
 
 </head>
 
+<style>
+    .quicksand {
+        font-family: 'Quicksand';
+    }
+</style>
+
 <body>
     <!-- navbar-->
     <nav class="navbar navbar-expand-lg bg-none fixed-top">
@@ -53,27 +56,44 @@
                         <a class="nav-link active" aria-current="page" href="index.php"
                             style="font-family: 'Quicksand';">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#login" style="font-family: 'Quicksand';">Explore</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#login" style="font-family: 'Quicksand';">Uploud Recipe</a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['username'])) {
+                        echo "<li class='nav-item'>
+                                <a class='nav-link quicksand' href='explore.php' style='font-family: 'Quicksand';'>Explore</a>
+                                </li>
+                                <li class='nav-item'>
+                                    <a class='nav-link quicksand' href='uploud.php' style='font-family: 'Quicksand';'>Uploud Recipe</a>
+                                </li>";
+                    } else {
+                        echo "<li class='nav-item'>
+                                <a class='nav-link quicksand' href='#login' style='font-family: 'Quicksand';'>Explore</a>
+                                </li>
+                                <li class='nav-item'>
+                                    <a class='nav-link quicksand' href='#login' style='font-family: 'Quicksand';'>Uploud Recipe</a>
+                                </li>";
+                    }
+                    ?>
                 </ul>
                 <?php
                 if (isset($_GET['pesan'])) {
                     if ($_GET['pesan'] == "udah_login") {
-                        echo "<span class='navbar-text' id='sudahLogin'>
+                        $q = "SELECT * FROM users WHERE username = '$username'";
+                        $query = mysqli_query($conn, $q);
+                        if ($query) {
+                            while ($data = mysqli_fetch_array($query)) {
+                                echo "<span class='navbar-text' id='sudahLogin'>
                                 <a href='profil.php' class='me-3'>
-                                    <img src='".$data['url']."' alt='' class='img-fluid align-top me-1 rounded-circle' width='40' height='20'>
+                                    <img src='users/pict" . $data['id_pict'] . ".jpg' alt='' class='img-fluid align-top me-1 rounded-circle' width='40' height='20'>
                                 </a>
                             </span>";
+                            }
+                        }
                     } else {
                         echo "<span class='navbar-text' id='belumLogin'>
                                 <a href='#login' class='me-3'>
                                     <img src='img/user.png' alt='' class='img-fluid align-top me-1' width='25' height='20' style='border: none;'>
                                 </a>
-                            </span>";      
+                            </span>";
                     }
                 } else {
                     echo "<span class='navbar-text' id='belumLogin'>
