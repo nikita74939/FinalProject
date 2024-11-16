@@ -1,16 +1,26 @@
 <?php
-include "koneksi.php";
-if(isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username_regist'];
-    $password = $_POST['password_regist'];
+    session_start();
+    include 'koneksi.php';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    $query = mysqli_query($konek, "INSERT INTO user VALUES ('', '$username', '$password')")
-             or die(mysqli_error($konek));
-    
+    $currentDateTime = new DateTime();
+    $time = $currentDateTime->format("Y-m-d H:i:s");
 
-    unset($_POST['username_regist'], $_POST['password_regist']);
+    $query = "INSERT INTO users VALUES('', '$username', '', '$password', '', '$time', '1')";
 
-    if($query) {
-        echo "<div style='color:#198754'>Akun anda berhasil terdaftar. Silahkan login.</div>";
+    $sql = mysqli_query($conn, $query);
+
+    $_SESSION['username'] = $username;
+    $_SESSION['status'] = "login";
+
+    $q = "SELECT * FROM users WHERE username = '$username'";
+    $query = mysqli_query($conn, $q);
+    if ($query) {
+        while ($data = mysqli_fetch_array($query)) {
+            $id = $data['user_id'];
+        }
     }
-}
+
+    header("location: edit_profil.php?edit=$id");
+    
