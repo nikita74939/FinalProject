@@ -5,7 +5,7 @@ session_start();
 
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
-}   
+}
 ?>
 
 <!DOCTYPE html>
@@ -296,6 +296,16 @@ if (isset($_SESSION['username'])) {
     </div>
     <!-- login end -->
 
+    <?php 
+        $q = "SELECT * FROM users";
+        $query = mysqli_query($conn, $q);
+        if ($query) {
+            $i =0;
+            while ($data = mysqli_fetch_array($query)) { ?>
+            <input type="hidden" class="cek-user" id="user<?php echo $i?>" value="<?php echo $data['username'] ?>">
+            
+    <?php $i++;}} ?>
+    
     <!-- regist -->
     <div class="register my-5" id="regist" style="display: none">
         <div class="card m-5">
@@ -312,42 +322,41 @@ if (isset($_SESSION['username'])) {
                         <div class="col-5 p-4">
                             <h2 style="text-align: center">Beauty Recipe</h2>
 
-                            <form action="regist.php" method="post" class="mt-5 px-5">
+                            <form action="regist.php" method="post" class="mt-5 px-5" id="registrationForm">
                                 <div class="my-2">
                                     <label for="" class="form-label text-start ms-1"
                                         style="font-family: 'Quicksand';">Username</label>
                                     <input type="text" class="form-control rounded-pill" name="username"
                                         id="usernameRegist" placeholder="Username" style="font-family: 'Quicksand';">
-                                    <div id="usernameHelpR" class="form-text" style="font-family: 'Quicksand';">
+                                    <div id="usernameHelpR" class="form-text text-danger"
+                                        style="font-family: 'Quicksand';">
                                         Username already used.
                                     </div>
-
                                 </div>
                                 <div class="my-4">
                                     <label for="" class="form-label ms-1"
                                         style="font-family: 'Quicksand';">Password</label>
                                     <input type="password" class="form-control rounded-pill" name="password"
                                         id="passwordRegist" placeholder="Password" style="font-family: 'Quicksand';">
-                                    <div id="passwordHelpR" class="form-text" style="font-family: 'Quicksand';">
+                                    <div id="passwordHelpR" class="form-text text-danger"
+                                        style="font-family: 'Quicksand';">
                                         Your password must be 8-20 characters long.
                                     </div>
                                 </div>
-
                                 <div class="my-4">
                                     <label for="" class="form-label ms-1" style="font-family: 'Quicksand';">Confirm
                                         Password</label>
                                     <input type="password" class="form-control rounded-pill" id="confirmPassword"
                                         placeholder="Confirm Password" style="font-family: 'Quicksand';">
-                                    <div id="ConfirmPasswordHelpR" class="form-text" style="font-family: 'Quicksand';">
-                                        Passwords do not match.
+                                    <div id="ConfirmPasswordHelpR" class="form-text text-danger"
+                                        style="font-family: 'Quicksand';">
+                                        Password does not match.
                                     </div>
                                 </div>
-
                                 <div style="text-align: center">
                                     <input type="submit" class="btn btn-outline-dark mt-3" value="Create an account"
                                         style="background-color: rgb(140, 186, 159);">
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -392,9 +401,9 @@ if (isset($_SESSION['username'])) {
             $('#regist').hide();
 
             if ($('#sudahLogin').length) {
-                $('.login').hide(); 
-                $('#regist').hide(); 
-            }       
+                $('.login').hide();
+                $('#regist').hide();
+            }
 
             $(document).on('click', '.registLink', function (e) {
                 e.preventDefault();
@@ -407,6 +416,67 @@ if (isset($_SESSION['username'])) {
                 $(".login").show();
                 $("#regist").hide();
             });
+
+            $("#usernameHelpR").hide();
+            $("#passwordHelpR").hide();
+            $("#ConfirmPasswordHelpR").hide();
+            
+            $('#usernameRegist').on('input', function () {
+                var username = $('#usernameRegist').val();
+                let i = 0;
+                let count = 0;
+
+                while ($('#user' + i).val()) {
+                    let userValue = $('#user' + i).val(); 
+                    if (username === userValue) {
+                        $('#usernameHelpR').show();
+                        count++;
+                    }
+                    i++;
+                }
+
+                if (count === 0) {
+                    $('#usernameHelpR').hide();
+                }
+            });
+
+            $('#passwordRegist').on('input', function () {
+                var password = $('#passwordRegist').val();
+                var errorMessage = '';
+
+                if (password.length < 8 || password.length > 20) {
+                    errorMessage = 'Password must be 8-20 characters long. ';
+                } else if (!/[A-Z]/.test(password)) {
+                    errorMessage = 'Password must contain at least one uppercase letter. ';
+                } else if (!/[a-z]/.test(password)) {
+                    errorMessage = 'Password must contain at least one lowercase letter. ';
+                } else if (!/\d/.test(password)) {
+                    errorMessage = 'Password must contain at least one number. ';
+                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    errorMessage = 'Password must contain at least one special character. ';
+                }
+
+                if (errorMessage !== '') {
+                    $('#passwordHelpR').text(errorMessage).show();
+                } else {
+                    $('#passwordHelpR').hide();
+                }
+            });
+
+
+            $('#confirmPassword').on('click', function(){
+                $('#confirmPassword').on('input', function(){
+                    var pass  = $('#passwordRegist').val();
+                    var cpass = $('#confirmPassword').val();
+                    if (cpass != pass) {
+                        $('#ConfirmPasswordHelpR').show();
+                    } else {
+                        $('#ConfirmPasswordHelpR').hide();
+                    }
+                })
+            });
+
+        
         });
     </script>
 </body>
