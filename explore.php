@@ -1,8 +1,25 @@
+<!-- lagi ku kerjain -->
 <?php
 include 'koneksi.php';
+session_start();
+
+if (empty($_SESSION['username'])) {
+    header("location:index.php?pesan=belum_login");
+} else if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
+
+$q = "SELECT * FROM users WHERE username = '$username'";
+$query = mysqli_query($conn, $q);
+if ($query) {
+    while ($data = mysqli_fetch_array($query)) {
+        $pict_id = $data['id_pict'];
+    }
+}
 
 $query = "SELECT * FROM recipes";
 $sql = mysqli_query($conn, $query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,9 +71,9 @@ $sql = mysqli_query($conn, $query);
                                 <h6>Uploud</h6>
                             </li>
                         </a>
-                        <a href="profi.php#activity" style="text-decoration: none; color: black">
+                        <a href="profil.php" style="text-decoration: none; color: black">
                             <li class="list-group-item" style="border: none">
-                                <h6>Activity</h6>
+                                <h6 style="font-weight: 600">Profil</h6>
                             </li>
                         </a>
                     </ul>
@@ -72,11 +89,8 @@ $sql = mysqli_query($conn, $query);
             <!-- left end -->
 
             <!-- middle -->
-             <!-- disini kutaruh while buat nampilin semua recipe tapi file img buat recipenya blm ada di folder jadi ga keluar gambarnya -->
-            <?php
-                while ($result = mysqli_fetch_assoc($sql)) {
-            ?>
-            <div class="col-7" style="display: block">
+            <!-- disini kutaruh while buat nampilin semua recipe tapi file img buat recipenya blm ada di folder jadi ga keluar gambarnya -->
+            <div class="col-7">
                 <!-- card -->
                 <div class="container pt-4">
                     <div class="row text-center">
@@ -92,67 +106,75 @@ $sql = mysqli_query($conn, $query);
                         </div>
                         <hr>
                     </div>
-                    <div class="row">
-                        <div id="...." class="card border-secondary mx-2 my-3">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-5 pt-4">
-                                        <img src="img/<?php echo $result['main_image']; ?>" alt=""
-                                            style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
-                                        <div class="container">
-                                            <div class="row" style="position: relative; top: -50px; border: none;">
-                                                <div class="col-6">
-                                                    <img src="users/pict1.jpeg"
-                                                        class="img-thumbnail rounded-circle mb-1" alt="..."
-                                                        width="100px">
-                                                    <p style="font-size: 14px;">@cherrygirl</p>
-                                                </div>
-                                                <div class="col-6 text-end pt-5">
-                                                    <p style="font-size: 14px;" class="p-1">10 Nov</p>
-                                                    
-                                                    <a href="save.php?save=<?php echo $result['recipe_id']; ?>" class="">Favorites</a>
-
+                    <?php
+                    while ($result = mysqli_fetch_assoc($sql)) {
+                        ?>
+                        <div class="row group-card">
+                            <div class="card border-secondary mx-2 my-3 card-post">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-5 pt-4">
+                                            <img src="img/<?php echo $result['main_image']; ?>" alt=""
+                                                style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
+                                            <div class="container">
+                                                <div class="row" style="position: relative; top: -50px; border: none;">
+                                                    <div class="col-6">
+                                                        <img src="users/pict1.jpeg"
+                                                            class="img-thumbnail rounded-circle mb-1" alt="..."
+                                                            width="100px">
+                                                        <p style="font-size: 14px;">@cherrygirl</p>
+                                                    </div>
+                                                    <div class="col-6 text-end pt-5">
+                                                        <p style="font-size: 14px;" class="p-1">10 Nov</p>
+                                                        <a href="save.php?save=<?php echo $result['recipe_id']; ?>"
+                                                            class="">Favorites</a>
+                                                    </div>
                                                 </div>
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <div class="col-7 pt-4">
-                                        <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
-                                        <hr>
-                                        <p class="card-text"><?php echo $result['description']; ?>
-                                        </p>
-                                        <div class="d-flex flex-wrap">
-                                            <button class="btn btn-outline-warning me-3 mb-3"><?php echo $result['category']; ?></button>
-                                            <button class="btn btn-outline-dark me-3 mb-3"><?php echo $result['main_ingredient']; ?></button>
+                                        <div class="col-7 pt-4">
+                                            <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
+                                            <hr>
+                                            <p class="card-text"><?php echo $result['description']; ?></p>
+                                            <div class="d-flex flex-wrap">
+                                                <button class="btn btn-outline-warning me-3 mb-3 btn-cat"
+                                                    value="<?php echo strtolower($result['category']); ?>">
+                                                    <?php echo $result['category']; ?>
+                                                </button>
+                                                <button class="btn btn-outline-dark me-3 mb-3 btn-ing"
+                                                    value="<?php echo strtolower($result['main_ingredient']); ?>">
+                                                    <?php echo $result['main_ingredient']; ?>
+                                                </button>
+                                            </div>
+                                            <div class="d-flex flex-column mt-3 text-end">
+                                                <p style="font-family: 'Quicksand'; font-weight:600;">
+                                                    <i class="fa-regular fa-star"></i> 4
+                                                </p>
+                                                <a href="fullrecipe.php#commentar"
+                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
+                                                    9 commentar
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="d-flex flex-column mt-3 text-end">
-                                            <p style="font-family: 'Quicksand'; font-weight:600;">
-                                                <i class="fa-regular fa-star"></i> 4
-                                            </p>
-                                            <a href="fullrecipe.php#commentar"
-                                                style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
-                                                9 commentar
-                                            </a>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <?php
+                    }
+                    ?>
+
                 </div>
             </div>
-            <?php
-                }
-            ?>
+
 
             <!-- middle end -->
 
             <!-- detail -->
-            <div class="col-7">
+            <div class="col-7" style="display: none">
                 <div class="pt-4">
-                    <h4 class="ps-3" style="font-family: 'Quicksand';"><i class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
+                    <h4 class="ps-3" style="font-family: 'Quicksand';"><i
+                            class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
                 </div>
                 <div id="...." class="card border-secondary m-2 my-3">
                     <div class="card-header">
@@ -169,7 +191,7 @@ $sql = mysqli_query($conn, $query);
                     </div>
                     <div class="card-body">
                         <img src="users/pict1.jpeg" alt=""
-                            style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
+                            style="width: 100%; min-height: 240px; object-fit: cover; object-position: center;">
                         <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
                         <hr>
                         <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
@@ -199,26 +221,30 @@ $sql = mysqli_query($conn, $query);
                         <h6>Categorie</h6>
                         <hr>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="font-family: 'Quicksand';">An item</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';">A second item</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';">A third item</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';">A fourth item</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';">And a fifth one</li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemaskButton"
+                                value="Face Mask">Face Mask
+                            </li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facescrubButton">Face
+                                Scrub</li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemiskButton">Face Mist
+                            </li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="lipButton"
+                                value="Lip Care">Lip Care</li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="hairButton">Hair Care</li>
                         </ul>
                     </div>
                     <div class="mx-3 mt-4">
                         <h6>Main ingredient</h6>
                         <hr>
                         <div class="d-flex flex-wrap">
-                            <button class="btn btn-outline-dark me-3 mb-3">Jeruk</button>
-                            <button class="btn btn-outline-dark me-3 mb-3">Markisa</button>
-                            <button class="btn btn-outline-dark me-3 mb-3">Madu</button>
-                            <button class="btn btn-outline-dark me-3 mb-3">Lemon</button>
-                            <button class="btn btn-outline-dark me-3 mb-3">Gula</button>
-                            <button class="btn btn-outline-dark me-3 mb-3">Timun</button>
-                            <button class="btn btn-outline-dark me-3 mb-3">Jeruk</button>
-
-
+                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton">Honey</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="aloeButton">Aloe Vera Gel</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="cocoOilButton">Coconut Oil</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="greenTeaButton">Green Tea</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="yogurtButton">Yogurt</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="turmericButton">Turmeric</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton"
+                                value="oatmeal">Oatmeal</button>
                         </div>
                     </div>
                 </div>
@@ -233,7 +259,54 @@ $sql = mysqli_query($conn, $query);
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/scriptIndex.js"></script>
+    <script>
+        $(document).ready(function () {
+            let selectedCategory = null;
+            let selectedIngredient = null;
+
+            // Handle category click
+            $(".list-group-item").click(function () {
+                $(".list-group-item").removeClass("active");
+                if (selectedCategory === $(this).attr("id")) {
+                    selectedCategory = null; // Deselect if clicked again
+                } else {
+                    selectedCategory = $(this).attr("id");
+                    $(this).addClass("active");
+                }
+                filterResults();
+            });
+
+            // Handle ingredient click
+            $(".btn-outline-dark").click(function () {
+                $(".btn-outline-dark").removeClass("active");
+                if (selectedIngredient === $(this).attr("id")) {
+                    selectedIngredient = null; // Deselect if clicked again
+                } else {
+                    selectedIngredient = $(this).attr("id");
+                    $(this).addClass("active");
+                }
+                filterResults();
+            });
+
+            // Filter results based on selectedCategory and selectedIngredient
+            function filterResults() {
+                $(".card-post").each(function () {
+                    let category = $(this).find(".btn-cat").val();
+                    let ingredient = $(this).find(".btn-ing").val();
+
+                    let showByCategory = !selectedCategory || category === selectedCategory;
+                    let showByIngredient = !selectedIngredient || ingredient === selectedIngredient;
+
+                    if (showByCategory && showByIngredient) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+        });
+    </script>
 </body>
 
 </html>
