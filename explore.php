@@ -97,22 +97,26 @@ $query2 = "SELECT * FROM recipes ";
                 <!-- card -->
                 <div class="container pt-4">
                     <div class="row text-center">
-                        <div class="col-6" style="border-bottom: solid 1px black;">
+                        <div class="col-12" style="border-bottom: solid 1px black;">
                             <a href="#popularRecipe" id="popularButton"></a>
-                            <p style="font-weight: 700; color: black; font-family: 'Quicksand'; font-size: 20px">Popular
-                            </p>
-                        </div>
-                        <div class="col-6" style="border-bottom: none;">
-                            <a href="#latestRecipe" id="latestButton"></a>
-                            <p style="font-weight: 400; color: gray; font-family: 'Quicksand'; font-size: 20px">Latest
+                            <p style="font-weight: 600; color: black; font-family: 'Quicksand'; font-size: 20px">DIY Recipes
                             </p>
                         </div>
                         <hr>
                     </div>
                     <div class="row group-card">
-                    <?php
-                    while ($result = mysqli_fetch_assoc($sql)) {
-                        ?>
+                        <?php
+                        while ($result = mysqli_fetch_assoc($sql)) {
+                            $id = $result['user_id'];
+                            $query_profil = "SELECT * FROM users WHERE user_id = '$id'";
+                            $sql_profil = mysqli_query($conn, $query_profil);
+                            while ($result2 = mysqli_fetch_assoc($sql_profil)) {
+                                $id_pict = $result2['id_pict'];
+                                $username = $result2['username'];
+                            }
+
+                            ?>
+
                             <div class="card border-secondary mx-2 my-3 card-post" id="<?php echo $result['recipe_id']; ?>">
                                 <div class="container">
                                     <div class="row">
@@ -122,15 +126,15 @@ $query2 = "SELECT * FROM recipes ";
                                             <div class="container">
                                                 <div class="row" style="position: relative; top: -50px; border: none;">
                                                     <div class="col-6">
-                                                        <img src="users/pict1.jpeg"
+                                                        <img src="users/pict<?php echo $id_pict ?>.jpg"
                                                             class="img-thumbnail rounded-circle mb-1" alt="..."
                                                             width="100px">
-                                                        <p style="font-size: 14px;">@cherrygirl</p>
+                                                        <p class="text-nowrap" style="font-size: 14px;">@c<?php echo $username ?>l</p>
                                                     </div>
                                                     <div class="col-6 text-end pt-5">
                                                         <p style="font-size: 14px;" class="p-1">10 Nov</p>
-                                                        <a href="save.php?save=<?php echo $result['recipe_id']; ?>"
-                                                            class="">Favorites</a>
+                                                        <a style="font-size: 24px; color: rgb(140, 186, 159);" href="save.php?save=<?php echo $result['recipe_id']; ?>"
+                                                            class=""><i class="fa-regular fa-bookmark"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,13 +167,13 @@ $query2 = "SELECT * FROM recipes ";
                                 </div>
                             </div>
                             <?php
-                    }
-                    ?>
+                        }
+                        ?>
                     </div>
 
                 </div>
             </div>
-            
+
             <!-- middle end -->
 
             <!-- right -->
@@ -271,7 +275,7 @@ $query2 = "SELECT * FROM recipes ";
                 });
             }
 
-            $('.card-post').click(function() {
+            $('.card-post').click(function () {
                 let recipe = $(this).attr("id");
                 window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal
             });
@@ -280,5 +284,3 @@ $query2 = "SELECT * FROM recipes ";
 </body>
 
 </html>
-
-  
