@@ -1,83 +1,5 @@
-<!-- lagi digarap!!!!
-    <?php
-    include 'koneksi.php';
+<!-- lagi digarap!!!! -->
 
-    $recipe_id = $_GET['lihat'];
-    
-    if (isset($_POST['aksiComment'])) {
-        if ($_POST['aksiComment'] == "add") {
-            $comment_text = $_POST['comment_text'];
-            
-            $query = "INSERT INTO comments VALUES(NULL, '$recipe_id', NULL, '$comment_text', NULL);";
-            $sql = mysqli_query($conn, $query);
-            
-            header("location: fullrecipe.php?lihat=$recipe_id");
-        }
-    }
-    
-    $query = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
-    $sql = mysqli_query($conn, $query);
-    
-    
-    
-    $query_comment = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
-    $sql_comment = mysqli_query($conn, $query_comment);
-    
-    ?>
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-    <nav>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="explore.php">Explore recipes</a></li>
-            <li><a href="uploud.php">Upload Recipes</a></li>
-        </ul>
-        <a href="profil.php">Profile</a>
-    </nav>
-    <h1>explore recipes</h1>
-    <?php
-        while($result = mysqli_fetch_assoc($sql)) {
-            ?>
-        <h3><?php echo $result['title']; ?></h3>
-        <img src="img/<?php echo $result['main_image']; ?>" alt="foto" style="width: 100px;" />
-        <p>buat profile tapi blom ku selesaiin</p>
-        <p>buat rating</p>
-        <p><?php echo $result['description']; ?></p>
-        <h4>Ingredients</h4>
-        <p><?php echo $result['ingredient']; ?></p>
-        <h4>Step by step</h4>
-        <p><?php echo $result['step']; ?></p>
-        <?php
-        }
-        ?>
-    <div class="comments">
-        <form action="" method="POST">
-            <input name="comment_text" id="comment_text" type="text" placeholder="Add comment...">
-            <button type="submit" name="aksiComment" value="add">add</button>
-        </form>
-        <?php
-            while($result_comment = mysqli_fetch_assoc($sql_comment)) {
-                ?>
-            <h5>user belum dibikin</h5>
-            <p><?php echo $result_comment['created_at']; ?></p>
-            <p><?php echo $result_comment['comment_text']; ?></p>
-            <?php
-            }
-        ?>
-    </div>
-</body>
-</html>
-
--->
-
-<!-- lagi ku kerjain -->
 <?php
 include 'koneksi.php';
 session_start();
@@ -88,16 +10,24 @@ if (empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
 }
 
-$q = "SELECT * FROM users WHERE username = '$username'";
-$query = mysqli_query($conn, $q);
-if ($query) {
-    while ($data = mysqli_fetch_array($query)) {
-        $pict_id = $data['id_pict'];
+$recipe_id = $_GET['lihat'];
+
+if (isset($_POST['aksiComment'])) {
+    if ($_POST['aksiComment'] == "add") {
+        $comment_text = $_POST['comment_text'];
+
+        $query = "INSERT INTO comments VALUES(NULL, '$recipe_id', NULL, '$comment_text', NULL);";
+        $sql = mysqli_query($conn, $query);
+
+        header("location: fullrecipe.php?lihat=$recipe_id");
     }
 }
 
-$query = "SELECT * FROM recipes";
+$query = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
 $sql = mysqli_query($conn, $query);
+
+$query_comment = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
+$sql_comment = mysqli_query($conn, $query_comment);
 
 ?>
 <!DOCTYPE html>
@@ -124,6 +54,9 @@ $sql = mysqli_query($conn, $query);
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
+
+<style>
+</style>
 
 <body>
     <div class="container mx-3">
@@ -168,47 +101,105 @@ $sql = mysqli_query($conn, $query);
             <!-- left end -->
 
             <!-- detail -->
-            <div class="col-7">
-                <div class="pt-4">
-                    <h4 class="ps-3" style="font-family: 'Quicksand';"><i
-                            class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
-                </div>
-                <div id="...." class="card border-secondary m-2 my-3">
-                    <div class="card-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    Face mist
-                                </div>
-                                <div class="col-6 text-end">
-                                    bintang 4,5
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <img src="users/pict1.jpeg" alt=""
-                            style="width: 100%; min-height: 240px; object-fit: cover; object-position: center;">
-                        <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
-                        <hr>
-                        <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
-                            soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
-                        <div class="container p-0 pt-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="text-secondary">Bahan utama: pisang</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <a href="fullrecipe.php#commentar"
-                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
-                                        commentar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+            while ($result = mysqli_fetch_assoc($sql)) {
+                $user_id = $result['user_id'];
 
+                $query_profil = "SELECT * FROM users WHERE user_id = '$user_id';";
+                $sql_profil = mysqli_query($conn, $query_profil);
+                while ($result2 = mysqli_fetch_assoc($sql_profil)) {
+                    $id_pict = $result2['id_pict'];
+                    $usernamee = $result2['username'];
+                    $nama = $result2['nama'];
+                }
+                ?>
+                <div class="col-7">
+                    <div class="pt-4">
+                        <h4 class="ps-3" style="font-family: 'Quicksand';"><i
+                                class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
+                    </div>
+                    <div id="...." class="card border-secondary m-2 my-3">
+                        <div class="card-header">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <?php echo $result['category']; ?>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        bintang 4,5
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <img src="<?php echo $result['main_image']; ?>" alt=""
+                                        style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
+                                </div>
+                                <div class="col-5">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <img src="users/pict<?php echo $id_pict ?>.jpg"
+                                                class="img-thumbnail rounded-circle mb-1" alt="..." width="100px">
+                                        </div>
+                                        <div class="col-7 pt-3">
+                                            <h6 style="font-size: 20px; font-weight: 600"><?php echo $nama; ?></h6>
+                                            <p class="text-nowrap" style="font-size: 14px;">@c<?php echo $usernamee ?>l</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="card mt-3" style="border: 2px dashed rgb(140, 186, 159);">
+
+                                        <div class="row mt-3 mb-1 text-center">
+                                            <p class="">Rate this!</p>
+                                        </div>
+    
+                                        <div class="row text-center mx-5 mb-4 justify-content-center">
+                                            <button class="col-2 rate-button bg-white" data-rate="1">
+                                                <i class="fa-regular fa-star bg-white" style="display: inline-flex; border:none"></i>
+                                            </button>
+                                            <!-- Bintang 2 -->
+                                            <button class="col-2 rate-button bg-white" data-rate="2">
+                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                            </button>
+                                            <!-- Bintang 3 -->
+                                            <button class="col-2 rate-button bg-white" data-rate="3">
+                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                            </button>
+                                            <!-- Bintang 4 -->
+                                            <button class="col-2 rate-button bg-white" data-rate="4">
+                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                            </button>
+                                            <!-- Bintang 5 -->
+                                            <button class="col-2 rate-button bg-white" data-rate="5">
+                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
+                            <hr>
+                            <p class="card-text"><?php echo $result['description']; ?></p>
+                            <div class="container p-0 pt-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="text-secondary">Bahan utama: <?php echo $result['main_ingredient']; ?></p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <a href="fullrecipe.php#commentar"
+                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                            commentar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
             <!-- right -->
 
             <div class="col-3 sticky-top" style="height: 100vh;">
@@ -267,3 +258,33 @@ $sql = mysqli_query($conn, $query);
 </body>
 
 </html>
+
+<?php
+while ($result = mysqli_fetch_assoc($sql)) {
+    ?>
+    <h3><?php echo $result['title']; ?></h3>
+    <img src="img/<?php echo $result['main_image']; ?>" alt="foto" style="width: 100px;" />
+    <p>buat profile tapi blom ku selesaiin</p>
+    <p>buat rating</p>
+    <p><?php echo $result['description']; ?></p>
+    <h4>Ingredients</h4>
+    <p><?php echo $result['ingredient']; ?></p>
+    <h4>Step by step</h4>
+    <p><?php echo $result['step']; ?></p>
+    <?php
+}
+?>
+<div class="comments">
+    <form action="" method="POST">
+        <input name="comment_text" id="comment_text" type="text" placeholder="Add comment...">
+        <button type="submit" name="aksiComment" value="add">add</button>
+    </form>
+    <?php
+    while ($result_comment = mysqli_fetch_assoc($sql_comment)) {
+        ?>
+        <h5>user belum dibikin</h5>
+        <p><?php echo $result_comment['created_at']; ?></p>
+        <p><?php echo $result_comment['comment_text']; ?></p>
+        <?php
+    }
+    ?>

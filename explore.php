@@ -1,4 +1,4 @@
-<!-- bener bener filter doang, kalau bisa benerin ya:) -->
+<!-- kurang: rate, com, filter -->
 <?php
 include 'koneksi.php';
 session_start();
