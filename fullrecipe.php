@@ -149,13 +149,14 @@ $sql_comment = mysqli_query($conn, $query_comment);
                                         </div>
 
                                     </div>
-                                    <div class="card mt-3" style="border: 2px dashed rgb(140, 186, 159);">
-
-                                        <div class="row mt-3 mb-1 text-center">
+                                    <div class="card mt-3" style="border: none">
+                                    <hr class="me-1">
+                                        <div class="row mt-0 mb-1 me-1 text-center">
                                             <p class="">Rate this!</p>
+                                            
                                         </div>
     
-                                        <div class="row text-center mx-5 mb-4 justify-content-center">
+                                        <div class="row text-center mx-5 mb-0 justify-content-center">
                                             <button class="col-2 rate-button bg-white" data-rate="1">
                                                 <i class="fa-regular fa-star bg-white" style="display: inline-flex; border:none"></i>
                                             </button>
@@ -175,7 +176,9 @@ $sql_comment = mysqli_query($conn, $query_comment);
                                             <button class="col-2 rate-button bg-white" data-rate="5">
                                                 <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
+                                            
                                         </div>
+                                        <hr class="me-1">
                                     </div>
                                 </div>
                             </div>
