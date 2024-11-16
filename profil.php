@@ -193,11 +193,11 @@ if ($query) {
 
                     <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px;">
                         <?php
-                        $query = mysqli_query($conn, "select r.title, r.description, r.main_image from recipes r join favorites f on f.recipe_id = r.recipe_id join users u on r.user_id = u.user_is where f.user_id ='$id'");
+                        $query = mysqli_query($conn, "select r.recipe_id, r.title, r.description, r.main_image, r.category, r.main_image, r.main_ingredient, u.user_id, u.username, u.id_pict from recipes r join favorites f on f.recipe_id = r.recipe_id join users u on r.user_id = u.user_id where f.user_id ='$id'");
                         while ($result = mysqli_fetch_array($query)) { ?>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <!-- card -->
-                                <div id="...." class="card border-secondary mx-2 my-3">
+                                <div id="...." class="card border-secondary mx-2 mt-3 mb-1" style="height: 320px">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-5 pt-4">
@@ -206,16 +206,15 @@ if ($query) {
                                                 <div class="container">
                                                     <div class="row" style="position: relative; top: -50px; border: none;">
                                                         <div class="col-6">
-                                                            <img src="users/pict1.jpeg"
+                                                            <img src="users/pict<?php echo $result['id_pict']; ?>.jpg"
                                                                 class="img-thumbnail rounded-circle mb-1" alt="..."
                                                                 width="100px">
-                                                            <p style="font-size: 14px;">@cherrygirl</p>
+                                                            <p style="font-size: 14px;">@<?php echo $result['username']; ?></p>
                                                         </div>
                                                         <div class="col-6 text-end pt-5">
                                                             <p style="font-size: 14px;" class="p-1">10 Nov</p>
 
-                                                            <a href="save.php?save=<?php echo $result['recipe_id']; ?>"
-                                                                class="">Favorites</a>
+                                                            <a href="save.php?save=<?php echo $result['recipe_id']; ?>" class="">Favorites</a>
 
                                                         </div>
                                                     </div>
