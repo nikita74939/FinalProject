@@ -350,7 +350,7 @@ if (isset($_SESSION['username'])) {
                                         placeholder="Confirm Password" style="font-family: 'Quicksand';">
                                     <div id="ConfirmPasswordHelpR" class="form-text text-danger"
                                         style="font-family: 'Quicksand';">
-                                        Passwords do not match.
+                                        Password does not match.
                                     </div>
                                 </div>
                                 <div style="text-align: center">
@@ -437,6 +437,29 @@ if (isset($_SESSION['username'])) {
 
                 if (count === 0) {
                     $('#usernameHelpR').hide();
+                }
+            });
+
+            $('#passwordRegist').on('input', function () {
+                var password = $('#passwordRegist').val();
+                var errorMessage = '';
+
+                if (password.length < 8 || password.length > 20) {
+                    errorMessage = 'Password must be 8-20 characters long. ';
+                } else if (!/[A-Z]/.test(password)) {
+                    errorMessage = 'Password must contain at least one uppercase letter. ';
+                } else if (!/[a-z]/.test(password)) {
+                    errorMessage = 'Password must contain at least one lowercase letter. ';
+                } else if (!/\d/.test(password)) {
+                    errorMessage = 'Password must contain at least one number. ';
+                } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    errorMessage = 'Password must contain at least one special character. ';
+                }
+
+                if (errorMessage !== '') {
+                    $('#passwordHelpR').text(errorMessage).show();
+                } else {
+                    $('#passwordHelpR').hide();
                 }
             });
 
