@@ -1,3 +1,15 @@
+<?php
+include 'koneksi.php';
+session_start();
+
+if (empty($_SESSION['username'])) {
+    header("location:index.php?pesan=belum_login");
+} else if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,19 +140,28 @@
                             <label for="" class="form-label mt-4">Category</label>
                             <select class="form-control" name="category" id="category"
                                 style="font-family: 'Quicksand';">
-                                <option value="Face">Face</option>
-                                <option value="Body">Body</option>
-                                <option value="Hair">Hair</option>
+                                <option value="Face Mask">Face Mask</option>
+                                <option value="Face Scrub">Face Scrub</option>
+                                <option value="Face Mist">Face Mist</option>
+                                <option value="Lip Care">Lip Care</option>
+                                <option value="Hair Care">Hair Care</option>
+                                <option value="Other">Other</option>
                             </select>
 
                             <label for="" class="form-label mt-4">Main Ingredients</label>
                             <select class="form-control" name="main_ingredient" id="main_ingredient"
                                 style="font-family: 'Quicksand';">
-                                <option value="Face">Face</option>
-                                <option value="Body">Body</option>
-                                <option value="Hair">Hair</option>
+                                <option value="Honey">Honey</option>
+                                <option value="Aloe Vera Gel">Aloe Vera Gel</option>
+                                <option value="Coconut Oil">Coconut Oil</option>
+                                <option value="Green Tea">Green Tea</option>
+                                <option value="Yogurt">Yogurt</option>
+                                <option value="Turmeric">Turmeric</option>
+                                <option value="Oats">Oats</option>
+                                <option value="Body">Other</option>
                             </select>
                         </div>
+                        
                         <div class="col-6 p-5 pt-3">
                             <label for="" class="form-label">Deskripstion</label>
                             <textarea style="font-family: 'Quicksand'; min-height: 100px;" class="form-control"
