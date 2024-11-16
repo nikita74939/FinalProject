@@ -1,8 +1,11 @@
+<!-- lagi kupake -->
 <?php
 include 'koneksi.php';
 session_start();
 
-if (isset($_SESSION['username'])) {
+if(empty($_SESSION['username'])) {
+    header("location:index.php?pesan=belum_login");
+} else if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 }
 ?>

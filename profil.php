@@ -1,29 +1,33 @@
+<!-- lagi kupake -->
+
 <?php
-include 'koneksi.php';
-session_start();
+    include 'koneksi.php';
+    session_start();
 
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-}
-
-$q = "SELECT * FROM users WHERE username = '$username'";
-$query = mysqli_query($conn, $q);
-if ($query) {
-    while ($data = mysqli_fetch_array($query)) {
-        $id = $data['user_id'];
-        $bio = $data['bio'];
-        $nama = $data['nama'];
-        $id_pict = $data['id_pict'];
+    if(empty($_SESSION['username'])) {
+        header("location:index.php?pesan=belum_login");
+    } else if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
     }
-}
 
-$q = "SELECT p.color FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$id'";
-$query = mysqli_query($conn, $q);
-if ($query) {
-    while ($data = mysqli_fetch_array($query)) {
-        $color = $data['color'];
+    $q = "SELECT * FROM users WHERE username = '$username'";
+    $query = mysqli_query($conn, $q);
+    if ($query) {
+        while ($data = mysqli_fetch_array($query)) {
+            $id = $data['user_id'];
+            $bio = $data['bio'];
+            $nama = $data['nama'];
+            $id_pict = $data['id_pict'];
+        }
     }
-}
+
+    $q = "SELECT p.color FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$id'";
+    $query = mysqli_query($conn, $q);
+    if ($query) {
+        while ($data = mysqli_fetch_array($query)) {
+            $color = $data['color'];
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -180,7 +184,7 @@ if ($query) {
                             </div>
                         </div>
 
-                        <?php }?>
+                    <?php }?>
                     </div>
 
                     <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px;">
