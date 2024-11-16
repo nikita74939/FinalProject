@@ -38,6 +38,23 @@ $query_profil = "SELECT * FROM profil_pict WHERE id = '$user_id';";
 $sql_profil = mysqli_query($conn, $query_profil);
 $result_profil = mysqli_fetch_assoc($sql_profil);
 
+if (isset($_POST['aksiProfil']) && $_POST['aksiProfil'] == "edit") {
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+    $bio = $_POST['bio'];
+    $id_pict = $_POST['id_pict'];
+
+    if (empty($id_pict)) {
+        $id_pict = $result_users['id_pict'];  //gunakan nilai lama jk tdk diperbarui
+    }
+
+    $query_edit_users = "UPDATE users SET nama='$nama', username='$username', bio='$bio', id_pict='$id_pict' WHERE user_id = '$user_id';";
+    $sql_edit_users = mysqli_query($conn, $query_edit_users);
+
+    header("location: profil.php");
+    exit();
+}
+
 if (empty($_SESSION['username'])) {
     header("location:index.php?pesan=belum_login");
 } else if (isset($_SESSION['username'])) {
@@ -127,7 +144,7 @@ if (empty($_SESSION['username'])) {
             <!-- right -->
 
             <div class="col-10">
-                <form action="proses_uploud.php" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="pt-4">
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
                                 class="fa-solid fa-chevron-left me-4 pb-2"></i>Edit Profile</h4>
@@ -163,19 +180,19 @@ if (empty($_SESSION['username'])) {
                             </div>
 
                             <div class="col-8 p-5 pt-3 ">
-                                <input type="hidden" class="form-control" name="id_pict" id="id_pict" value="<?php echo $result_users['id_pict']; ?>">
+                                    <input type="hidden" class="form-control" name="id_pict" id="id_pict" value="<?php echo $result_users['id_pict']; ?>">
 
-                                <label for="" class="form-label">Nickname</label>
-                                <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="nama" id="title" value="<?php echo $result_users['nama']; ?>">
+                                    <label for="" class="form-label">Nickname</label>
+                                    <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="nama" id="nama" value="<?php echo $result_users['nama']; ?>">
 
-                                <label for="" class="form-label mt-4">Username</label>
-                                <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="username" id="username" value="<?php echo $result_users['username']; ?>">
+                                    <label for="" class="form-label mt-4">Username</label>
+                                    <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="username" id="username" value="<?php echo $result_users['username']; ?>">
 
-                                <label for="" class="form-label mt-4">Bio</label>
-                                <textarea style="font-family: 'Quicksand'; min-height: 100px;" required type="text"  class="form-control" name="bio" id="bio"><?php echo $result_users['bio']; ?></textarea>
+                                    <label for="" class="form-label mt-4">Bio</label>
+                                    <textarea style="font-family: 'Quicksand'; min-height: 100px;" required type="text"  class="form-control" name="bio" id="bio"><?php echo $result_users['bio']; ?></textarea>
 
-                                <div class="text-end my-5">
-                                <button type="submit" class="btn btn-outline-dark" id="btn-edit" style="background-color: rgb(140, 186, 159)">Save Change</button>
+                                    <div class="text-end my-5">
+                                    <button type="submit" class="btn btn-outline-dark" id="btn-edit" style="background-color: rgb(140, 186, 159)" name="aksiProfil" value="edit">Save Change</button>
                             </div>
 
                             </div>
