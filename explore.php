@@ -1,4 +1,4 @@
-<!-- lagi ku kerjain -->
+<!-- bener bener filter doang, kalau bisa benerin ya:) -->
 <?php
 include 'koneksi.php';
 session_start();
@@ -19,6 +19,9 @@ if ($query) {
 
 $query = "SELECT * FROM recipes";
 $sql = mysqli_query($conn, $query);
+
+$query2 = "SELECT * FROM recipes ";
+
 
 ?>
 <!DOCTYPE html>
@@ -106,11 +109,11 @@ $sql = mysqli_query($conn, $query);
                         </div>
                         <hr>
                     </div>
+                    <div class="row group-card">
                     <?php
                     while ($result = mysqli_fetch_assoc($sql)) {
                         ?>
-                        <div class="row group-card">
-                            <div class="card border-secondary mx-2 my-3 card-post">
+                            <div class="card border-secondary mx-2 my-3 card-post" id="<?php echo $result['recipe_id']; ?>">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-5 pt-4">
@@ -138,11 +141,11 @@ $sql = mysqli_query($conn, $query);
                                             <p class="card-text"><?php echo $result['description']; ?></p>
                                             <div class="d-flex flex-wrap">
                                                 <button class="btn btn-outline-warning me-3 mb-3 btn-cat"
-                                                    value="<?php echo strtolower($result['category']); ?>">
+                                                    value="<?php echo $result['category']; ?>">
                                                     <?php echo $result['category']; ?>
                                                 </button>
                                                 <button class="btn btn-outline-dark me-3 mb-3 btn-ing"
-                                                    value="<?php echo strtolower($result['main_ingredient']); ?>">
+                                                    value="<?php echo $result['main_ingredient']; ?>">
                                                     <?php echo $result['main_ingredient']; ?>
                                                 </button>
                                             </div>
@@ -159,58 +162,15 @@ $sql = mysqli_query($conn, $query);
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <?php
+                            <?php
                     }
                     ?>
+                    </div>
 
                 </div>
             </div>
-
-
+            
             <!-- middle end -->
-
-            <!-- detail -->
-            <div class="col-7" style="display: none">
-                <div class="pt-4">
-                    <h4 class="ps-3" style="font-family: 'Quicksand';"><i
-                            class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
-                </div>
-                <div id="...." class="card border-secondary m-2 my-3">
-                    <div class="card-header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6">
-                                    Face mist
-                                </div>
-                                <div class="col-6 text-end">
-                                    bintang 4,5
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <img src="users/pict1.jpeg" alt=""
-                            style="width: 100%; min-height: 240px; object-fit: cover; object-position: center;">
-                        <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
-                        <hr>
-                        <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
-                            soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
-                        <div class="container p-0 pt-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="text-secondary">Bahan utama: pisang</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <a href="fullrecipe.php#commentar"
-                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
-                                        commentar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- right -->
 
@@ -222,29 +182,35 @@ $sql = mysqli_query($conn, $query);
                         <hr>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" style="font-family: 'Quicksand';" id="facemaskButton"
-                                value="Face Mask">Face Mask
-                            </li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facescrubButton">Face
-                                Scrub</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemiskButton">Face Mist
-                            </li>
+                                value="Face Mask">Face Mask</li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facescrubButton"
+                                value="Face Scrub">Face Scrub</li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemistButton"
+                                value="Face Mist">Face Mist</li>
                             <li class="list-group-item" style="font-family: 'Quicksand';" id="lipButton"
                                 value="Lip Care">Lip Care</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="hairButton">Hair Care</li>
+                            <li class="list-group-item" style="font-family: 'Quicksand';" id="hairButton"
+                                value="Hair Care">Hair Care</li>
                         </ul>
+
                     </div>
                     <div class="mx-3 mt-4">
                         <h6>Main ingredient</h6>
                         <hr>
                         <div class="d-flex flex-wrap">
-                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton">Honey</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="aloeButton">Aloe Vera Gel</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="cocoOilButton">Coconut Oil</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="greenTeaButton">Green Tea</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="yogurtButton">Yogurt</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="turmericButton">Turmeric</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton"
-                                value="oatmeal">Oatmeal</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton" value="Honey">Honey</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="aloeButton" value="Aloe Vera Gel">Aloe
+                                Vera Gel</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="cocoOilButton"
+                                value="Coconut Oil">Coconut Oil</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="greenTeaButton" value="Green Tea">Green
+                                Tea</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="yogurtButton"
+                                value="Yogurt">Yogurt</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="turmericButton"
+                                value="Turmeric">Turmeric</button>
+                            <button class="btn btn-outline-dark me-3 mb-3" id="oatmealButton"
+                                value="Oatmeal">Oatmeal</button>
                         </div>
                     </div>
                 </div>
@@ -294,8 +260,8 @@ $sql = mysqli_query($conn, $query);
                     let category = $(this).find(".btn-cat").val();
                     let ingredient = $(this).find(".btn-ing").val();
 
-                    let showByCategory = !selectedCategory || category === selectedCategory;
-                    let showByIngredient = !selectedIngredient || ingredient === selectedIngredient;
+                    let showByCategory = !selectedCategory || category == selectedCategory;
+                    let showByIngredient = !selectedIngredient || ingredient == selectedIngredient;
 
                     if (showByCategory && showByIngredient) {
                         $(this).show();
@@ -305,41 +271,14 @@ $sql = mysqli_query($conn, $query);
                 });
             }
 
+            $('.card-post').click(function() {
+                let recipe = $(this).attr("id");
+                window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal
+            });
         });
     </script>
 </body>
 
 </html>
 
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="explore.php">Explore recipes</a></li>
-            <li><a href="uploud.php">Upload Recipes</a></li>
-        </ul>
-        <a href="profil.php">Profile</a>
-    </nav>
-    <h1>explore recipes</h1>
-    <?php
-    while ($result = mysqli_fetch_assoc($sql)) {
-        ?>
-        <img src="img/<?php echo $result['main_image']; ?>" alt="foto" style="width: 100px;" />
-        <h3><?php echo $result['title']; ?></h3>
-        <p><?php echo $result['description']; ?></p>
-        <a href="fullrecipe.php?lihat=<?php echo $result['recipe_id']; ?>">full recipe</a>
-        <br>
-    <?php
-    }
-    ?>
-</body>
-</html>
-    -->
+  
