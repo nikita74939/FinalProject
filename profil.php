@@ -1,9 +1,29 @@
 <?php
-    include 'koneksi.php';
+include 'koneksi.php';
+session_start();
 
-    $query = "SELECT user_id, username, nama, bio FROM users;";
-    $sql = mysqli_query($conn, $query);
-    $result = mysqli_fetch_assoc($sql);
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
+
+$q = "SELECT * FROM users WHERE username = '$username'";
+$query = mysqli_query($conn, $q);
+if ($query) {
+    while ($data = mysqli_fetch_array($query)) {
+        $id = $data['user_id'];
+        $bio = $data['bio'];
+        $nama = $data['nama'];
+        $id_pict = $data['id_pict'];
+    }
+}
+
+$q = "SELECT p.color FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$id'";
+$query = mysqli_query($conn, $q);
+if ($query) {
+    while ($data = mysqli_fetch_array($query)) {
+        $color = $data['color'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +96,7 @@
             <!-- right -->
 
             <div class="col-10" id="profilView">
-                <div class="card mt-1" style="height: 200px; background-color: burlywood; border:none">
+                <div class="card mt-1" style="height: 200px; background-color: <?php echo $color ?>; border:none">
                     <div class="card-body">
                     </div>
                 </div>
@@ -86,19 +106,20 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-3">
-                            <img src="users/pict2.jpg" class="img-thumbnail rounded-circle mx-5" alt="..."
-                                width="200px" style="position: relative; top: -100px; border: none;">
+                            <img src="users/pict<?php echo $id_pict ?>.jpg" class="img-thumbnail rounded-circle mx-5"
+                                alt="..." width="200px" style="position: relative; top: -100px; border: none;">
                         </div>
                         <div class="col-9 text-end">
-                            <a href="edit_profil.php?edit=<?php echo $result['user_id']; ?>" class="p-2 px-3 mt-4 btn btn-dark rounded-pill">Edit Profil</a>
+                            <a href="edit_profil.php?edit=<?php echo $id ?>"
+                                class="p-2 px-3 mt-4 btn btn-dark rounded-pill">Edit Profil</a>
                         </div>
                     </div>
                     <div class="row pt-3" style="position: relative; top: -100px;">
-                        <h6 style="font-size: 32px; font-weight: 700"><?php echo $result['nama']; ?></h6>
-                        <p style="font-size: 16px;">@<?php echo $result['username']; ?></p>
+                        <h6 style="font-size: 32px; font-weight: 700"><?php echo $nama; ?></h6>
+                        <p style="font-size: 16px;">@<?php echo $username; ?></p>
                     </div>
                     <div class="row pt-1" style="position: relative; top: -100px;">
-                        <p class="pb-4"><?php echo $result['bio']; ?></p>
+                        <p class="pb-4"><?php echo $bio; ?></p>
                         <hr>
                     </div>
 
@@ -107,18 +128,21 @@
                     <!-- button -->
 
                     <div class="row text-center" style="position: relative; top: -100px;">
-                        <div class="col-6" style="border-bottom: solid 1px black;">
-                            <a href="#postRecipe" id="postButton"></a>
-                            <p style="font-weight: 700; color: black">post</p>
+                        <div id="postButton" class="col-6" style="border-bottom: solid 1px black;">
+                            <button id="postText" class="border-0 bg-white pb-3" style="font-weight: 700; color: black"
+                              >post</button>
                         </div>
-                        <div class="col-6" style="border-bottom: none;">
-                            <a href="#savedRecipe" id="savedButton"></a>
-                            <p style="font-weight: 400; color: gray">saved</p>
+                        <div id="savedButton" class="col-6" style="border-bottom: none;">
+                            <button id="savedText" class="border-0 bg-white pb-3" style="font-weight: 400; color: gray">saved</button>
                         </div>
                         <hr>
                     </div>
 
                     <div id="postRecipe" class="row pt-1 px-4" style="position: relative; top: -100px; display: block">
+                    <?php
+                        $query=mysqli_query($conn,"select * from lab");
+                        
+                        while($data=mysqli_fetch_array($query)) { ?>
                         <div class="col-6">
                             <div id="...." class="card border-secondary m-2 my-3">
                                 <div class="card-header">
@@ -155,9 +179,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php }?>
                     </div>
 
-                    <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px; display: none">
+                    <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px;">
                         <div class="col-6">
                             <div id="...." class="card border-secondary m-2 my-3">
                                 <div class="card-header">
@@ -213,7 +239,32 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/scriptIndex.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#postRecipe').show();
+            $('#savedRecipe').hide();
+
+            $('#postButton').click(function () {
+                $(this).css('border-bottom', 'solid 1px black');
+                $('#savedButton').css('border-bottom', 'none');
+                $('#postRecipe').show();
+                $('#savedRecipe').hide();
+
+                $('#savedText').css({'font-weight': '400', 'color': 'gray'});
+                $('#postText').css({'font-weight': '700', 'color': 'black'});
+            });
+
+            $('#savedButton').click(function () {
+                $('#postButton').css('border-bottom', 'none');
+                $(this).css('border-bottom', 'solid 1px black')
+                $('#postRecipe').hide();
+                $('#savedRecipe').show();
+
+                $('#postText').css({'font-weight': '400', 'color': 'gray'});
+                $('#savedText').css({'font-weight': '700', 'color': 'black'});
+            });
+        });
+    </script>
 </body>
 
 </html>
