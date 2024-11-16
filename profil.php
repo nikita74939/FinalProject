@@ -1,33 +1,33 @@
 <!-- lagi kupake -->
 
 <?php
-    include 'koneksi.php';
-    session_start();
+include 'koneksi.php';
+session_start();
 
-    if(empty($_SESSION['username'])) {
-        header("location:index.php?pesan=belum_login");
-    } else if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-    }
+if (empty($_SESSION['username'])) {
+    header("location:index.php?pesan=belum_login");
+} else if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
 
-    $q = "SELECT * FROM users WHERE username = '$username'";
-    $query = mysqli_query($conn, $q);
-    if ($query) {
-        while ($data = mysqli_fetch_array($query)) {
-            $id = $data['user_id'];
-            $bio = $data['bio'];
-            $nama = $data['nama'];
-            $id_pict = $data['id_pict'];
-        }
+$q = "SELECT * FROM users WHERE username = '$username'";
+$query = mysqli_query($conn, $q);
+if ($query) {
+    while ($data = mysqli_fetch_array($query)) {
+        $id = $data['user_id'];
+        $bio = $data['bio'];
+        $nama = $data['nama'];
+        $id_pict = $data['id_pict'];
     }
+}
 
-    $q = "SELECT p.color FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$id'";
-    $query = mysqli_query($conn, $q);
-    if ($query) {
-        while ($data = mysqli_fetch_array($query)) {
-            $color = $data['color'];
-        }
+$q = "SELECT p.color FROM profil_pict p JOIN users u ON p.id = u.id_pict WHERE u.user_id = '$id'";
+$query = mysqli_query($conn, $q);
+if ($query) {
+    while ($data = mysqli_fetch_array($query)) {
+        $color = $data['color'];
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -133,91 +133,116 @@
 
                     <div class="row text-center" style="position: relative; top: -100px;">
                         <div id="postButton" class="col-6" style="border-bottom: solid 1px black;">
-                            <button id="postText" class="border-0 bg-white pb-3" style="font-weight: 700; color: black"
-                              >post</button>
+                            <button id="postText" class="border-0 bg-white pb-3"
+                                style="font-weight: 700; color: black">post</button>
                         </div>
                         <div id="savedButton" class="col-6" style="border-bottom: none;">
-                            <button id="savedText" class="border-0 bg-white pb-3" style="font-weight: 400; color: gray">saved</button>
+                            <button id="savedText" class="border-0 bg-white pb-3"
+                                style="font-weight: 400; color: gray">saved</button>
                         </div>
                         <hr>
                     </div>
 
-                    <div id="postRecipe" class="row pt-1 px-4" style="position: relative; top: -100px; display: block">
-                    <?php
-                        $query=mysqli_query($conn,"select * from lab");
-                        
-                        while($data=mysqli_fetch_array($query)) { ?>
-                        <div class="col-6">
-                            <div id="...." class="card border-secondary m-2 my-3">
-                                <div class="card-header">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                Face mist
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                bintang 4,5
+                    <div id="postRecipe" class="row pt-1 px-4" style="position: relative; top: -100px;">
+                        <?php
+                        $query = mysqli_query($conn, "select * from recipes where user_id ='$id'");
+
+                        while ($data = mysqli_fetch_array($query)) { ?>
+                            <div class="col-md-6 col-sm-12">
+                                <div id="...." class="card border-secondary m-2 my-3" style="height: 500px">
+                                    <div class="card-header">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <?php echo $data['category'] ?>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    bintang 4,5
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <img src="users/pict1.jpeg" alt=""
-                                        style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
-                                    <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
-                                    <hr>
-                                    <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
-                                        soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
-                                    <div class="container p-0 pt-3">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p class="text-secondary">Bahan utama: pisang</p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <a href="fullrecipe.php#commentar"
-                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
-                                                    commentar</a>
+                                    <div class="card-body">
+                                        <img src="users/pict1.jpeg" alt=""
+                                            style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
+                                        <div style="height: 120px">
+                                            <h5 class="card-title mt-2"><?php echo $data['title'] ?></h5>
+                                            <hr>
+                                            <p class="card-text"><?php echo $data['description'] ?></p>
+                                        </div>
+                                        <div class="container p-0 pt-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p class="text-secondary">Bahan utama:
+                                                        <?php echo $data['main_ingredient'] ?>
+                                                    </p>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    <a href="fullrecipe.php#commentar"
+                                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                                        commentar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    <?php }?>
+                        <?php } ?>
                     </div>
 
                     <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px;">
-                        <div class="col-6">
-                            <div id="...." class="card border-secondary m-2 my-3">
-                                <div class="card-header">
+                        <?php
+                        $query = mysqli_query($conn, "select r.title, r.description, r.main_image from recipes r join favorites f on f.recipe_id = r.recipe_id join users u on r.user_id = u.user_is where f.user_id ='$id'");
+                        while ($result = mysqli_fetch_array($query)) { ?>
+                            <div class="col-6">
+                                <!-- card -->
+                                <div id="...." class="card border-secondary mx-2 my-3">
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-6">
-                                                Face mist
+                                            <div class="col-5 pt-4">
+                                                <img src="img/<?php echo $result['main_image']; ?>" alt=""
+                                                    style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
+                                                <div class="container">
+                                                    <div class="row" style="position: relative; top: -50px; border: none;">
+                                                        <div class="col-6">
+                                                            <img src="users/pict1.jpeg"
+                                                                class="img-thumbnail rounded-circle mb-1" alt="..."
+                                                                width="100px">
+                                                            <p style="font-size: 14px;">@cherrygirl</p>
+                                                        </div>
+                                                        <div class="col-6 text-end pt-5">
+                                                            <p style="font-size: 14px;" class="p-1">10 Nov</p>
+
+                                                            <a href="save.php?save=<?php echo $result['recipe_id']; ?>"
+                                                                class="">Favorites</a>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                            <div class="col-6 text-end">
-                                                bintang 4,5
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <img src="users/pict1.jpeg" alt=""
-                                        style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
-                                    <h5 class="card-title mt-2">🌙 Lunar Glow Mask 🌙</h5>
-                                    <hr>
-                                    <p class="card-text">Calling all moon babes! ✨ Get your glow on with this creamy,
-                                        soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌</p>
-                                    <div class="container p-0 pt-3">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p class="text-secondary">Bahan utama: pisang</p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <a href="fullrecipe.php#commentar"
-                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
-                                                    commentar</a>
+                                            <div class="col-7 pt-4">
+                                                <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
+                                                <hr>
+                                                <p class="card-text"><?php echo $result['description']; ?>
+                                                </p>
+                                                <div class="d-flex flex-wrap">
+                                                    <button
+                                                        class="btn btn-outline-warning me-3 mb-3"><?php echo $result['category']; ?></button>
+                                                    <button
+                                                        class="btn btn-outline-dark me-3 mb-3"><?php echo $result['main_ingredient']; ?></button>
+                                                </div>
+                                                <div class="d-flex flex-column mt-3 text-end">
+                                                    <p style="font-family: 'Quicksand'; font-weight:600;">
+                                                        <i class="fa-regular fa-star"></i> 4
+                                                    </p>
+                                                    <a href="fullrecipe.php#commentar"
+                                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
+                                                        9 commentar
+                                                    </a>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -225,13 +250,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <footer class="p-5 text-center" style="background-color: white">
-                            Home Explore Uploud About Us
-                        </footer>
-
-                    </div>
-                </div>
+                <?php } ?>
             </div>
 
             <!-- right end -->
@@ -254,8 +273,8 @@
                 $('#postRecipe').show();
                 $('#savedRecipe').hide();
 
-                $('#savedText').css({'font-weight': '400', 'color': 'gray'});
-                $('#postText').css({'font-weight': '700', 'color': 'black'});
+                $('#savedText').css({ 'font-weight': '400', 'color': 'gray' });
+                $('#postText').css({ 'font-weight': '700', 'color': 'black' });
             });
 
             $('#savedButton').click(function () {
@@ -264,8 +283,8 @@
                 $('#postRecipe').hide();
                 $('#savedRecipe').show();
 
-                $('#postText').css({'font-weight': '400', 'color': 'gray'});
-                $('#savedText').css({'font-weight': '700', 'color': 'black'});
+                $('#postText').css({ 'font-weight': '400', 'color': 'gray' });
+                $('#savedText').css({ 'font-weight': '700', 'color': 'black' });
             });
         });
     </script>
