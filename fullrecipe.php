@@ -29,6 +29,18 @@ $sql = mysqli_query($conn, $query);
 $query_comment = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
 $sql_comment = mysqli_query($conn, $query_comment);
 
+$count = 0;
+$rate = 0;
+
+$query_rate = "SELECT * FROM ratings WHERE recipe_id = '$recipe_id';";
+$sql_rate = mysqli_query($conn, $query_rate);
+while ($result4 = mysqli_fetch_assoc($sql_rate)) {
+    $rating = $result4['rating'];
+    $rate += $rating;
+    $count++;
+}
+$ratings = $rate / $count;
+$ratings = number_format($rating, 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,7 +138,13 @@ $sql_comment = mysqli_query($conn, $query_comment);
                                         <?php echo $result['category']; ?>
                                     </div>
                                     <div class="col-6 text-end">
-                                        bintang 4,5
+                                        <?php
+                                        if ($rating > 0) {
+                                            echo "<i class='fa-solid fa-star'></i> " . $ratings;
+                                        } else {
+                                            echo "not yet rated";
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -150,15 +168,15 @@ $sql_comment = mysqli_query($conn, $query_comment);
 
                                     </div>
                                     <div class="card mt-3" style="border: none">
-                                    <hr class="me-1">
-                                        <div class="row mt-0 mb-1 me-1 text-center">
+                                        <div class="row mt-0 mb-0 me-1 text-center">
                                             <p class="">Rate this!</p>
-                                            
+
                                         </div>
-    
-                                        <div class="row text-center mx-5 mb-0 justify-content-center">
+
+                                        <div class="row text-center mx-5 mb-3 justify-content-center">
                                             <button class="col-2 rate-button bg-white" data-rate="1">
-                                                <i class="fa-regular fa-star bg-white" style="display: inline-flex; border:none"></i>
+                                                <i class="fa-regular fa-star bg-white"
+                                                    style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 2 -->
                                             <button class="col-2 rate-button bg-white" data-rate="2">
@@ -176,19 +194,25 @@ $sql_comment = mysqli_query($conn, $query_comment);
                                             <button class="col-2 rate-button bg-white" data-rate="5">
                                                 <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
-                                            
+
                                         </div>
-                                        <hr class="me-1">
+                                        <button class="btn btn-outline-dark"
+                                            style="font-family: 'Quicksand'; font-weight: 600">Send <i
+                                                class="fa-regular fa-paper-plane"></i></button>
                                     </div>
                                 </div>
                             </div>
                             <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
                             <hr>
                             <p class="card-text"><?php echo $result['description']; ?></p>
+                            <p class="text-secondary">Bahan utama: <?php echo $result['main_ingredient']; ?></p>
+                            <hr>
+                            <?php echo $result['ingredient']; ?>
+                            <hr>
+                            <?php echo $result['step']; ?>
                             <div class="container p-0 pt-3">
                                 <div class="row">
                                     <div class="col-6">
-                                        <p class="text-secondary">Bahan utama: <?php echo $result['main_ingredient']; ?></p>
                                     </div>
                                     <div class="col-6 text-end">
                                         <a href="fullrecipe.php#commentar"
