@@ -80,11 +80,6 @@ if ($query) {
                                 <h6>Uploud</h6>
                             </li>
                         </a>
-                        <a href="#activity" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Activity</h6>
-                            </li>
-                        </a>
                     </ul>
 
                     <div class="fixed-bottom">

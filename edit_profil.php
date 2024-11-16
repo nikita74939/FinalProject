@@ -124,9 +124,9 @@ if (empty($_SESSION['username'])) {
                                 <h6>Uploud</h6>
                             </li>
                         </a>
-                        <a href="#activity" style="text-decoration: none; color: black">
+                        <a href="profil.php" style="text-decoration: none; color: black">
                             <li class="list-group-item" style="border: none">
-                                <h6>Activity</h6>
+                                <h6 style="font-weight: 600">Profil</h6>
                             </li>
                         </a>
                     </ul>
