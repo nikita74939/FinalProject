@@ -1,29 +1,3 @@
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="" method="POST" enctype="multipart/form-data">
-    <p>Nama</p>
-    <input value="<?php echo $result_users['nama']; ?>" type="text" name="nama" id="nama">
-    <p>username</p>
-    <input value="<?php echo $result_users['username']; ?>" type="text" name="username" id="username">
-    <p>password</p>
-    <input value="<?php echo $result_users['password']; ?>" type="password" name="password" id="password">
-    <p>bio</p>
-    <textarea name="bio" id="bio"><?php echo $result_users['bio']; ?></textarea>
-    <button type="submit">ubah</button>
-    </form>
-</body>
-</html>
--->
-
-<!-- lagi kupake -->
-
 <?php
 include 'koneksi.php';
 session_start();
@@ -148,6 +122,11 @@ if (empty($_SESSION['username'])) {
                     <div class="pt-4">
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
                                 class="fa-solid fa-chevron-left me-4 pb-2"></i>Edit Profile</h4>
+                        <?php if(isset($_GET['pesan'])): ?>
+                        <div class="row m-3 mx-4 text-center">
+                            <p style="color: rgb(150, 190, 159)">Let's complete your account!</p>
+                        </div>
+                        <?php endif; ?>
                         <div class="row my-3">
                             <div class="col-4 pe-5 pt-3 text-center">
                                 <img src="users/pict<?php echo $result_users['id_pict']; ?>.jpg" id="profilPict"
