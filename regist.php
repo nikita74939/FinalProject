@@ -22,5 +22,5 @@
         }
     }
 
-    header("location: edit_profil.php?edit=$id");
+    header("location: edit_profil.php?edit=$id&pesan=udahlogin");
     
