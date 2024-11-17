@@ -127,6 +127,7 @@ $ratings = number_format($rating, 1);
             <!-- detail -->
             <?php
             while ($result = mysqli_fetch_assoc($sql)) {
+                $recipe_id = $result['recipe_id'];
                 $user_id = $result['user_id'];
 
                 $query_profil = "SELECT * FROM users WHERE user_id = '$user_id';";
@@ -136,8 +137,9 @@ $ratings = number_format($rating, 1);
                     $usernamee = $result2['username'];
                     $nama = $result2['nama'];
                 }
-
-                $query_myrate = "SELECT * FROM ratings WHERE user_id = '$user_id';";
+                
+                $myrate = NULL;
+                $query_myrate = "SELECT * FROM ratings r join users u on u.user_id = r.user_id WHERE u.username = '$username' and r.recipe_id = '$recipe_id';";
                 $sql_myrate = mysqli_query($conn, $query_myrate);
                 while ($result9 = mysqli_fetch_assoc($sql_myrate)) {
                     $myrate = $result9['rating'];

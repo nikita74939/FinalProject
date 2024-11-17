@@ -99,7 +99,8 @@ $query2 = "SELECT * FROM recipes ";
                     <div class="row text-center">
                         <div class="col-12" style="border-bottom: solid 1px black;">
                             <a href="#popularRecipe" id="popularButton"></a>
-                            <p style="font-weight: 600; color: black; font-family: 'Quicksand'; font-size: 20px">DIY Recipes
+                            <p style="font-weight: 600; color: black; font-family: 'Quicksand'; font-size: 20px">DIY
+                                Recipes
                             </p>
                         </div>
                         <hr>
@@ -107,12 +108,37 @@ $query2 = "SELECT * FROM recipes ";
                     <div class="row group-card">
                         <?php
                         while ($result = mysqli_fetch_assoc($sql)) {
+                            $recipe_id = $result['recipe_id'];
                             $id = $result['user_id'];
                             $query_profil = "SELECT * FROM users WHERE user_id = '$id'";
                             $sql_profil = mysqli_query($conn, $query_profil);
                             while ($result2 = mysqli_fetch_assoc($sql_profil)) {
                                 $id_pict = $result2['id_pict'];
                                 $username = $result2['username'];
+                            }
+
+                            $count = 0;
+                            $rate = 0;
+
+                            $query_rate = "SELECT * FROM ratings WHERE recipe_id = '$recipe_id';";
+                            $sql_rate = mysqli_query($conn, $query_rate);
+                            while ($result4 = mysqli_fetch_assoc($sql_rate)) {
+                                $rating = $result4['rating'];
+                                $rate += $rating;
+                                $count++;
+                            }
+
+                            if ($count > 0) {
+                                $ratings = $rate / $count;
+                                $ratings = number_format($ratings, 1);
+                            }
+
+                            $jumlah = 0;
+
+                            $query_coms = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
+                            $sql_coms = mysqli_query($conn, $query_coms);
+                            while ($result5 = mysqli_fetch_assoc($sql_coms)) {
+                                $jumlah++;
                             }
 
                             ?>
@@ -129,11 +155,13 @@ $query2 = "SELECT * FROM recipes ";
                                                         <img src="users/pict<?php echo $id_pict ?>.jpg"
                                                             class="img-thumbnail rounded-circle mb-1" alt="..."
                                                             width="100px">
-                                                        <p class="text-nowrap" style="font-size: 14px;">@c<?php echo $username ?>l</p>
+                                                        <p class="text-nowrap" style="font-size: 14px;">
+                                                            @c<?php echo $username ?>l</p>
                                                     </div>
                                                     <div class="col-6 text-end pt-5">
-                                                        <p style="font-size: 14px;" class="p-1">10 Nov</p>
-                                                        <a style="font-size: 24px; color: rgb(140, 186, 159);" href="save.php?save=<?php echo $result['recipe_id']; ?>"
+                                                        <p style="font-size: 14px;" class="p-1"><?php echo $result['created_at'] ?></p>
+                                                        <a style="font-size: 24px; color: rgb(140, 186, 159);"
+                                                            href="save.php?save=<?php echo $result['recipe_id']; ?>"
                                                             class=""><i class="fa-regular fa-bookmark"></i></a>
                                                     </div>
                                                 </div>
@@ -154,12 +182,23 @@ $query2 = "SELECT * FROM recipes ";
                                                 </button>
                                             </div>
                                             <div class="d-flex flex-column mt-3 text-end">
-                                                <p style="font-family: 'Quicksand'; font-weight:600;">
-                                                    <i class="fa-regular fa-star"></i> 4
+                                                <p style="font-family: 'Quicksand'; font-weight:500;">
+                                                    <?php
+                                                    if ($count > 0) {
+                                                        echo "<i class='fa-solid fa-star'></i> " . $ratings;
+                                                    } else {
+                                                        echo "not yet rated";
+                                                    }
+                                                    ?>
                                                 </p>
-                                                <a href="fullrecipe.php#commentar"
-                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
-                                                    9 commentar
+                                                <a href="fullrecipe.php?lihat=<?php echo $recipe_id; ?>#commentar"
+                                                    style="font-family: 'Quicksand'; font-weight:500; color: black; text-decoration: none">
+                                                    <?php
+                                                    if ($jumlah > 1) {
+                                                        echo $jumlah." comments";
+                                                    } else {
+                                                        echo $jumlah." comment";
+                                                    } ?>
                                                 </a>
                                             </div>
                                         </div>
