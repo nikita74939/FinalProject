@@ -151,6 +151,9 @@ if ($count > 0) {
                 while ($result9 = mysqli_fetch_assoc($sql_myrate)) {
                     $myrate = $result9['rating'];
                 }
+
+                $query_check_favorites = "SELECT * FROM favorites WHERE recipe_id = '$recipe_id' AND user_id ='$idnow';";
+                $result_favorites = mysqli_query($conn, $query_check_favorites);
                 ?>
                 <div class="col-7">
                     <div class="pt-4">
@@ -179,7 +182,7 @@ if ($count > 0) {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-7">
-                                    <img src="<?php echo $result['main_image']; ?>" alt=""
+                                    <img src="img/<?php echo $result['main_image']; ?>" alt=""
                                         style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
                                 </div>
                                 <div class="col-5">
@@ -255,7 +258,7 @@ if ($count > 0) {
                             <h5 class="card-title mt-2">
                                 <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                     href="save.php?save=<?php echo $result['recipe_id']; ?>" class=""><i
-                                        class="fa-regular fa-bookmark me-2"></i></a><?php echo $result['title']; ?></h5>
+                                        class="<?php echo (mysqli_num_rows($result_favorites) == 0) ? "fa-regular" : "fa-solid";?> fa-bookmark me-2"></i></a><?php echo $result['title']; ?></h5>
                             <hr>
                             <p class="card-text"><?php echo $result['description']; ?></p>
                             <p class="text-secondary">Main Ingredient: <?php echo $result['main_ingredient']; ?></p>

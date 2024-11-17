@@ -13,11 +13,12 @@ $q = "SELECT * FROM users WHERE username = '$username'";
 $query = mysqli_query($conn, $q);
 if ($query) {
     while ($data = mysqli_fetch_array($query)) {
+        $id_acc = $data['user_id'];
         $pict_id = $data['id_pict'];
     }
 }
 
-$query = "SELECT * FROM recipes";
+$query = "SELECT * FROM recipes ORDER BY recipe_id desc";
 $sql = mysqli_query($conn, $query);
 
 $query2 = "SELECT * FROM recipes ";
@@ -162,6 +163,9 @@ $query2 = "SELECT * FROM recipes ";
                             while ($result5 = mysqli_fetch_assoc($sql_coms)) {
                                 $jumlah++;
                             }
+
+                            $query_check_favorites = "SELECT * FROM favorites WHERE recipe_id = '$recipe_id' AND user_id ='$id_acc';";
+                            $result_favorites = mysqli_query($conn, $query_check_favorites);
 
                             ?>
 
