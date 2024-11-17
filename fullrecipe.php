@@ -54,9 +54,59 @@ while ($result4 = mysqli_fetch_assoc($sql_coms)) {
 }
 if ($count > 0) {
     $ratings = $rate / $count;
-    $ratings = number_format($rating, 1);
+    $ratings = number_format($ratings, 1);
     
 }
+
+//rating
+$query_user = "SELECT user_id FROM users WHERE username = '$username'";
+$sql_user = mysqli_query($conn, $query_user);
+$result_user = mysqli_fetch_assoc($sql_user);
+
+// Menentukan user_id, misalnya disimpan di session
+$user_id = isset($result_user['user_id']) ? $result_user['user_id'] : null; // Ganti dengan ID user yang valid
+
+if ($user_id === null) {
+    $_SESSION['message'] = "Anda harus login terlebih dahulu."; // Menyimpan pesan dalam session
+    header("Location: login.php"); // Redirect ke halaman login jika belum login
+    exit;
+}
+
+// Menangani submit rating
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rating'])) {
+    $recipe_id = $_GET['lihat']; // Ganti dengan ID produk yang sesuai
+    $rating = $_POST['rating'];
+
+    // Memeriksa apakah pengguna sudah memberikan rating untuk produk ini
+    $sql_check = "SELECT * FROM ratings WHERE recipe_id = $recipe_id AND user_id = $user_id";
+    $result_check = $conn->query($sql_check);
+
+    if ($result_check->num_rows > 0) {
+        $_SESSION['message'] = 'Anda sudah memberikan rating untuk produk ini!'; // Menyimpan pesan dalam session
+    } else {
+        // Menyimpan rating ke database
+        $sql = "INSERT INTO ratings (recipe_id, user_id, rating) VALUES ($recipe_id, $user_id, $rating)";
+        if ($conn->query($sql) === TRUE) {
+            $_SESSION['message'] = 'Rating berhasil disimpan!'; // Menyimpan pesan dalam session
+        } else {
+            $_SESSION['message'] = "Error: " . $sql . "<br>" . $conn->error; // Menyimpan pesan error dalam session
+        }
+    }
+
+    header("Location: fullrecipe.php?lihat=$recipe_id"); // Redirect setelah submit untuk menampilkan pesan
+    exit;
+}
+
+// Mengambil rating produk dari database
+$sql_rating = "SELECT AVG(rating) as average_rating FROM ratings WHERE recipe_id = $recipe_id";
+$result_rating = mysqli_query($conn, $sql_rating);
+
+if (!$result_rating) {
+    die("Query failed: " . mysqli_error($conn));  // Menangani error jika query gagal
+}
+
+$row = mysqli_fetch_assoc($result_rating);
+$average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +133,43 @@ if ($count > 0) {
 
 </head>
 
-<style>
+<style> 
+/* styling buat rating */
+    .stars {
+            display: inline-block;
+            direction: rtl;
+    }
+
+    .stars input {
+        display: none;
+    }
+
+    .stars label {
+        font-size: 25px;
+        color: silver;
+        cursor: pointer;
+    }
+
+    .stars input:checked ~ label {
+        color: black;
+    }
+
+    .stars input:checked + label {
+        color: black;
+    }
+
+    .stars input:checked ~ input + label {
+        color: black;
+    }
+
+    .stars label:hover,
+    .stars label:hover ~ label {
+        color: black;
+    }
+
+    .stars input:checked ~ label {
+        color: black;
+    }
 </style>
 
 <body>
@@ -202,60 +288,38 @@ if ($count > 0) {
 
                                     </div>
                                     <div class="card mt-3" style="border: none">
-                                        <div class="row mt-0 mb-0 me-1 text-center">
+                                    <div class="row mt-0 mb-0 me-1 text-center">
                                             <p class="">Rate this!</p>
-
+                                            <?php
+                                            if (isset($_SESSION['message'])) {
+                                                echo "<script>alert('" . $_SESSION['message'] . "');</script>";
+                                                unset($_SESSION['message']); // Menghapus pesan setelah ditampilkan
+                                            }
+                                            ?>
                                         </div>
-
                                         <div class="row text-center mx-5 mb-3 justify-content-center">
-                                            <button class="col-2 rate-button bg-white" data-rate="1">
-                                                <i class="<?php if ($myrate >= 1) {
-                                                    echo "fa-solid";
-                                                } else {
-                                                    echo "fa-regular";
-                                                } ?> fa-star bg-white" style="display: inline-flex; border:none"></i>
-                                            </button>
-                                            <!-- Bintang 2 -->
-                                            <button class="col-2 rate-button bg-white" data-rate="2">
-                                                <i class="<?php if ($myrate >= 2) {
-                                                    echo "fa-solid";
-                                                } else {
-                                                    echo "fa-regular";
-                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
-                                            </button>
-                                            <!-- Bintang 3 -->
-                                            <button class="col-2 rate-button bg-white" data-rate="3">
-                                                <i class="<?php if ($myrate >= 3) {
-                                                    echo "fa-solid";
-                                                } else {
-                                                    echo "fa-regular";
-                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
-                                            </button>
-                                            <!-- Bintang 4 -->
-                                            <button class="col-2 rate-button bg-white" data-rate="4">
-                                                <i class="<?php if ($myrate >= 4) {
-                                                    echo "fa-solid";
-                                                } else {
-                                                    echo "fa-regular";
-                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
-                                            </button>
-                                            <!-- Bintang 5 -->
-
-                                            <button class="col-2 rate-button bg-white" data-rate="5">
-                                                <i class="<?php if ($myrate >= 5) {
-                                                    echo "fa-solid";
-                                                } else {
-                                                    echo "fa-regular";
-                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
-                                            </button>
-
-
+                                        <form method="POST" action="">
+                                            <div class="stars">
+                                                <input type="radio" name="rating" value="5" id="star5" />
+                                                <label for="star5">&#9733;</label>
+                                                
+                                                <input type="radio" name="rating" value="4" id="star4" />
+                                                <label for="star4">&#9733;</label>
+                                                
+                                                <input type="radio" name="rating" value="3" id="star3" />
+                                                <label for="star3">&#9733;</label>
+                                                
+                                                <input type="radio" name="rating" value="2" id="star2" />
+                                                <label for="star2">&#9733;</label>
+                                                
+                                                <input type="radio" name="rating" value="1" id="star1" />
+                                                <label for="star1">&#9733;</label>
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-outline-dark" type="submit"style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159); width: 150px;">Send
+                                            <i class="fa-regular fa-paper-plane"></i></button>
+                                        </form>
                                         </div>
-                                        <?php if (!($myrate)) { ?>
-                                            <button class="btn btn-outline-dark"
-                                                style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">Send
-                                                <i class="fa-regular fa-paper-plane"></i></button>
-                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
