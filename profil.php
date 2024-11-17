@@ -148,7 +148,33 @@ if ($query) {
                         <?php
                         $query = mysqli_query($conn, "select * from recipes where user_id ='$id'");
 
-                        while ($data = mysqli_fetch_array($query)) { ?>
+                        while ($data = mysqli_fetch_array($query)) { 
+                            $recipe_id = $data['recipe_id'];
+                            $count = 0;
+                            $rate = 0;
+
+                            $query_rate = "SELECT * FROM ratings WHERE recipe_id = '$recipe_id';";
+                            $sql_rate = mysqli_query($conn, $query_rate);
+                            while ($result4 = mysqli_fetch_assoc($sql_rate)) {
+                                $rating = $result4['rating'];
+                                $rate += $rating;
+                                $count++;
+                            }
+
+                            $jumlah = 0;
+
+                            $query_coms = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
+                            $sql_coms = mysqli_query($conn, $query_coms);
+                            while ($result4 = mysqli_fetch_assoc($sql_coms)) {
+                                $jumlah++;
+                            }
+                            if ($count > 0) {
+                                $ratings = $rate / $count;
+                                $ratings = number_format($rating, 1);
+
+                            }
+                            
+                        ?>
                             <div class="col-md-6 col-sm-12">
                                 <div class="card border-secondary m-2 my-3 card-post" id="<?php echo $data['recipe_id']; ?>" style="height: 560px">
                                     <div class="card-header">
@@ -158,7 +184,13 @@ if ($query) {
                                                     <?php echo $data['category'] ?>
                                                 </div>
                                                 <div class="col-6 text-end">
-                                                    bintang 4,5
+                                                <?php
+                                                        if ($count > 0) {
+                                                            echo "<i class='fa-solid fa-star'></i> " . $ratings;
+                                                        } else {
+                                                            echo "not yet rated";
+                                                        }
+                                                        ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,14 +206,19 @@ if ($query) {
                                         <div class="container p-0 pt-3">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <p class="text-secondary">Bahan utama:
+                                                    <p class="text-secondary">Main ingredient:
                                                         <?php echo $data['main_ingredient'] ?>
                                                     </p>
                                                 </div>
                                                 <div class="col-6 text-end">
-                                                    <a href="fullrecipe.php#commentar"
-                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
-                                                    commentar</a>
+                                                    <a href="fullrecipe.php?lihat=<?php echo $recipe_id; ?>#commentar"
+                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
+                                                    <?php if ($jumlah > 1) {
+                                                            echo $jumlah . " comments";
+                                                        } else {
+                                                            echo $jumlah . " comment";
+                                                        } ?>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row">
@@ -231,7 +268,7 @@ if ($query) {
                             ?>
                             <div class="col-12">
                                 <!-- card -->
-                                <div id="...." class="card border-secondary mx-2 mt-3 mb-1 card-post" style="height: 320px">
+                                <div id="<?php echo $recipe_id ?>" class="card border-secondary mx-2 mt-3 mb-1 card-post" style="height: 320px">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-5 pt-4">
@@ -279,7 +316,7 @@ if ($query) {
                                                         }
                                                         ?>
                                                     </p>
-                                                    <a href="fullrecipe.php#commentar"
+                                                    <a href="fullrecipe.php?lihat=<?php echo $recipe_id; ?>#commentar"
                                                         style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
                                                         <?php if ($jumlah > 1) {
                                                             echo $jumlah . " comments";
