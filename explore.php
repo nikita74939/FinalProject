@@ -18,7 +18,7 @@ if ($query) {
     }
 }
 
-$query = "SELECT * FROM recipes";
+$query = "SELECT * FROM recipes ORDER BY recipe_id desc";
 $sql = mysqli_query($conn, $query);
 
 $query2 = "SELECT * FROM recipes ";
