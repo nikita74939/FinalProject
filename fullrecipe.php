@@ -39,6 +39,15 @@ while ($result4 = mysqli_fetch_assoc($sql_rate)) {
     $rate += $rating;
     $count++;
 }
+
+$jumlah = 0;
+
+$query_coms = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
+$sql_coms = mysqli_query($conn, $query_coms);
+while ($result4 = mysqli_fetch_assoc($sql_coms)) {
+    $jumlah ++;
+}
+
 $ratings = $rate / $count;
 $ratings = number_format($rating, 1);
 ?>
@@ -102,10 +111,13 @@ $ratings = number_format($rating, 1);
                         </a>
                     </ul>
 
-                    <div class="fixed-bottom">
-                        <a href="logout.php" style="color: black">
-                            <h6 class="ps-5 pb-3">Logout</h6>
-                        </a>
+                    <div class="row fixed-bottom ps-2">
+                        <div class="col-2 pt-3" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black" class="mt-2">
+                                <h6 class="ps-5 pb-3">Logout</h6>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,7 +142,7 @@ $ratings = number_format($rating, 1);
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
                                 class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
                     </div>
-                    <div id="...." class="card border-secondary m-2 my-3">
+                    <div id="...." class="card border-secondary m-2 my-3 pb-5 pe-1">
                         <div class="card-header">
                             <div class="container">
                                 <div class="row">
@@ -197,8 +209,8 @@ $ratings = number_format($rating, 1);
 
                                         </div>
                                         <button class="btn btn-outline-dark"
-                                            style="font-family: 'Quicksand'; font-weight: 600">Send <i
-                                                class="fa-regular fa-paper-plane"></i></button>
+                                            style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">Send
+                                            <i class="fa-regular fa-paper-plane"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -216,10 +228,60 @@ $ratings = number_format($rating, 1);
                                     </div>
                                     <div class="col-6 text-end">
                                         <a href="fullrecipe.php#commentar"
-                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none; color: black"><?php echo $jumlah ?>
                                             commentar</a>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="mx-3 mt-4 comments">
+                                <form action="" method="POST">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <input name="comment_text" id="comment_text" type="text"
+                                                placeholder="Add comment..." class="form-control"
+                                                style="font-family: 'Quicksand'; font-weight:600;">
+                                        </div>
+                                        <div class="col-1">
+                                            <button type="submit" name="aksiComment" value="add"
+                                                class="btn btn-outline-dark"
+                                                style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">add</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <?php
+                                while ($result_comment = mysqli_fetch_assoc($sql_comment)) {
+                                    $query_pc = "SELECT * FROM users WHERE username = '$username';";
+                                    $sql_pc = mysqli_query($conn, $query_pc);
+                                    while ($result5 = mysqli_fetch_assoc($sql_pc)) {
+                                        $pict = $result5['id_pict'];
+                                        $nama = $result5['nama'];
+                                    }
+                                    ?>
+                                    <div class="card mt-3">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2 text-nowrap">
+                                                    <img src="users/pict<?php echo $pict ?>.jpg"
+                                                        class="img-thumbnail rounded-circle mb-1" alt="..." width="50px" style="border:none">
+                                                </div>
+                                                <div class="col-6" style="position: relative; left: -50px">
+                                                    <p style="font-family: 'Quicksand'; font-size: 14px; font-weight: 500;"><?php echo $nama ?></p>
+                                                    <p style="font-size: 12px; position: relative; top: -15px">@<?php echo $username ?></p>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <p style="font-family: 'Quicksand'; font-size: 12px"><?php echo $result_comment['created_at']; ?></h6>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <p><?php echo $result_comment['comment_text']; ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -301,17 +363,3 @@ while ($result = mysqli_fetch_assoc($sql)) {
     <?php
 }
 ?>
-<div class="comments">
-    <form action="" method="POST">
-        <input name="comment_text" id="comment_text" type="text" placeholder="Add comment...">
-        <button type="submit" name="aksiComment" value="add">add</button>
-    </form>
-    <?php
-    while ($result_comment = mysqli_fetch_assoc($sql_comment)) {
-        ?>
-        <h5>user belum dibikin</h5>
-        <p><?php echo $result_comment['created_at']; ?></p>
-        <p><?php echo $result_comment['comment_text']; ?></p>
-        <?php
-    }
-    ?>
