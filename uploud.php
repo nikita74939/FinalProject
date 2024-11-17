@@ -87,12 +87,12 @@ if (empty($_SESSION['username'])) {
                             </li>
                         </a>
                         <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
+                            <li class="list-group-item" style="border: none;">
                                 <h6>Explore</h6>
                             </li>
                         </a>
                         <a href="uploud.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
+                            <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
                                 <h6>Uploud</h6>
                             </li>
                         </a>
@@ -103,10 +103,13 @@ if (empty($_SESSION['username'])) {
                         </a>
                     </ul>
 
-                    <div class="fixed-bottom">
-                        <a href="logout.php" style="color: black">
-                            <h6 class="ps-5 pb-3">Logout</h6>
-                        </a>
+                    <div class="row fixed-bottom ps-2">
+                        <div class="col-2 pt-3" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black" class="mt-2">
+                                <h6 class="ps-5 pb-3">Logout</h6>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </div>

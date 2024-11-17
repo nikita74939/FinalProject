@@ -8,6 +8,11 @@ if (empty($_SESSION['username'])) {
     header("location:index.php?pesan=belum_login");
 } else if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
+    $querys = "SELECT * FROM users WHERE username = '$username';";
+    $sqls = mysqli_query($conn, $querys);
+    while ($resultt = mysqli_fetch_assoc($sqls)) {
+        $idnow = $resultt['user_id'];
+    }
 }
 
 $recipe_id = $_GET['lihat'];
@@ -16,7 +21,7 @@ if (isset($_POST['aksiComment'])) {
     if ($_POST['aksiComment'] == "add") {
         $comment_text = $_POST['comment_text'];
 
-        $query = "INSERT INTO comments VALUES(NULL, '$recipe_id', NULL, '$comment_text', NULL);";
+        $query = "INSERT INTO comments VALUES('', '$recipe_id', '$idnow', '$comment_text', NULL);";
         $sql = mysqli_query($conn, $query);
 
         header("location: fullrecipe.php?lihat=$recipe_id");
@@ -45,11 +50,13 @@ $jumlah = 0;
 $query_coms = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
 $sql_coms = mysqli_query($conn, $query_coms);
 while ($result4 = mysqli_fetch_assoc($sql_coms)) {
-    $jumlah ++;
+    $jumlah++;
 }
-
-$ratings = $rate / $count;
-$ratings = number_format($rating, 1);
+if ($count > 0) {
+    $ratings = $rate / $count;
+    $ratings = number_format($rating, 1);
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +102,7 @@ $ratings = number_format($rating, 1);
                             </li>
                         </a>
                         <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
+                            <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
                                 <h6>Explore</h6>
                             </li>
                         </a>
@@ -137,7 +144,7 @@ $ratings = number_format($rating, 1);
                     $usernamee = $result2['username'];
                     $nama = $result2['nama'];
                 }
-                
+
                 $myrate = NULL;
                 $query_myrate = "SELECT * FROM ratings r join users u on u.user_id = r.user_id WHERE u.username = '$username' and r.recipe_id = '$recipe_id';";
                 $sql_myrate = mysqli_query($conn, $query_myrate);
@@ -195,53 +202,80 @@ $ratings = number_format($rating, 1);
 
                                         <div class="row text-center mx-5 mb-3 justify-content-center">
                                             <button class="col-2 rate-button bg-white" data-rate="1">
-                                                <i class="<?php if($myrate >= 1)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star bg-white"
-                                                    style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if ($myrate >= 1) {
+                                                    echo "fa-solid";
+                                                } else {
+                                                    echo "fa-regular";
+                                                } ?> fa-star bg-white" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 2 -->
                                             <button class="col-2 rate-button bg-white" data-rate="2">
-                                                <i class="<?php if($myrate >= 2)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if ($myrate >= 2) {
+                                                    echo "fa-solid";
+                                                } else {
+                                                    echo "fa-regular";
+                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 3 -->
                                             <button class="col-2 rate-button bg-white" data-rate="3">
-                                                <i class="<?php if($myrate >= 3)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if ($myrate >= 3) {
+                                                    echo "fa-solid";
+                                                } else {
+                                                    echo "fa-regular";
+                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 4 -->
                                             <button class="col-2 rate-button bg-white" data-rate="4">
-                                                <i class="<?php if($myrate >= 4)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if ($myrate >= 4) {
+                                                    echo "fa-solid";
+                                                } else {
+                                                    echo "fa-regular";
+                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 5 -->
-                                            
+
                                             <button class="col-2 rate-button bg-white" data-rate="5">
-                                                <i class="<?php if($myrate >= 5)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if ($myrate >= 5) {
+                                                    echo "fa-solid";
+                                                } else {
+                                                    echo "fa-regular";
+                                                } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
-                                            
-                                            
+
+
                                         </div>
-                                        <?php if(!($myrate))  { ?>
-                                        <button class="btn btn-outline-dark"
-                                        style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">Send
-                                        <i class="fa-regular fa-paper-plane"></i></button>
+                                        <?php if (!($myrate)) { ?>
+                                            <button class="btn btn-outline-dark"
+                                                style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">Send
+                                                <i class="fa-regular fa-paper-plane"></i></button>
                                         <?php } ?>
                                     </div>
                                 </div>
                             </div>
-                            <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
+                            <h5 class="card-title mt-2"><a style="font-size: 24px; color: rgb(140, 186, 159);"
+                                    href="save.php?save=<?php echo $result['recipe_id']; ?>" class=""><i
+                                        class="fa-regular fa-bookmark me-2"></i></a><?php echo $result['title']; ?></h5>
                             <hr>
                             <p class="card-text"><?php echo $result['description']; ?></p>
-                            <p class="text-secondary">Bahan utama: <?php echo $result['main_ingredient']; ?></p>
+                            <p class="text-secondary">Main Ingredient: <?php echo $result['main_ingredient']; ?></p>
                             <hr>
+                            <p class="text-secondary">Ingredients:</p>
                             <?php echo $result['ingredient']; ?>
                             <hr>
+                            <p class="text-secondary">Steps:</p>
                             <?php echo $result['step']; ?>
                             <div class="container p-0 pt-3">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-10">
                                     </div>
-                                    <div class="col-6 text-end">
-                                        <a href="fullrecipe.php#commentar"
-                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none; color: black"><?php echo $jumlah ?>
-                                            commentar</a>
+                                    <div class="col-2">
+                                        <a href=""
+                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none; color: black"><?php
+                                            if ($jumlah > 1) {
+                                                echo $jumlah . " comments";
+                                            } else {
+                                                echo $jumlah . " comment";
+                                            } ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -263,9 +297,11 @@ $ratings = number_format($rating, 1);
                                 </form>
                                 <?php
                                 while ($result_comment = mysqli_fetch_assoc($sql_comment)) {
-                                    $query_pc = "SELECT * FROM users WHERE username = '$username';";
+                                    $user_idd = $result_comment['user_id'];
+                                    $query_pc = "SELECT * FROM users  WHERE user_id = '$user_idd';";
                                     $sql_pc = mysqli_query($conn, $query_pc);
                                     while ($result5 = mysqli_fetch_assoc($sql_pc)) {
+                                        $namm = $result5['username'];
                                         $pict = $result5['id_pict'];
                                         $nama = $result5['nama'];
                                     }
@@ -275,14 +311,19 @@ $ratings = number_format($rating, 1);
                                             <div class="row">
                                                 <div class="col-2 text-nowrap">
                                                     <img src="users/pict<?php echo $pict ?>.jpg"
-                                                        class="img-thumbnail rounded-circle mb-1" alt="..." width="50px" style="border:none">
+                                                        class="img-thumbnail rounded-circle mb-1" alt="..." width="50px"
+                                                        style="border:none">
                                                 </div>
                                                 <div class="col-6" style="position: relative; left: -50px">
-                                                    <p style="font-family: 'Quicksand'; font-size: 14px; font-weight: 500;"><?php echo $nama ?></p>
-                                                    <p style="font-size: 12px; position: relative; top: -15px">@<?php echo $username ?></p>
+                                                    <p style="font-family: 'Quicksand'; font-size: 14px; font-weight: 500;">
+                                                        <?php echo $nama ?>
+                                                    </p>
+                                                    <p style="font-size: 12px; position: relative; top: -15px">
+                                                        @<?php echo $namm ?></p>
                                                 </div>
                                                 <div class="col-4 text-end">
-                                                    <p style="font-family: 'Quicksand'; font-size: 12px"><?php echo $result_comment['created_at']; ?></h6>
+                                                    <p style="font-family: 'Quicksand'; font-size: 12px">
+                                                        <?php echo $result_comment['created_at']; ?></h6>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -356,10 +397,10 @@ $ratings = number_format($rating, 1);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-        $(".back-icon").on("click", function () {
-            window.history.back();
+            $(".back-icon").on("click", function () {
+                window.history.back();
+            });
         });
-    });
     </script>
 </body>
 
