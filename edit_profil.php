@@ -82,37 +82,43 @@ if (empty($_SESSION['username'])) {
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
-                    <ul class="list-group list-group-flush my-4">
-                        <a href="index.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Home</h6>
-                            </li>
-                        </a>
-                        <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Explore</h6>
-                            </li>
-                        </a>
-                        <a href="uploud.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Uploud</h6>
-                            </li>
-                        </a>
-                        <a href="profil.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6 style="font-weight: 600">Profil</h6>
-                            </li>
-                        </a>
-                    </ul>
+                    <div class="d-flex flex-column" style="min-height: 90vh">
+                        <!-- bagian menu -->
+                        <div class="flex-grow-1">
+                            <ul class="list-group list-group-flush my-4">
+                                <a href="index.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Home</h6>
+                                    </li>
+                                </a>
+                                <a href="explore.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none;">
+                                        <h6>Explore</h6>
+                                    </li>
+                                </a>
+                                <a href="uploud.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Uploud</h6>
+                                    </li>
+                                </a>
+                                <a href="profil.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
+                                        <h6 style="font-weight: 600">Profil</h6>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
 
-                    <div class="fixed-bottom">
-                        <a href="logout.php" style="color: black">
-                            <h6 class="ps-5 pb-3">Logout</h6>
-                        </a>
+                        <!-- bagian logout -->
+                        <div class="py-3 rounded-pill pb-2" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black; text-decoration: none;">
+                                <h6 class="text-center">Logout</h6>
+                            </a>
+                        </div>
                     </div>
+
                 </div>
             </div>
-
             <!-- left end -->
 
             <!-- right -->
@@ -121,7 +127,7 @@ if (empty($_SESSION['username'])) {
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="pt-4">
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
-                                class="fa-solid fa-chevron-left me-4 pb-2"></i>Edit Profile</h4>
+                                class="fa-solid fa-chevron-left me-4 pb-2 back-icon"></i>Edit Profile</h4>
                         <?php if(isset($_GET['pesan'])): ?>
                         <div class="row m-3 mx-4 text-center">
                             <p style="color: rgb(150, 190, 159)">Let's complete your account!</p>
@@ -203,6 +209,10 @@ if (empty($_SESSION['username'])) {
                 var selectedId = $(this).attr('id');
                 $('#checkmark-' + selectedId).show();
                 $('#id_pict').val(selectedId);
+            });
+
+            $(".back-icon").on("click", function () {
+                window.history.back();
             });
         });
     </script>

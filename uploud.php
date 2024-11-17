@@ -80,37 +80,41 @@ if (empty($_SESSION['username'])) {
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
-                    <ul class="list-group list-group-flush my-4">
-                        <a href="index.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Home</h6>
-                            </li>
-                        </a>
-                        <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none;">
-                                <h6>Explore</h6>
-                            </li>
-                        </a>
-                        <a href="uploud.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
-                                <h6>Uploud</h6>
-                            </li>
-                        </a>
-                        <a href="profil.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6 style="font-weight: 600">Profil</h6>
-                            </li>
-                        </a>
-                    </ul>
+                    <div class="d-flex flex-column" style="min-height: 90vh">
+                        <!-- bagian menu -->
+                        <div class="flex-grow-1">
+                            <ul class="list-group list-group-flush my-4">
+                                <a href="index.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Home</h6>
+                                    </li>
+                                </a>
+                                <a href="explore.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none; ">
+                                        <h6>Explore</h6>
+                                    </li>
+                                </a>
+                                <a href="uploud.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
+                                        <h6>Uploud</h6>
+                                    </li>
+                                </a>
+                                <a href="profil.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6 style="font-weight: 600">Profil</h6>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
 
-                    <div class="row fixed-bottom ps-2">
-                        <div class="col-2 pt-3" style="background-color: rgb(140, 186, 159);">
-                            <a href="logout.php" style="color: black" class="mt-2">
-                                <h6 class="ps-5 pb-3">Logout</h6>
+                        <!-- bagian logout -->
+                        <div class="py-3 rounded-pill pb-2" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black; text-decoration: none;">
+                                <h6 class="text-center">Logout</h6>
                             </a>
-
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -122,7 +126,7 @@ if (empty($_SESSION['username'])) {
                 <form action="proses_uploud.php" method="POST" enctype="multipart/form-data">
                     <div class="pt-4">
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
-                                class="fa-solid fa-chevron-left me-4 pb-2"></i>Uploud Recipe</h4>
+                                class="fa-solid fa-chevron-left me-4 pb-2 back-icon"></i>Uploud Recipe</h4>
                     </div>
                     <div class="row my-3">
                         <div class="col-6 p-5 pt-3">
@@ -223,6 +227,10 @@ if (empty($_SESSION['username'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
+            $(".back-icon").on("click", function () {
+                window.history.back();
+            });
+
         let x = 1;
         let y = 1;
 

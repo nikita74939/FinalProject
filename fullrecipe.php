@@ -95,37 +95,41 @@ if ($count > 0) {
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
-                    <ul class="list-group list-group-flush my-4">
-                        <a href="index.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Home</h6>
-                            </li>
-                        </a>
-                        <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
-                                <h6>Explore</h6>
-                            </li>
-                        </a>
-                        <a href="uploud.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Uploud</h6>
-                            </li>
-                        </a>
-                        <a href="profil.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6 style="font-weight: 600">Profil</h6>
-                            </li>
-                        </a>
-                    </ul>
+                    <div class="d-flex flex-column" style="min-height: 90vh">
+                        <!-- bagian menu -->
+                        <div class="flex-grow-1">
+                            <ul class="list-group list-group-flush my-4">
+                                <a href="index.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Home</h6>
+                                    </li>
+                                </a>
+                                <a href="explore.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
+                                        <h6>Explore</h6>
+                                    </li>
+                                </a>
+                                <a href="uploud.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Uploud</h6>
+                                    </li>
+                                </a>
+                                <a href="profil.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6 style="font-weight: 600">Profil</h6>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
 
-                    <div class="row fixed-bottom ps-2">
-                        <div class="col-2 pt-3" style="background-color: rgb(140, 186, 159);">
-                            <a href="logout.php" style="color: black" class="mt-2">
-                                <h6 class="ps-5 pb-3">Logout</h6>
+                        <!-- bagian logout -->
+                        <div class="py-3 rounded-pill pb-2" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black; text-decoration: none;">
+                                <h6 class="text-center">Logout</h6>
                             </a>
-
                         </div>
                     </div>
+
                 </div>
             </div>
 

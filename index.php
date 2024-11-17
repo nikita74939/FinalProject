@@ -178,12 +178,12 @@ if (isset($_SESSION['username'])) {
                         <div class="container">
                             <div class="row">
                                 <div class="col-5 pt-4">
-                                    <img src="users/pict1.jpeg" alt=""
+                                    <img src="img/most-popular.jpg" alt=""
                                         style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
                                     <div class="container">
                                         <div class="row" style="position: relative; top: -50px; border: none;">
                                             <div class="col-6">
-                                                <img src="users/pict1.jpeg" class="img-thumbnail rounded-circle mb-1"
+                                                <img src="users/pict2.jpg" class="img-thumbnail rounded-circle mb-1"
                                                     alt="..." width="100px">
                                                 <p style="font-size: 14px;">@cherrygirl</p>
                                             </div>
@@ -202,16 +202,16 @@ if (isset($_SESSION['username'])) {
                                         soothing mask. Perfect buat yang butuh calming ritual di malam hari 💫🌌
                                     </p>
                                     <div class="d-flex flex-wrap">
-                                        <button class="btn btn-outline-warning me-3 mb-3">Face Mist</button>
-                                        <button class="btn btn-outline-dark me-3 mb-3">Markisa</button>
+                                        <button class="btn btn-outline-warning me-3 mb-3">Face Mask</button>
+                                        <button class="btn btn-outline-dark me-3 mb-3">Banana</button>
                                     </div>
                                     <div class="d-flex flex-column mt-3 text-end">
                                         <p style="font-family: 'Quicksand'; font-weight:600;">
-                                            <i class="fa-regular fa-star"></i> 4
+                                            <i class="fa-solid fa-star"></i> 4
                                         </p>
                                         <a href="fullrecipe.php#commentar"
                                             style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
-                                            9 commentar
+                                            9 comments
                                         </a>
                                     </div>
                                 </div>

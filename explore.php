@@ -59,37 +59,41 @@ $query2 = "SELECT * FROM recipes ";
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
-                    <ul class="list-group list-group-flush my-4">
-                        <a href="index.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Home</h6>
-                            </li>
-                        </a>
-                        <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
-                                <h6>Explore</h6>
-                            </li>
-                        </a>
-                        <a href="uploud.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6>Uploud</h6>
-                            </li>
-                        </a>
-                        <a href="profil.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
-                                <h6 style="font-weight: 600">Profil</h6>
-                            </li>
-                        </a>
-                    </ul>
+                    <div class="d-flex flex-column" style="min-height: 90vh">
+                        <!-- bagian menu -->
+                        <div class="flex-grow-1">
+                            <ul class="list-group list-group-flush my-4">
+                                <a href="index.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Home</h6>
+                                    </li>
+                                </a>
+                                <a href="explore.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
+                                        <h6>Explore</h6>
+                                    </li>
+                                </a>
+                                <a href="uploud.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6>Uploud</h6>
+                                    </li>
+                                </a>
+                                <a href="profil.php" style="text-decoration: none; color: black">
+                                    <li class="list-group-item" style="border: none">
+                                        <h6 style="font-weight: 600">Profil</h6>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
 
-                    <div class="row fixed-bottom ps-2">
-                        <div class="col-2 pt-3" style="background-color: rgb(140, 186, 159);">
-                            <a href="logout.php" style="color: black" class="mt-2">
-                                <h6 class="ps-5 pb-3">Logout</h6>
+                        <!-- bagian logout -->
+                        <div class="py-3 rounded-pill pb-2" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black; text-decoration: none;">
+                                <h6 class="text-center">Logout</h6>
                             </a>
-
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -185,7 +189,8 @@ $query2 = "SELECT * FROM recipes ";
                                                             @c<?php echo $username ?>l</p>
                                                     </div>
                                                     <div class="col-6 text-end pt-5">
-                                                        <p style="font-size: 14px;" class="p-1"><?php echo $result['created_at'] ?></p>
+                                                        <p style="font-size: 14px;" class="p-1">
+                                                            <?php echo $result['created_at'] ?></p>
                                                         <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                                             href="save.php?save=<?php echo $result['recipe_id']; ?>&user_id=<?php echo $pict_id; ?>"
                                                             class=""><i class="fa-regular fa-bookmark"></i></a>
@@ -221,9 +226,9 @@ $query2 = "SELECT * FROM recipes ";
                                                     style="font-family: 'Quicksand'; font-weight:500; color: black; text-decoration: none">
                                                     <?php
                                                     if ($jumlah > 1) {
-                                                        echo $jumlah." comments";
+                                                        echo $jumlah . " comments";
                                                     } else {
-                                                        echo $jumlah." comment";
+                                                        echo $jumlah . " comment";
                                                     } ?>
                                                 </a>
                                             </div>
