@@ -183,7 +183,7 @@ $query2 = "SELECT * FROM recipes ";
                                                     <div class="col-6 text-end pt-5">
                                                         <p style="font-size: 14px;" class="p-1"><?php echo $result['created_at'] ?></p>
                                                         <a style="font-size: 24px; color: rgb(140, 186, 159);"
-                                                            href="save.php?save=<?php echo $result['recipe_id']; ?>"
+                                                            href="save.php?save=<?php echo $result['recipe_id']; ?>&user_id=<?php echo $pict_id; ?>"
                                                             class=""><i class="fa-regular fa-bookmark"></i></a>
                                                     </div>
                                                 </div>

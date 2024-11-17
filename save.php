@@ -2,6 +2,26 @@
     session_start();
     include 'koneksi.php';
 
+    // Pastikan user sudah login
+    if (empty($_SESSION['username'])) {
+        header("location:index.php?pesan=belum_login");
+        exit();
+    }
+
+    // Ambil user_id dari session
+    $username = $_SESSION['username'];
+    $query_user = "SELECT user_id FROM users WHERE username = '$username'";
+    $result_user = mysqli_query($conn, $query_user);
+
+    if ($result_user && mysqli_num_rows($result_user) > 0) {
+        $user_data = mysqli_fetch_assoc($result_user);
+        $user_id = $user_data['user_id'];
+    } else {
+        // Jika data user tidak ditemukan
+        header("location:index.php?pesan=error_user");
+        exit();
+    }
+
     if (isset($_GET['save'])) {
         $recipe_id = $_GET['save'];
 
@@ -16,7 +36,7 @@
 
             if (mysqli_num_rows($result_favorites) == 0) {
                 // Jika blm
-                $query_insert_favorites = "INSERT INTO favorites (recipe_id) VALUES ('$recipe_id');";
+                $query_insert_favorites = "INSERT INTO favorites (recipe_id, user_id) VALUES ('$recipe_id', '$user_id');";
                 if (mysqli_query($conn, $query_insert_favorites)) {
                     $_SESSION['message'] = 'success';
                 } else {
