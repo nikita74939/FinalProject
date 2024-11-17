@@ -136,11 +136,17 @@ $ratings = number_format($rating, 1);
                     $usernamee = $result2['username'];
                     $nama = $result2['nama'];
                 }
+
+                $query_myrate = "SELECT * FROM ratings WHERE user_id = '$user_id';";
+                $sql_myrate = mysqli_query($conn, $query_myrate);
+                while ($result9 = mysqli_fetch_assoc($sql_myrate)) {
+                    $myrate = $result9['rating'];
+                }
                 ?>
                 <div class="col-7">
                     <div class="pt-4">
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
-                                class="fa-solid fa-chevron-left me-4 pb-2"></i>Recipe</h4>
+                                class="fa-solid fa-chevron-left me-4 pb-2 back-icon"></i>Recipe</h4>
                     </div>
                     <div id="...." class="card border-secondary m-2 my-3 pb-5 pe-1">
                         <div class="card-header">
@@ -151,7 +157,7 @@ $ratings = number_format($rating, 1);
                                     </div>
                                     <div class="col-6 text-end">
                                         <?php
-                                        if ($rating > 0) {
+                                        if ($count > 0) {
                                             echo "<i class='fa-solid fa-star'></i> " . $ratings;
                                         } else {
                                             echo "not yet rated";
@@ -187,30 +193,34 @@ $ratings = number_format($rating, 1);
 
                                         <div class="row text-center mx-5 mb-3 justify-content-center">
                                             <button class="col-2 rate-button bg-white" data-rate="1">
-                                                <i class="fa-regular fa-star bg-white"
+                                                <i class="<?php if($myrate >= 1)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star bg-white"
                                                     style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 2 -->
                                             <button class="col-2 rate-button bg-white" data-rate="2">
-                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if($myrate >= 2)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 3 -->
                                             <button class="col-2 rate-button bg-white" data-rate="3">
-                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if($myrate >= 3)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 4 -->
                                             <button class="col-2 rate-button bg-white" data-rate="4">
-                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if($myrate >= 4)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
                                             <!-- Bintang 5 -->
+                                            
                                             <button class="col-2 rate-button bg-white" data-rate="5">
-                                                <i class="fa-regular fa-star" style="display: inline-flex; border:none"></i>
+                                                <i class="<?php if($myrate >= 5)  { echo "fa-solid"; } else { echo "fa-regular"; } ?> fa-star" style="display: inline-flex; border:none"></i>
                                             </button>
-
+                                            
+                                            
                                         </div>
+                                        <?php if(!($myrate))  { ?>
                                         <button class="btn btn-outline-dark"
-                                            style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">Send
-                                            <i class="fa-regular fa-paper-plane"></i></button>
+                                        style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159);">Send
+                                        <i class="fa-regular fa-paper-plane"></i></button>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -343,23 +353,12 @@ $ratings = number_format($rating, 1);
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function () {
+        $(".back-icon").on("click", function () {
+            window.history.back();
+        });
+    });
     </script>
 </body>
 
 </html>
-
-<?php
-while ($result = mysqli_fetch_assoc($sql)) {
-    ?>
-    <h3><?php echo $result['title']; ?></h3>
-    <img src="img/<?php echo $result['main_image']; ?>" alt="foto" style="width: 100px;" />
-    <p>buat profile tapi blom ku selesaiin</p>
-    <p>buat rating</p>
-    <p><?php echo $result['description']; ?></p>
-    <h4>Ingredients</h4>
-    <p><?php echo $result['ingredient']; ?></p>
-    <h4>Step by step</h4>
-    <p><?php echo $result['step']; ?></p>
-    <?php
-}
-?>
