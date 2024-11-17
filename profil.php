@@ -148,7 +148,7 @@ if ($query) {
                         <?php
                         $query = mysqli_query($conn, "select * from recipes where user_id ='$id'");
 
-                        while ($data = mysqli_fetch_array($query)) { 
+                        while ($data = mysqli_fetch_array($query)) {
                             $recipe_id = $data['recipe_id'];
                             $count = 0;
                             $rate = 0;
@@ -173,10 +173,11 @@ if ($query) {
                                 $ratings = number_format($rating, 1);
 
                             }
-                            
-                        ?>
+
+                            ?>
                             <div class="col-md-6 col-sm-12">
-                                <div class="card border-secondary m-2 my-3 card-post" id="<?php echo $data['recipe_id']; ?>" style="height: 560px">
+                                <div class="card border-secondary m-2 my-3 card-post" id="<?php echo $data['recipe_id']; ?>"
+                                    style="height: 560px">
                                     <div class="card-header">
                                         <div class="container">
                                             <div class="row">
@@ -184,13 +185,13 @@ if ($query) {
                                                     <?php echo $data['category'] ?>
                                                 </div>
                                                 <div class="col-6 text-end">
-                                                <?php
-                                                        if ($count > 0) {
-                                                            echo "<i class='fa-solid fa-star'></i> " . $ratings;
-                                                        } else {
-                                                            echo "not yet rated";
-                                                        }
-                                                        ?>
+                                                    <?php
+                                                    if ($count > 0) {
+                                                        echo "<i class='fa-solid fa-star'></i> " . $ratings;
+                                                    } else {
+                                                        echo "not yet rated";
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,8 +213,8 @@ if ($query) {
                                                 </div>
                                                 <div class="col-6 text-end">
                                                     <a href="fullrecipe.php?lihat=<?php echo $recipe_id; ?>#commentar"
-                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
-                                                    <?php if ($jumlah > 1) {
+                                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none; color: black">
+                                                        <?php if ($jumlah > 1) {
                                                             echo $jumlah . " comments";
                                                         } else {
                                                             echo $jumlah . " comment";
@@ -222,10 +223,14 @@ if ($query) {
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row">
-                                                <a class="btn btn-outline-dark me-2" href="edit_recipe.php?edit=<?php echo $data['recipe_id'] ?>" class="">Edit
+                                                <a class="btn btn-outline-dark me-2"
+                                                    href="edit_recipe.php?edit=<?php echo $data['recipe_id'] ?>"
+                                                    class="">Edit
                                                     Recipe</a>
-                                                <a class="btn btn-outline-danger" href="edit_recipe.php?hapus=<?php echo $data['recipe_id'] ?>" class="">Delete</a>
-                                                
+                                                <a class="btn btn-outline-danger"
+                                                    href="edit_recipe.php?hapus=<?php echo $data['recipe_id'] ?>"
+                                                    class="">Delete</a>
+
                                             </div>
                                         </div>
                                     </div>
@@ -268,7 +273,8 @@ if ($query) {
                             ?>
                             <div class="col-12">
                                 <!-- card -->
-                                <div id="<?php echo $recipe_id ?>" class="card border-secondary mx-2 mt-3 mb-1 card-post" style="height: 320px">
+                                <div id="<?php echo $recipe_id ?>" class="card border-secondary mx-2 mt-3 mb-1 card-post"
+                                    style="height: 320px">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-5 pt-4">
@@ -284,7 +290,9 @@ if ($query) {
                                                             </p>
                                                         </div>
                                                         <div class="col-6 text-end pt-5">
-                                                            <p style="font-size: 14px;" class="p-1"><?php echo $result['created_at'] ?></p>
+                                                            <p style="font-size: 14px;" class="p-1">
+                                                                <?php echo $result['created_at'] ?>
+                                                            </p>
 
                                                             <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                                                 href="save.php?save=<?php echo $result['recipe_id']; ?>"
@@ -317,7 +325,7 @@ if ($query) {
                                                         ?>
                                                     </p>
                                                     <a href="fullrecipe.php?lihat=<?php echo $recipe_id; ?>#commentar"
-                                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
+                                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none; color: black">
                                                         <?php if ($jumlah > 1) {
                                                             echo $jumlah . " comments";
                                                         } else {
@@ -331,97 +339,97 @@ if ($query) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
+
                     </div>
-                <?php } ?>
+                </div>
+
+                <!-- right end -->
             </div>
-
-            <!-- right end -->
         </div>
-    </div>
 
-    <!-- java script-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#postRecipe').show();
-            $('#savedRecipe').hide();
-
-            $('#postButton').click(function () {
-                $(this).css('border-bottom', 'solid 1px black');
-                $('#savedButton').css('border-bottom', 'none');
+        <!-- java script-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
                 $('#postRecipe').show();
                 $('#savedRecipe').hide();
 
-                $('#savedText').css({ 'font-weight': '400', 'color': 'gray' });
-                $('#postText').css({ 'font-weight': '700', 'color': 'black' });
-            });
+                $('#postButton').click(function () {
+                    $(this).css('border-bottom', 'solid 1px black');
+                    $('#savedButton').css('border-bottom', 'none');
+                    $('#postRecipe').show();
+                    $('#savedRecipe').hide();
 
-            $('#savedButton').click(function () {
-                $('#postButton').css('border-bottom', 'none');
-                $(this).css('border-bottom', 'solid 1px black')
-                $('#postRecipe').hide();
-                $('#savedRecipe').show();
-
-                $('#postText').css({ 'font-weight': '400', 'color': 'gray' });
-                $('#savedText').css({ 'font-weight': '700', 'color': 'black' });
-            });
-
-      
-            let selectedCategory = null;
-            let selectedIngredient = null;
-
-            // Handle category click
-            $(".list-group-item").click(function () {
-                $(".list-group-item").removeClass("active");
-                if (selectedCategory === $(this).attr("id")) {
-                    selectedCategory = null; // Deselect if clicked again
-                } else {
-                    selectedCategory = $(this).attr("id");
-                    $(this).addClass("active");
-                }
-                filterResults();
-            });
-
-            // Handle ingredient click
-            $(".btn-outline-dark").click(function () {
-                $(".btn-outline-dark").removeClass("active");
-                if (selectedIngredient === $(this).attr("id")) {
-                    selectedIngredient = null; // Deselect if clicked again
-                } else {
-                    selectedIngredient = $(this).attr("id");
-                    $(this).addClass("active");
-                }
-                filterResults();
-            });
-
-            // Filter results based on selectedCategory and selectedIngredient
-            function filterResults() {
-                $(".card-post").each(function () {
-                    let category = $(this).find(".btn-cat").val();
-                    let ingredient = $(this).find(".btn-ing").val();
-
-                    let showByCategory = !selectedCategory || category == selectedCategory;
-                    let showByIngredient = !selectedIngredient || ingredient == selectedIngredient;
-
-                    if (showByCategory && showByIngredient) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    $('#savedText').css({ 'font-weight': '400', 'color': 'gray' });
+                    $('#postText').css({ 'font-weight': '700', 'color': 'black' });
                 });
-            }
 
-            $('.card-post').click(function () {
-                let recipe = $(this).attr("id");
-                window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal
+                $('#savedButton').click(function () {
+                    $('#postButton').css('border-bottom', 'none');
+                    $(this).css('border-bottom', 'solid 1px black')
+                    $('#postRecipe').hide();
+                    $('#savedRecipe').show();
+
+                    $('#postText').css({ 'font-weight': '400', 'color': 'gray' });
+                    $('#savedText').css({ 'font-weight': '700', 'color': 'black' });
+                });
+
+
+                let selectedCategory = null;
+                let selectedIngredient = null;
+
+                // Handle category click
+                $(".list-group-item").click(function () {
+                    $(".list-group-item").removeClass("active");
+                    if (selectedCategory === $(this).attr("id")) {
+                        selectedCategory = null; // Deselect if clicked again
+                    } else {
+                        selectedCategory = $(this).attr("id");
+                        $(this).addClass("active");
+                    }
+                    filterResults();
+                });
+
+                // Handle ingredient click
+                $(".btn-outline-dark").click(function () {
+                    $(".btn-outline-dark").removeClass("active");
+                    if (selectedIngredient === $(this).attr("id")) {
+                        selectedIngredient = null; // Deselect if clicked again
+                    } else {
+                        selectedIngredient = $(this).attr("id");
+                        $(this).addClass("active");
+                    }
+                    filterResults();
+                });
+
+                // Filter results based on selectedCategory and selectedIngredient
+                function filterResults() {
+                    $(".card-post").each(function () {
+                        let category = $(this).find(".btn-cat").val();
+                        let ingredient = $(this).find(".btn-ing").val();
+
+                        let showByCategory = !selectedCategory || category == selectedCategory;
+                        let showByIngredient = !selectedIngredient || ingredient == selectedIngredient;
+
+                        if (showByCategory && showByIngredient) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                $('.card-post').click(function () {
+                    let recipe = $(this).attr("id");
+                    window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal
+                });
+
             });
-    
-        });
-    </script>
+        </script>
 </body>
 
 </html>
