@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'koneksi.php';
 
     if (isset($_GET['save'])) {
@@ -17,18 +18,18 @@
                 // Jika blm
                 $query_insert_favorites = "INSERT INTO favorites (recipe_id) VALUES ('$recipe_id');";
                 if (mysqli_query($conn, $query_insert_favorites)) {
-                    echo "Recipe berhasil disimpan ke favorit!";
+                    $_SESSION['message'] = 'success';
                 } else {
-                    echo "Gagal menyimpan ke favorit: " . mysqli_error($conn);
+                    $_SESSION['message'] = 'error';
                 }
             } else {
-                echo "Recipe sudah ada di daftar favorit!";
+                $_SESSION['message'] = 'exists';
             }
         } else {
-            echo "Recipe tidak ditemukan!";
+            $_SESSION['message'] = 'not_found';
         }
-    } else {
-        //echo "ID recipe tidak diberikan.";
+        header("location: explore.php");
+        exit();
     }
 
 

@@ -96,6 +96,25 @@ $query2 = "SELECT * FROM recipes ";
 
             <!-- middle -->
             <!-- disini kutaruh while buat nampilin semua recipe tapi file img buat recipenya blm ada di folder jadi ga keluar gambarnya -->
+            <?php
+            // notifikasi ketika save button ditekan
+            if (isset($_SESSION['message'])) {
+                $message = $_SESSION['message'];
+
+                if ($message == 'success') {
+                    echo "<script>alert('Resep berhasil disimpan ke favorit!');</script>";
+                } elseif ($message == 'exists') {
+                    echo "<script>alert('Resep sudah ada di daftar favorit!');</script>";
+                } elseif ($message == 'error') {
+                    echo "<script>alert('Gagal menyimpan resep ke favorit.');</script>";
+                } elseif ($message == 'not_found') {
+                    echo "<script>alert('Resep tidak ditemukan.');</script>";
+                }
+
+                unset($_SESSION['message']);
+            }
+            ?>
+
             <div class="col-7">
                 <!-- card -->
                 <div class="container pt-4">
