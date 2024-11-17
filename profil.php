@@ -1,5 +1,3 @@
-<!-- lagi kupake -->
-
 <?php
 include 'koneksi.php';
 session_start();
@@ -71,7 +69,7 @@ if ($query) {
                             </li>
                         </a>
                         <a href="explore.php" style="text-decoration: none; color: black">
-                            <li class="list-group-item" style="border: none">
+                            <li class="list-group-item" style="border: none;">
                                 <h6>Explore</h6>
                             </li>
                         </a>
@@ -80,12 +78,20 @@ if ($query) {
                                 <h6>Uploud</h6>
                             </li>
                         </a>
+                        <a href="profil.php" style="text-decoration: none; color: black">
+                            <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
+                                <h6 style="font-weight: 600">Profil</h6>
+                            </li>
+                        </a>
                     </ul>
 
-                    <div class="fixed-bottom">
-                        <a href="logout.php" style="color: black">
-                            <h6 class="ps-5 pb-3">Logout</h6>
-                        </a>
+                    <div class="row fixed-bottom ps-2">
+                        <div class="col-2 pt-3" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" style="color: black" class="mt-2">
+                                <h6 class="ps-5 pb-3">Logout</h6>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,7 +150,7 @@ if ($query) {
 
                         while ($data = mysqli_fetch_array($query)) { ?>
                             <div class="col-md-6 col-sm-12">
-                                <div id="...." class="card border-secondary m-2 my-3" style="height: 500px">
+                                <div class="card border-secondary m-2 my-3 card-post" id="<?php echo $data['recipe_id']; ?>" style="height: 560px">
                                     <div class="card-header">
                                         <div class="container">
                                             <div class="row">
@@ -165,8 +171,6 @@ if ($query) {
                                             <hr>
                                             <p class="card-text"><?php echo $data['description'] ?></p>
                                         </div>
-                                        <a href="edit_recipe.php?edit=<?php echo $data['recipe_id'] ?>" class="">Edit Recipe</a>
-                                        <a href="edit_recipe.php?hapus=<?php echo $data['recipe_id'] ?>" class="">Hapus</a>
                                         <div class="container p-0 pt-3">
                                             <div class="row">
                                                 <div class="col-6">
@@ -176,9 +180,15 @@ if ($query) {
                                                 </div>
                                                 <div class="col-6 text-end">
                                                     <a href="fullrecipe.php#commentar"
-                                                        style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
-                                                        commentar</a>
+                                                    style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">9
+                                                    commentar</a>
                                                 </div>
+                                            </div>
+                                            <div class="d-flex flex-row">
+                                                <a class="btn btn-outline-dark me-2" href="edit_recipe.php?edit=<?php echo $data['recipe_id'] ?>" class="">Edit
+                                                    Recipe</a>
+                                                <a class="btn btn-outline-danger" href="edit_recipe.php?hapus=<?php echo $data['recipe_id'] ?>" class="">Delete</a>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -190,11 +200,38 @@ if ($query) {
 
                     <div id="savedRecipe" class="row pt-1 px-4" style="position: relative; top: -100px;">
                         <?php
-                        $query = mysqli_query($conn, "select r.recipe_id, r.title, r.description, r.main_image, r.category, r.main_image, r.main_ingredient, u.user_id, u.username, u.id_pict from recipes r join favorites f on f.recipe_id = r.recipe_id join users u on r.user_id = u.user_id where f.user_id ='$id'");
-                        while ($result = mysqli_fetch_array($query)) { ?>
+                        $query = mysqli_query($conn, "select r.recipe_id, r.title, r.description, r.main_image, r.category, r.main_image, r.main_ingredient, r.created_at, u.user_id, u.username, u.id_pict from recipes r join favorites f on f.recipe_id = r.recipe_id join users u on r.user_id = u.user_id where f.user_id ='$id'");
+                        while ($result = mysqli_fetch_array($query)) {
+                            $recipe_id = $result['recipe_id'];
+                            $count = 0;
+                            $rate = 0;
+
+                            $query_rate = "SELECT * FROM ratings WHERE recipe_id = '$recipe_id';";
+                            $sql_rate = mysqli_query($conn, $query_rate);
+                            while ($result4 = mysqli_fetch_assoc($sql_rate)) {
+                                $rating = $result4['rating'];
+                                $rate += $rating;
+                                $count++;
+                            }
+
+                            $jumlah = 0;
+
+                            $query_coms = "SELECT * FROM comments WHERE recipe_id = '$recipe_id';";
+                            $sql_coms = mysqli_query($conn, $query_coms);
+                            while ($result4 = mysqli_fetch_assoc($sql_coms)) {
+                                $jumlah++;
+                            }
+                            if ($count > 0) {
+                                $ratings = $rate / $count;
+                                $ratings = number_format($rating, 1);
+
+                            }
+
+
+                            ?>
                             <div class="col-12">
                                 <!-- card -->
-                                <div id="...." class="card border-secondary mx-2 mt-3 mb-1" style="height: 320px">
+                                <div id="...." class="card border-secondary mx-2 mt-3 mb-1 card-post" style="height: 320px">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-5 pt-4">
@@ -206,12 +243,15 @@ if ($query) {
                                                             <img src="users/pict<?php echo $result['id_pict']; ?>.jpg"
                                                                 class="img-thumbnail rounded-circle mb-1" alt="..."
                                                                 width="100px">
-                                                            <p style="font-size: 14px;">@<?php echo $result['username']; ?></p>
+                                                            <p style="font-size: 14px;">@<?php echo $result['username']; ?>
+                                                            </p>
                                                         </div>
                                                         <div class="col-6 text-end pt-5">
-                                                            <p style="font-size: 14px;" class="p-1">10 Nov</p>
+                                                            <p style="font-size: 14px;" class="p-1"><?php echo $result['created_at'] ?></p>
 
-                                                            <a href="save.php?save=<?php echo $result['recipe_id']; ?>" class="">Favorites</a>
+                                                            <a style="font-size: 24px; color: rgb(140, 186, 159);"
+                                                                href="save.php?save=<?php echo $result['recipe_id']; ?>"
+                                                                class=""><i class="fa-regular fa-bookmark me-2"></i></a>
 
                                                         </div>
                                                     </div>
@@ -231,11 +271,21 @@ if ($query) {
                                                 </div>
                                                 <div class="d-flex flex-column mt-3 text-end">
                                                     <p style="font-family: 'Quicksand'; font-weight:600;">
-                                                        <i class="fa-regular fa-star"></i> 4
+                                                        <?php
+                                                        if ($count > 0) {
+                                                            echo "<i class='fa-solid fa-star'></i> " . $ratings;
+                                                        } else {
+                                                            echo "not yet rated";
+                                                        }
+                                                        ?>
                                                     </p>
                                                     <a href="fullrecipe.php#commentar"
                                                         style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
-                                                        9 commentar
+                                                        <?php if ($jumlah > 1) {
+                                                            echo $jumlah . " comments";
+                                                        } else {
+                                                            echo $jumlah . " comment";
+                                                        } ?>
                                                     </a>
                                                 </div>
 
@@ -282,6 +332,57 @@ if ($query) {
                 $('#postText').css({ 'font-weight': '400', 'color': 'gray' });
                 $('#savedText').css({ 'font-weight': '700', 'color': 'black' });
             });
+
+      
+            let selectedCategory = null;
+            let selectedIngredient = null;
+
+            // Handle category click
+            $(".list-group-item").click(function () {
+                $(".list-group-item").removeClass("active");
+                if (selectedCategory === $(this).attr("id")) {
+                    selectedCategory = null; // Deselect if clicked again
+                } else {
+                    selectedCategory = $(this).attr("id");
+                    $(this).addClass("active");
+                }
+                filterResults();
+            });
+
+            // Handle ingredient click
+            $(".btn-outline-dark").click(function () {
+                $(".btn-outline-dark").removeClass("active");
+                if (selectedIngredient === $(this).attr("id")) {
+                    selectedIngredient = null; // Deselect if clicked again
+                } else {
+                    selectedIngredient = $(this).attr("id");
+                    $(this).addClass("active");
+                }
+                filterResults();
+            });
+
+            // Filter results based on selectedCategory and selectedIngredient
+            function filterResults() {
+                $(".card-post").each(function () {
+                    let category = $(this).find(".btn-cat").val();
+                    let ingredient = $(this).find(".btn-ing").val();
+
+                    let showByCategory = !selectedCategory || category == selectedCategory;
+                    let showByIngredient = !selectedIngredient || ingredient == selectedIngredient;
+
+                    if (showByCategory && showByIngredient) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            $('.card-post').click(function () {
+                let recipe = $(this).attr("id");
+                window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal
+            });
+    
         });
     </script>
 </body>
