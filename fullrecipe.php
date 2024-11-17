@@ -182,7 +182,7 @@ if ($count > 0) {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-7">
-                                    <img src="<?php echo $result['main_image']; ?>" alt=""
+                                    <img src="img/<?php echo $result['main_image']; ?>" alt=""
                                         style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
                                 </div>
                                 <div class="col-5">
