@@ -300,24 +300,27 @@ $average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
                                         <div class="row text-center mx-5 mb-3 justify-content-center">
                                         <form method="POST" action="">
                                             <div class="stars">
-                                                <input type="radio" name="rating" value="5" id="star5" />
+                                            
+                                                <input type="radio" name="rating" value="5" id="star5" <?php if ($myrate == 5) { echo "checked"; } ?> />
                                                 <label for="star5">&#9733;</label>
                                                 
-                                                <input type="radio" name="rating" value="4" id="star4" />
+                                                <input type="radio" name="rating" value="4" id="star4" <?php if ($myrate == 4) { echo "checked"; } ?> />
                                                 <label for="star4">&#9733;</label>
                                                 
-                                                <input type="radio" name="rating" value="3" id="star3" />
+                                                <input type="radio" name="rating" value="3" id="star3" <?php if ($myrate == 3) { echo "checked"; } ?> />
                                                 <label for="star3">&#9733;</label>
                                                 
-                                                <input type="radio" name="rating" value="2" id="star2" />
+                                                <input type="radio" name="rating" value="2" id="star2" <?php if ($myrate == 2) { echo "checked"; } ?> />
                                                 <label for="star2">&#9733;</label>
                                                 
-                                                <input type="radio" name="rating" value="1" id="star1" />
+                                                <input type="radio" name="rating" value="1" id="star1" <?php if ($myrate == 1) { echo "checked"; } ?> />
                                                 <label for="star1">&#9733;</label>
                                             </div>
                                             <br>
+                                            <?php if (!($myrate)) { ?>
                                             <button class="btn btn-outline-dark" type="submit"style="font-family: 'Quicksand'; font-weight: 600; background-color: rgb(140, 186, 159); width: 150px;">Send
                                             <i class="fa-regular fa-paper-plane"></i></button>
+                                            <?php } ?>
                                         </form>
                                         </div>
                                     </div>
