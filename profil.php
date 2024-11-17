@@ -197,7 +197,7 @@ if ($query) {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <img src="users/pict1.jpeg" alt=""
+                                        <img src="<?php echo $data['main_image'] ?>" alt=""
                                             style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
                                         <div style="height: 120px">
                                             <h5 class="card-title mt-2"><?php echo $data['title'] ?></h5>
@@ -268,7 +268,9 @@ if ($query) {
                                 $ratings = number_format($rating, 1);
 
                             }
-
+                            
+                            $query_check_favorites = "SELECT * FROM favorites WHERE recipe_id = '$recipe_id' AND user_id ='$id';";
+                            $result_favorites = mysqli_query($conn, $query_check_favorites);
 
                             ?>
                             <div class="col-12">
@@ -296,7 +298,7 @@ if ($query) {
 
                                                             <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                                                 href="save.php?save=<?php echo $result['recipe_id']; ?>"
-                                                                class=""><i class="fa-regular fa-bookmark me-2"></i></a>
+                                                                class=""><i class="<?php echo (mysqli_num_rows($result_favorites) == 0) ? "fa-regular" : "fa-solid";?> fa-bookmark me-2"></i></a>
 
                                                         </div>
                                                     </div>
