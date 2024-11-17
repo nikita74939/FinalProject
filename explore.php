@@ -13,6 +13,7 @@ $q = "SELECT * FROM users WHERE username = '$username'";
 $query = mysqli_query($conn, $q);
 if ($query) {
     while ($data = mysqli_fetch_array($query)) {
+        $id_acc = $data['user_id'];
         $pict_id = $data['id_pict'];
     }
 }
@@ -163,6 +164,9 @@ $query2 = "SELECT * FROM recipes ";
                                 $jumlah++;
                             }
 
+                            $query_check_favorites = "SELECT * FROM favorites WHERE recipe_id = '$recipe_id' AND user_id ='$id_acc';";
+                            $result_favorites = mysqli_query($conn, $query_check_favorites);
+
                             ?>
 
                             <div class="card border-secondary mx-2 my-3 card-post" id="<?php echo $result['recipe_id']; ?>">
@@ -184,7 +188,7 @@ $query2 = "SELECT * FROM recipes ";
                                                         <p style="font-size: 14px;" class="p-1"><?php echo $result['created_at'] ?></p>
                                                         <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                                             href="save.php?save=<?php echo $result['recipe_id']; ?>"
-                                                            class=""><i class="fa-regular fa-bookmark"></i></a>
+                                                            class=""><i class="<?php echo (mysqli_num_rows($result_favorites) == 0) ? "fa-regular" : "fa-solid";?> fa-bookmark"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
