@@ -252,7 +252,8 @@ if ($count > 0) {
                                     </div>
                                 </div>
                             </div>
-                            <h5 class="card-title mt-2"><a style="font-size: 24px; color: rgb(140, 186, 159);"
+                            <h5 class="card-title mt-2">
+                                <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                     href="save.php?save=<?php echo $result['recipe_id']; ?>" class=""><i
                                         class="fa-regular fa-bookmark me-2"></i></a><?php echo $result['title']; ?></h5>
                             <hr>
@@ -344,7 +345,7 @@ if ($count > 0) {
             ?>
             <!-- right -->
 
-            <div class="col-3 sticky-top" style="height: 100vh;">
+            <div class="col-3 sticky-top" style="height: 100vh; display: none" >
                 <div class="pt-4">
                     <h5 class="ps-3" style="font-family: 'Quicksand';">Filter by</h5>
                     <div class="mx-3 mt-4">
