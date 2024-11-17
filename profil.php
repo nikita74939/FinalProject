@@ -166,6 +166,7 @@ if ($query) {
                                             <p class="card-text"><?php echo $data['description'] ?></p>
                                         </div>
                                         <a href="edit_recipe.php?edit=<?php echo $data['recipe_id'] ?>" class="">Edit Recipe</a>
+                                        <a href="edit_recipe.php?hapus=<?php echo $data['recipe_id'] ?>" class="">Hapus</a>
                                         <div class="container p-0 pt-3">
                                             <div class="row">
                                                 <div class="col-6">

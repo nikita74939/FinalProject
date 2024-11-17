@@ -35,6 +35,25 @@
             die("Error updating recipe: " . mysqli_error($conn));
         }
     }
+
+    if (isset($_GET['hapus'])) {
+        $recipe_id = $_GET['hapus'];
+
+        $query = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
+        $sql = mysqli_query($conn, $query);
+        $result = mysqli_fetch_assoc($sql);
+
+        unlink("img/".$result['main_image']);
+
+        $query_hapus = "DELETE FROM recipes WHERE recipe_id = '$recipe_id';";
+        $sql_hapus = mysqli_query($conn, $query_hapus);
+
+        if ($sql_hapus) {
+            header("location: profil.php");
+        } else {
+            die("Error hapus recipe: " . mysqli_error($conn));
+        }
+    }
 ?>
 
 <!DOCTYPE html>
