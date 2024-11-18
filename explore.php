@@ -23,6 +23,35 @@ $sql = mysqli_query($conn, $query);
 
 $query2 = "SELECT * FROM recipes ";
 
+if (isset($_GET['save'])) {
+    $recipe_id = $_GET['save'];
+
+    // Periksa apakah recipe_id ada di tabel recipes
+    $query_check_recipe = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
+    $result_recipe = mysqli_query($conn, $query_check_recipe);
+
+    if (mysqli_num_rows($result_recipe) > 0) {
+        // Periksa recipe_id udah favorites
+        $query_check_favorites = "SELECT * FROM favorites WHERE recipe_id = '$recipe_id' AND user_id ='$id_acc';";
+        $result_favorites = mysqli_query($conn, $query_check_favorites);
+
+        if (mysqli_num_rows($result_favorites) == 0) {
+            // Jika blm
+            $query_insert_favorites = "INSERT INTO favorites (recipe_id, user_id) VALUES ('$recipe_id', '$id_acc');";
+            if (mysqli_query($conn, $query_insert_favorites)) {
+                echo "sukses";
+            } 
+        } else {
+            $query_delete_favorites = "DELETE FROM favorites WHERE recipe_id = '$recipe_id' AND user_id = '$id_acc';";
+            if (mysqli_query($conn, $query_delete_favorites)) {
+                echo "sukses";
+            } 
+    } 
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -102,22 +131,6 @@ $query2 = "SELECT * FROM recipes ";
             <!-- middle -->
             <!-- disini kutaruh while buat nampilin semua recipe tapi file img buat recipenya blm ada di folder jadi ga keluar gambarnya -->
             <?php
-            // notifikasi ketika save button ditekan
-            if (isset($_SESSION['message'])) {
-                $message = $_SESSION['message'];
-
-                if ($message == 'success') {
-                    echo "<script>alert('Resep berhasil disimpan ke favorit!');</script>";
-                } elseif ($message == 'exists') {
-                    echo "<script>alert('Resep sudah ada di daftar favorit!');</script>";
-                } elseif ($message == 'error') {
-                    echo "<script>alert('Gagal menyimpan resep ke favorit.');</script>";
-                } elseif ($message == 'not_found') {
-                    echo "<script>alert('Resep tidak ditemukan.');</script>";
-                }
-
-                unset($_SESSION['message']);
-            }
             ?>
 
             <div class="col-7">
@@ -192,8 +205,8 @@ $query2 = "SELECT * FROM recipes ";
                                                         <p style="font-size: 14px;" class="p-1">
                                                             <?php echo $result['created_at'] ?></p>
                                                         <a style="font-size: 24px; color: rgb(140, 186, 159);"
-                                                            href="save.php?save=<?php echo $result['recipe_id']; ?>&user_id=<?php echo $pict_id; ?>"
-                                                            class=""><i class="fa-regular fa-bookmark"></i></a>
+                                                            href="explore.php?save=<?php echo $result['recipe_id']; ?>&user_id=<?php echo $pict_id; ?>"
+                                                            class=""><i class="<?php echo (mysqli_num_rows($result_favorites) == 0) ? "fa-regular" : "fa-solid";?> fa-bookmark"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,6 +314,8 @@ $query2 = "SELECT * FROM recipes ";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            
             let selectedCategory = null;
             let selectedIngredient = null;
 
@@ -349,6 +364,21 @@ $query2 = "SELECT * FROM recipes ";
                 let recipe = $(this).attr("id");
                 window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal
             });
+
+            // simpan posisi scroll di localStorage
+            window.addEventListener("beforeunload", function () {
+                localStorage.setItem("scrollPosition", window.scrollY);
+            });
+
+            // kembalikan posisi scroll setelah halaman dimuat
+            window.addEventListener("load", function () {
+                const scrollPosition = localStorage.getItem("scrollPosition");
+                if (scrollPosition) {
+                    window.scrollTo(0, parseInt(scrollPosition, 10));
+                }
+            });
+            
+
         });
     </script>
 </body>

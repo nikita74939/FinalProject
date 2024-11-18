@@ -295,7 +295,7 @@ if (isset($_GET['hapus'])) {
         $('#form-list-ingredient').append(`
             <div class="form-row align-items-center mb-2">
                 <div class="col-auto">
-                    <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="ingredient${x}" placeholder="ingredient ${x}">
+                    <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="ingredient${x}" placeholder="Ingredient ${x-1}">
                 </div>
             </div>
         `);
@@ -308,7 +308,7 @@ if (isset($_GET['hapus'])) {
         $('#form-list-step').append(`
             <div class="form-row align-items-center mb-2">
                 <div class="col-auto">
-                    <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="step${y}" placeholder="step ${y}">
+                    <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="step${y}" placeholder="Step ${y-1}">
                 </div>
             </div>
         `);
