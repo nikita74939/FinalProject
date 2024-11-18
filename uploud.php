@@ -226,10 +226,10 @@ if (empty($_SESSION['username'])) {
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $(".back-icon").on("click", function () {
-                window.history.back();
-            });
+    $(document).ready(function () {
+        $(".back-icon").on("click", function () {
+            window.history.back();
+        });
 
         let x = 1;
         let y = 1;
@@ -244,11 +244,6 @@ if (empty($_SESSION['username'])) {
                     </div>
                 </div>
             `);
-
-            let newIngredientValue = $(`#ingredient${x-1}`).val();
-            if (newIngredientValue) { 
-                $('#ingredientList').append(`<li class="list-group-item">${newIngredientValue}</li>`);
-            }
         });
 
         $('#addButtonStep').click(function (e) {
@@ -261,34 +256,38 @@ if (empty($_SESSION['username'])) {
                     </div>
                 </div>
             `);
-            let newStepValue = $(`#step${y}`).val();
-            if (newStepValue) { 
-                $('#stepList').append(`<li class="list-group-item">${newStepValue}</li>`);
-            }
         });
 
         $(document).on('click', '#btn-uploud', function (e) {
-            // Ambil nilai dari input terakhir untuk ingredients
-            let newIngredientValue = $(`#ingredient${x}`).val();
-            if (newIngredientValue) { 
-                $('#ingredientList').append(`<li class="list-group-item">${newIngredientValue}</li>`);
+
+            // proses ingredients
+            $('#ingredientList').empty();
+            for (let i = 1; i <= x; i++) {
+                let ingredientValue = $(`#ingredient${i}`).val();
+                if (ingredientValue) {
+                    $('#ingredientList').append(`<li class="list-group-item": ">${ingredientValue}</li>`);
+                }
             }
 
-            // Ambil nilai dari input terakhir untuk steps
-            let newStepValue = $(`#step${y}`).val();
-            if (newStepValue) { 
-                $('#stepList').append(`<li class="list-group-item">${newStepValue}</li>`);
+            // proses steps
+            $('#stepList').empty();
+            for (let i = 1; i <= y; i++) {
+                let stepValue = $(`#step${i}`).val();
+                if (stepValue) {
+                    $('#stepList').append(`<li class="list-group-item"">${stepValue}</li>`);
+                }
             }
 
-            // Simpan daftar ke input tersembunyi
-            let ingredientHTML = $('#ingredientList'). html();
+            // simpan daftar ke input tersembunyi
+            let ingredientHTML = $('#ingredientList').html();
             $('#ingredient').val(`<ul>${ingredientHTML}</ul>`);
 
             let stepHTML = $('#stepList').html();
             $('#step').val(`<ol>${stepHTML}</ol>`);
-            });
         });
-    </script>
+    });
+</script>
+
     <script>
         const dropArea = document.getElementById("drop-area");
         const fileInput = document.getElementById("file-input");
