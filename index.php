@@ -207,11 +207,11 @@ if (isset($_SESSION['username'])) {
                                     </div>
                                     <div class="d-flex flex-column mt-3 text-end">
                                         <p style="font-family: 'Quicksand'; font-weight:600;">
-                                            <i class="fa-solid fa-star"></i> 4
+                                            <i class="fa-solid fa-star"></i> 4.9
                                         </p>
                                         <a href="fullrecipe.php#commentar"
-                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none">
-                                            9 comments
+                                            style="font-family: 'Quicksand'; font-weight:600; text-decoration: none; color: black">
+                                            99 comments
                                         </a>
                                     </div>
                                 </div>
@@ -226,6 +226,17 @@ if (isset($_SESSION['username'])) {
         </div>
     </div>
     <!-- most populer end -->
+
+    <?php 
+        $q = "SELECT * FROM users";
+        $query = mysqli_query($conn, $q);
+        if ($query) {
+            $i =0;
+            while ($data = mysqli_fetch_array($query)) { ?>
+            <input type="hidden" class="cek-user" id="user<?php echo $i?>" value="<?php echo $data['username'] ?>">
+            <input type="hidden" class="cek-user" id="pass<?php echo $i?>" value="<?php echo $data['password'] ?>">
+            
+    <?php $i++;}} ?>
 
     <!-- login -->
     <div class="login p-5 mb-5 align-middle" id="login" style="display: block">
@@ -248,17 +259,7 @@ if (isset($_SESSION['username'])) {
                                         style="font-family: 'Quicksand';">Username</label>
                                     <input type="text" class="form-control rounded-pill" name="username"
                                         id="usernameLogin" placeholder="Username" style="font-family: 'Quicksand';">
-                                    <?php
-                                    if (isset($_GET['pesan'])) {
-                                        if ($_GET['pesan'] == "user_tidak_ditemukan") {
-                                            echo "<div id='usernameHelp' class='form-text' style='font-family: 'Quicksand'; color: red;'>Username not found.</div>";
-                                        } else {
-                                            echo "<br>";
-                                        }
-                                    } else {
-                                        echo "<br>";
-                                    }
-                                    ?>
+                                    <div id='usernameHelp' class='form-text' style="font-family:'Quicksand'; color: red;">Username not found.</div>
 
                                 </div>
                                 <div class="my-3">
@@ -266,21 +267,11 @@ if (isset($_SESSION['username'])) {
                                         style="font-family: 'Quicksand';">Password</label>
                                     <input type="password" class="form-control rounded-pill" name="password"
                                         id="passwordLogin" placeholder="Password" style="font-family: 'Quicksand';">
-                                    <?php
-                                    if (isset($_GET['pesan'])) {
-                                        if ($_GET['pesan'] == "user_tidak_ditemukan") {
-                                            echo "<div id='usernameHelp' class='form-text' style='font-family: 'Quicksand'; color: red;'>Wrong password.</div>";
-                                        } else {
-                                            echo "<br>";
-                                        }
-                                    } else {
-                                        echo "<br>";
-                                    }
-                                    ?>
+                                        <div id='passwordHelp' class='form-text' style="font-family: 'Quicksand'; color: red;">Wrong password.</div>
                                 </div>
 
                                 <div style="text-align: center">
-                                    <input type="submit" class="btn btn-outline-dark mt-3" value="LOGIN"
+                                    <input type="submit" class="btn btn-outline-dark mt-3" value="LOGIN" id="loginButton"
                                         style="background-color: rgb(140, 186, 159);">
 
                                 </div>
@@ -295,16 +286,6 @@ if (isset($_SESSION['username'])) {
         </div>
     </div>
     <!-- login end -->
-
-    <?php 
-        $q = "SELECT * FROM users";
-        $query = mysqli_query($conn, $q);
-        if ($query) {
-            $i =0;
-            while ($data = mysqli_fetch_array($query)) { ?>
-            <input type="hidden" class="cek-user" id="user<?php echo $i?>" value="<?php echo $data['username'] ?>">
-            
-    <?php $i++;}} ?>
     
     <!-- regist -->
     <div class="register my-5" id="regist" style="display: none">
@@ -417,6 +398,50 @@ if (isset($_SESSION['username'])) {
                 $(".login").show();
                 $("#regist").hide();
             });
+
+            $("#usernameHelp").text('');
+            $("#passwordHelp").text('');
+
+            $('#loginButton').on('click', function(e){
+    let go = false;
+    var username = $('#usernameLogin').val();
+    let i = 0;
+    let count = 0;
+
+    // Loop through the users (assuming user values are stored in elements with id "user0", "user1", etc.)
+    while ($('#user' + i).val()) {
+        let userValue = $('#user' + i).val(); 
+        if (username === userValue) {
+            var password = $('#passwordLogin').val();
+            let passValue = $('#pass' + i).val(); 
+
+            // Check if password matches the stored value
+            if (password === passValue) {
+                $('#passwordHelp').text(''); // Clear any previous error messages
+                go = true;
+                break; // Stop looping once the correct username and password are found
+            } else {
+                $('#passwordHelp').text('Wrong password.'); // Display error if password is incorrect
+            }
+            count++;
+        }
+        i++;
+    }
+
+    // Check if the username was found and display the appropriate message
+    if (count === 0) {
+        $('#usernameHelp').text('Username not found.');
+    } else {
+        $('#usernameHelp').text('');
+    }
+
+    // Prevent form submission if login failed
+    if (!go) {
+        e.preventDefault();
+    }
+});
+
+
 
             $("#usernameHelpR").hide();
             $("#passwordHelpR").hide();
