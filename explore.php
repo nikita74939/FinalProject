@@ -40,16 +40,16 @@ if (isset($_GET['save'])) {
             $query_insert_favorites = "INSERT INTO favorites (recipe_id, user_id) VALUES ('$recipe_id', '$id_acc');";
             if (mysqli_query($conn, $query_insert_favorites)) {
                 echo "sukses";
-            } 
+            }
         } else {
             $query_delete_favorites = "DELETE FROM favorites WHERE recipe_id = '$recipe_id' AND user_id = '$id_acc';";
             if (mysqli_query($conn, $query_delete_favorites)) {
                 echo "sukses";
-            } 
-    } 
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
+            }
+        }
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
 }
 
 
@@ -128,10 +128,6 @@ if (isset($_GET['save'])) {
 
             <!-- left end -->
 
-            <!-- middle -->
-            <!-- disini kutaruh while buat nampilin semua recipe tapi file img buat recipenya blm ada di folder jadi ga keluar gambarnya -->
-            <?php
-            ?>
 
             <div class="col-7">
                 <!-- card -->
@@ -144,6 +140,17 @@ if (isset($_GET['save'])) {
                             </p>
                         </div>
                         <hr>
+                        <?php if (isset($_GET['pesan'])) {
+                            if (($_GET['pesan']) == "udah_login") { ?>
+                                <div class="row m-3 mx-4 text-center">
+                                <p style="color: black;">"Welcome back <span style="font-style: italic;">@<?php echo $username; ?></span>. Ready to explore some magic?"</p>
+                                </div>
+                            <?php } else {?>
+                                <div class="row m-3 mx-4 text-center">
+                                    <p style="color: black">"Yay! Recipe uploaded successfully, ready to be tried!"</p>
+                                </div>
+                        <?php }} ?>
+
                     </div>
                     <div class="row group-card">
                         <?php
@@ -203,18 +210,20 @@ if (isset($_GET['save'])) {
                                                     </div>
                                                     <div class="col-6 text-end pt-5">
                                                         <p style="font-size: 14px;" class="p-1">
-                                                            <?php echo $result['created_at'] ?></p>
+                                                            <?php echo $result['created_at'] ?>
+                                                        </p>
                                                         <a style="font-size: 24px; color: rgb(140, 186, 159);"
                                                             href="explore.php?save=<?php echo $result['recipe_id']; ?>&user_id=<?php echo $pict_id; ?>"
-                                                            class=""><i class="<?php echo (mysqli_num_rows($result_favorites) == 0) ? "fa-regular" : "fa-solid";?> fa-bookmark"></i></a>
+                                                            class=""><i
+                                                                class="<?php echo (mysqli_num_rows($result_favorites) == 0) ? "fa-regular" : "fa-solid"; ?> fa-bookmark"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-7 pt-4">
+                                        <div class="col-7 pt-4" >
                                             <h5 class="card-title mt-2"><?php echo $result['title']; ?></h5>
                                             <hr>
-                                            <p class="card-text"><?php echo $result['description']; ?></p>
+                                            <p class="card-text" style="min-height: 60px"><?php echo $result['description']; ?></p>
                                             <div class="d-flex flex-wrap">
                                                 <button class="btn btn-outline-warning me-3 mb-3 btn-cat"
                                                     value="<?php echo $result['category']; ?>">
@@ -315,7 +324,7 @@ if (isset($_GET['save'])) {
     <script>
         $(document).ready(function () {
 
-            
+
             let selectedCategory = null;
             let selectedIngredient = null;
 
@@ -377,7 +386,7 @@ if (isset($_GET['save'])) {
                     window.scrollTo(0, parseInt(scrollPosition, 10));
                 }
             });
-            
+
 
         });
     </script>

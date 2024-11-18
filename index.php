@@ -236,7 +236,7 @@ if (isset($_SESSION['username'])) {
                         <div class="col-7 p-5 text-center">
                             <img src="img/login_girl.png" alt="" class="img-fluid" style="transform: scaleX(-1);"
                                 width="70%">
-                            <p>"Let's log in first to get things started!"</p>
+                            <p>"Welcome back, girl!"</p>
                         </div>
                         <div class="col-5 p-4">
                             <h4 style="font-family: 'Quicksand'; font-weight: 400; text-align: center">Login to</h4>
@@ -315,6 +315,7 @@ if (isset($_SESSION['username'])) {
                         <div class="col-7 p-5 text-center">
                             <img src="img/regist_girl.png" alt="" class="img-fluid" style="transform: scaleX(-1);"
                                 width="60%">
+                            <p>"So excited you’re joining us—"</p>
                             <p class="pt-5 align-bottom"
                                 style="font-family: 'Quicksand'; font-weight: 400; font-size: 14px">
                                 Already have an account? Login <a href="#login" class="loginLink">here</a></p>
