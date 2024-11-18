@@ -14,34 +14,6 @@ $query_recipe = "SELECT * FROM recipes WHERE recipe_id = '$recipe_id';";
 $sql_recipe = mysqli_query($conn, $query_recipe);
 $result_recipe = mysqli_fetch_assoc($sql_recipe);
 
-if (isset($_POST['aksiEdit']) && $_POST['aksiEdit'] == "edit") {
-    $title = $_POST['title'];
-    $category = $_POST['category'];
-    $main_ingredient = $_POST['main_ingredient'];
-    $description = $_POST['description'];
-    $ingredient = $_POST['ingredient'];
-    $step = $_POST['step'];
-
-    $main_image = $result_recipe['main_image']; // Default gambar lama
-    if (!empty($_FILES['main_image']['name'])) {
-        $target_dir = "img/";
-        $main_image = $target_dir . basename($_FILES['main_image']['name']);
-        if (!move_uploaded_file($_FILES['main_image']['tmp_name'], $main_image)) {
-            die("Error uploading file.");
-        }
-    }
-
-
-    $query_edit_recipe = "UPDATE recipes SET title='$title', category='$category', main_ingredient='$main_ingredient', description ='$description', ingredient='$ingredient', step='$step', main_image='$main_image' WHERE recipe_id = '$recipe_id';";
-    $sql_edit_recipe = mysqli_query($conn, $query_edit_recipe);
-
-    if ($sql_edit_recipe) {
-        header("location: profil.php");
-        exit();
-    } else {
-        die("Error updating recipe: " . mysqli_error($conn));
-    }
-}
 
 if (isset($_GET['hapus'])) {
     $recipe_id = $_GET['hapus'];
@@ -140,7 +112,7 @@ if (isset($_GET['hapus'])) {
             <!-- right -->
 
             <div class="col-10" id="formUploud">
-                <form action="proses_uploud.php" method="POST" enctype="multipart/form-data">
+                <form action="proses_edit.php" method="POST" enctype="multipart/form-data">
                     <div class="pt-4">
                         <h4 class="ps-3" style="font-family: 'Quicksand';"><i
                                 class="fa-solid fa-chevron-left me-4 pb-2 back-icon"></i>Uploud Recipe</h4>
@@ -279,101 +251,95 @@ if (isset($_GET['hapus'])) {
                 window.history.back();
             });
 
-            $(document).ready(function () {
                 let x = 1; // inisialisasi variabel untuk bahan
-                let y = 1; // inisialisasi variabel untuk langkah
+    let y = 1; // inisialisasi variabel untuk langkah
 
-                // proses data dari ul (ingredients)
-                $('.for-edit ul').each(function () {
-                    $(this).find('li').each(function () {
-                        let list = $(this).text();
-                        if (list) {
-                            $('#form-list-ingredient').append(`
+    // proses data dari ul (ingredients)
+    $('.for-edit ul').each(function () {
+        $(this).find('li').each(function () {
+            let list = $(this).text();
+            if (list) {
+                $('#form-list-ingredient').append(`
                     <div class="form-row align-items-center mb-2">
                         <div class="col-auto">
                             <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="ingredient${x}" value="${list}" placeholder="ingredient ${x}">
                         </div>
                     </div>
                 `);
-                            $('#ingredientList').append(`<li class="list-group-item" id="ingredient${x}">${list}</li>`);
-                            x++; // increment setelah elemen pertama ditambahkan
-                        }
-                    });
-                });
+                x++;
+            }
+        });
+    });
 
-                // proses data dari ol (steps)
-                $('.for-edit ol').each(function () {
-                    $(this).find('li').each(function () {
-                        let list = $(this).text();
-                        if (list) {
-                            $('#form-list-step').append(`
+    // proses data dari ol (steps)
+    $('.for-edit ol').each(function () {
+        $(this).find('li').each(function () {
+            let list = $(this).text();
+            if (list) {
+                $('#form-list-step').append(`
                     <div class="form-row align-items-center mb-2">
                         <div class="col-auto">
                             <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="step${y}" value="${list}" placeholder="step ${y}">
                         </div>
                     </div>
                 `);
-                            $('#stepList').append(`<li class="list-group-item" id="step${y}">${list}</li>`);
-                            y++; // increment setelah elemen pertama ditambahkan
-                        }
-                    });
-                });
+                y++;
+            }
+        });
+    });
 
-                // tambah bahan baru
-                $('#addButtonIngredient').click(function (e) {
-                    e.preventDefault();
-                    x++; // increment sebelum menambahkan input baru
-                    $('#form-list-ingredient').append(`
+    // tambah bahan baru
+    $('#addButtonIngredient').click(function (e) {
+        e.preventDefault();
+        x++;
+        $('#form-list-ingredient').append(`
             <div class="form-row align-items-center mb-2">
                 <div class="col-auto">
                     <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="ingredient${x}" placeholder="ingredient ${x}">
                 </div>
             </div>
         `);
-                });
+    });
 
-                // tambah langkah baru
-                $('#addButtonStep').click(function (e) {
-                    e.preventDefault();
-                    y++; // increment sebelum menambahkan input baru
-                    $('#form-list-step').append(`
+    // tambah langkah baru
+    $('#addButtonStep').click(function (e) {
+        e.preventDefault();
+        y++;
+        $('#form-list-step').append(`
             <div class="form-row align-items-center mb-2">
                 <div class="col-auto">
                     <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="step${y}" placeholder="step ${y}">
                 </div>
             </div>
         `);
-                });
-            });
+    });
 
+    // simpan data bahan dan langkah ke hidden input
+    $(document).on('click', '#btn-uploud', function (e) {
 
-            $(document).on('click', '#btn-uploud', function (e) {
+        // proses ingredients
+        let ingredientHTML = '';
+        for (let i = 1; i <= x; i++) {
+            let ingredientValue = $(`#ingredient${i}`).val();
+            if (ingredientValue) {
+                ingredientHTML += `<li>${ingredientValue}</li>`;
+            }
+        }
+        $('#ingredient').val(`<ul>${ingredientHTML}</ul>`);
 
-                // proses ingredients
-                $('#ingredientList').empty();
-                for (let i = 1; i <= x; i++) {
-                    let ingredientValue = $(`#ingredient${i}`).val();
-                    if (ingredientValue) {
-                        $('#ingredientList').append(`<li class="list-group-item": ">${ingredientValue}</li>`);
-                    }
-                }
+        // proses steps
+        let stepHTML = '';
+        for (let i = 1; i <= y; i++) {
+            let stepValue = $(`#step${i}`).val();
+            if (stepValue) {
+                stepHTML += `<li>${stepValue}</li>`;
+            }
+        }
+        $('#step').val(`<ol>${stepHTML}</ol>`);
 
-                // proses steps
-                $('#stepList').empty();
-                for (let i = 1; i <= y; i++) {
-                    let stepValue = $(`#step${i}`).val();
-                    if (stepValue) {
-                        $('#stepList').append(`<li class="list-group-item"">${stepValue}</li>`);
-                    }
-                }
-
-                // simpan daftar ke input tersembunyi
-                let ingredientHTML = $('#ingredientList').html();
-                $('#ingredient').val(`<ul>${ingredientHTML}</ul>`);
-
-                let stepHTML = $('#stepList').html();
-                $('#step').val(`<ol>${stepHTML}</ol>`);
-            });
+        console.log($('#ingredient').val());
+        console.log($('#step').val());
+    });
         });
     </script>
     <script>
