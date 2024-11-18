@@ -4,10 +4,10 @@ session_start();
 
 if (empty($_SESSION['username'])) {
     header("location:index.php?pesan=belum_login");
-} else if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
+    exit();
 }
 
+$username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -18,135 +18,109 @@ if (empty($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beauty Recipe</title>
 
-    <!-- style -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <!-- font -->
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
-        rel="stylesheet">
-    <!-- icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Poppins:wght@100..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .uploader {
+            text-align: center;
+        }
+
+        .drop-area {
+            border: 1px dashed #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .drop-area:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+
+        .drop-area p {
+            color: #666;
+            margin: 0;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .selected {
+            color: rgb(140, 186, 159) !important;
+        }
+    </style>
 </head>
-
-<style>
-    .uploader {
-        text-align: center;
-    }
-
-    .drop-area {
-        border: 1px dashed #ccc;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-
-    .drop-area:hover {
-        background-color: #f0f0f0;
-        border-color: #999;
-    }
-
-    .drop-area p {
-        color: #666;
-        margin: 0;
-    }
-
-    .preview-container {
-        margin-top: 20px;
-    }
-
-    .preview-container img {
-        max-width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-</style>
 
 <body>
     <div class="container mx-3">
         <div class="row">
-
-            <!-- left -->
-
+            <!-- Left Sidebar -->
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
                     <div class="d-flex flex-column" style="min-height: 90vh">
-                        <!-- bagian menu -->
                         <div class="flex-grow-1">
                             <ul class="list-group list-group-flush my-4">
-                                <a href="index.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none">
-                                        <h6>Home</h6>
-                                    </li>
-                                </a>
-                                <a href="explore.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none; ">
-                                        <h6>Explore</h6>
-                                    </li>
-                                </a>
-                                <a href="uploud.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
-                                        <h6>Uploud</h6>
-                                    </li>
-                                </a>
-                                <a href="profil.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none">
-                                        <h6 style="font-weight: 600">Profil</h6>
-                                    </li>
-                                </a>
+                                <li class="list-group-item border-0"><a href="index.php" class="text-dark text-decoration-none">Home</a></li>
+                                <li class="list-group-item border-0"><a href="explore.php" class="text-dark text-decoration-none">Explore</a></li>
+                                <li class="list-group-item border-0"><a href="uploud.php" class="text-dark text-decoration-none selected">Upload</a></li>
+                                <li class="list-group-item border-0"><a href="profil.php" class="text-dark text-decoration-none font-weight-bold">Profil</a></li>
                             </ul>
                         </div>
-
-                        <!-- bagian logout -->
-                        <div class="py-3 rounded-pill pb-2" style="background-color: rgb(140, 186, 159);">
-                            <a href="logout.php" style="color: black; text-decoration: none;">
+                        <div class="pt-3 pb-2 rounded-pill" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" class="text-dark text-decoration-none">
                                 <h6 class="text-center">Logout</h6>
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
+            <!-- Left Sidebar End -->
 
-            <!-- left end -->
-
-            <!-- right -->
-
+            <!-- Right Content -->
             <div class="col-10" id="formUploud">
-                <form action="proses_uploud.php" method="POST" enctype="multipart/form-data">
+                <form action=" proses_uploud.php" method="POST" enctype="multipart/form-data">
                     <div class="pt-4">
-                        <h4 class="ps-3" style="font-family: 'Quicksand';"><i
-                                class="fa-solid fa-chevron-left me-4 pb-2 back-icon"></i>Uploud Recipe</h4>
+                        <h4 class="ps-3" style="font-family: 'Quicksand';">
+                            <i class="fa-solid fa-chevron-left me-4 pb-2 back-icon"></i>Upload Recipe
+                        </h4>
                     </div>
                     <div class="row my-3">
                         <div class="col-6 p-5 pt-3">
-                            <label for="" class="form-label">Title</label>
-                            <input style="font-family: 'Quicksand';" required type="text" class="form-control"
-                                name="title" id="title" placeholder="Your own recipe's title">
+                            <label for="title" class="form-label">Title</label>
+                            <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="title" id="title" placeholder="Your own recipe's title">
 
-                            <label for="" class="form-label mt-4">Picture</label>
+                            <label for="main_image" class="form-label mt-4">Picture</label>
                             <div class="uploader">
                                 <div id="drop-area" class="drop-area">
-                                    <p style="font-family: 'Quicksand';">Drag & Drop your image here<br>or click to
-                                        upload</p>
+                                    <p style="font-family: 'Quicksand';">Drag & Drop your image here<br>or click to upload</p>
                                     <input type="file" id="file-input" name="main_image" accept="image/*" hidden>
                                 </div>
                                 <div id="preview-container" class="preview-container"></div>
                             </div>
 
-                            <label for="" class="form-label mt-4">Category</label>
-                            <select class="form-control" name="category" id="category"
-                                style="font-family: 'Quicksand';">
+                            <label for="category" class="form-label mt-4">Category</label>
+                            <select class="form-control" name="category" id="category" style="font-family: 'Quicksand';">
                                 <option value="Face Mask">Face Mask</option>
                                 <option value="Face Scrub">Face Scrub</option>
                                 <option value="Face Mist">Face Mist</option>
@@ -155,33 +129,29 @@ if (empty($_SESSION['username'])) {
                                 <option value="Other">Other</option>
                             </select>
 
-                            <label for="" class="form-label mt-4">Main Ingredients</label>
-                            <select class="form-control" name="main_ingredient" id="main_ingredient"
-                                style="font-family: 'Quicksand';">
+                            <label for="main_ingredient" class="form-label mt-4">Main Ingredients</label>
+                            <select class="form-control" name="main_ingredient" id="main_ingredient" style="font-family: 'Quicksand';">
                                 <option value="Honey">Honey</option>
-                                <option value="Banan">Banana</option>
+                                <option value="Banana">Banana</option>
                                 <option value="Coconut Oil">Coconut Oil</option>
                                 <option value="Green Tea">Green Tea</option>
                                 <option value="Yogurt">Yogurt</option>
                                 <option value="Turmeric">Turmeric</option>
                                 <option value="Oats">Oats</option>
-                                <option value="Body">Other</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
-                        
-                        <div class="col-6 p-5 pt-3">
-                            <label for="" class="form-label">Deskripstion</label>
-                            <textarea style="font-family: 'Quicksand'; min-height: 100px;" class="form-control"
-                                name="description" id="description"
-                                placeholder="Add description about your recipe"></textarea>
 
-                            <label for="" class="form-label mt-4">Ingredients</label>
+                        <div class="col-6 p-5 pt-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea style="font-family: 'Quicksand'; min-height: 100px;" class="form-control" name="description" id="description" placeholder="Add description about your recipe"></textarea>
+
+                            <label for="ingredient" class="form-label mt-4">Ingredients</label>
                             <div class="container p-0 m-0">
                                 <div id="form-list-ingredient">
                                     <div class="form-row align-items-center">
                                         <div class="col-auto">
-                                            <input style="font-family: 'Quicksand'" type="text"
-                                                class="form-control mb-2" id="ingredient1" placeholder="Ingredient 1">
+                                            <input style="font-family: 'Quicksand'" type="text" class="form-control mb-2" id="ingredient1" placeholder="Ingredient 1">
                                         </div>
                                     </div>
                                 </div>
@@ -189,15 +159,14 @@ if (empty($_SESSION['username'])) {
                                 <ul id="ingredientList" class="list-group mt-3" style="display: none"></ul>
                             </div>
 
-                            <input type="hidden" name="ingredient" id="ingredient" style="display: none">
+                            <input type="hidden" name="ingredient" id="ingredient">
 
-                            <label for="" class="form-label mt-4">Step by step</label>
+                            <label for="step" class="form-label mt-4">Step by Step</label>
                             <div class="container p-0 m-0">
                                 <div id="form-list-step">
                                     <div class="form-row align-items-center">
                                         <div class="col-auto">
-                                            <input style="font-family: 'Quicksand'" type="text"
-                                                class="form-control mb-2" id="step1" placeholder="Step 1">
+                                            <input style="font-family: 'Quicksand'" type="text" class="form-control mb-2" id="step1" placeholder="Step 1">
                                         </div>
                                     </div>
                                 </div>
@@ -205,88 +174,84 @@ if (empty($_SESSION['username'])) {
                                 <ul id="stepList" class="list-group mt-3" style="display: none"></ul>
                             </div>
 
-                            <input type="hidden" name="step" id="step" style="display: none">
+                            <input type="hidden" name="step" id="step">
 
                             <div class="text-end my-5">
-                                <button name="aksiUp" value="add" type="submit" class="btn btn-outline-dark me-5" id="btn-uploud"
-                                    style="background-color: rgb(140, 186, 159)">Uploud</button>
+                                <button name="aksiUp" value="add" type="submit" class="btn btn-outline-dark me-5" id="btn-upload" style="background-color: rgb(140, 186, 159)">Upload</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-
-            <!-- right end -->
+            <!-- Right Content End -->
         </div>
     </div>
 
-    <!-- java script-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-    $(document).ready(function () {
-        $(".back-icon").on("click", function () {
-            window.history.back();
-        });
+        $(document).ready(function () {
+            $(".back-icon").on("click", function () {
+                window.history.back();
+            });
 
-        let x = 1;
-        let y = 1;
+            let x = 1;
+            let y = 1;
 
-        $('#addButtonIngredient').click(function (e) {
-            e.preventDefault();
-            x++;
-            $('#form-list-ingredient').append(`
-                <div class="form-row align-items-center mb-2">
-                    <div class="col-auto">
-                        <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="ingredient${x}" placeholder="Ingredient ${x}">
+            $('#addButtonIngredient').click(function (e) {
+                e.preventDefault();
+                x++;
+                $('#form-list-ingredient').append(`
+                    <div class="form-row align-items-center mb-2">
+                        <div class="col-auto">
+                            <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="ingredient${x}" placeholder="Ingredient ${x}">
+                        </div>
                     </div>
-                </div>
-            `);
-        });
+                `);
+            });
 
-        $('#addButtonStep').click(function (e) {
-            e.preventDefault();
-            y++;
-            $('#form-list-step').append(`
-                <div class="form-row align-items-center mb-2">
-                    <div class="col-auto">
-                        <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="step${y}" placeholder="Step ${y}">
+            $('#addButtonStep').click(function (e) {
+                e.preventDefault();
+                y++;
+                $('#form-list-step').append(`
+                    <div class="form-row align-items-center mb-2">
+                        <div class="col-auto">
+                            <input style="font-family: 'Quicksand'" type="text" class="form-control mb-1" id="step${y}" placeholder="Step ${y}">
+                        </div>
                     </div>
-                </div>
-            `);
-        });
+                `);
+            });
 
-        $(document).on('click', '#btn-uploud', function (e) {
+            $(document).on('click', '#btn-upload', function (e) {
 
-            // proses ingredients
-            $('#ingredientList').empty();
-            for (let i = 1; i <= x; i++) {
-                let ingredientValue = $(`#ingredient${i}`).val();
-                if (ingredientValue) {
-                    $('#ingredientList').append(`<li>${ingredientValue}</li>`);
+                // Process ingredients
+                $('#ingredientList').empty().show();
+                for (let i = 1; i <= x; i++) {
+                    let ingredientValue = $(`#ingredient${i}`).val();
+                    if (ingredientValue) {
+                        $('#ingredientList').append(`<li>${ingredientValue}</li>`);
+                    }
                 }
-            }
 
-            // proses steps
-            $('#stepList').empty();
-            for (let i = 1; i <= y; i++) {
-                let stepValue = $(`#step${i}`).val();
-                if (stepValue) {
-                    $('#stepList').append(`<li>${stepValue}</li>`);
+                // Process steps
+                $('#stepList').empty().show();
+                for (let i = 1; i <= y; i++) {
+                    let stepValue = $(`#step${i}`).val();
+                    if (stepValue) {
+                        $('#stepList').append(`<li>${stepValue}</li>`);
+                    }
                 }
-            }
 
-            // simpan daftar ke input tersembunyi
-            let ingredientHTML = $('#ingredientList').html();
-            $('#ingredient').val(`<ul>${ingredientHTML}</ul>`);
+                // Save lists to hidden inputs
+                let ingredientHTML = $('#ingredientList').html();
+                $('#ingredient').val(`<ul>${ingredientHTML}</ul>`);
 
-            let stepHTML = $('#stepList').html();
-            $('#step').val(`<ol>${stepHTML}</ol>`);
+                let stepHTML = $('#stepList').html();
+                $('#step').val(`<ol>${stepHTML}</ol>`);
+            });
         });
-    });
-</script>
+    </script>
 
     <script>
         const dropArea = document.getElementById("drop-area");
@@ -336,7 +301,7 @@ if (empty($_SESSION['username'])) {
                     previewContainer.appendChild(img);
                 };
                 reader.readAsDataURL(file);
-            } else {
+                } else {
                 alert("Please upload an image file.");
             }
         }
