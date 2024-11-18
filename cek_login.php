@@ -14,9 +14,5 @@ if (mysqli_num_rows($user_check) > 0) {
         $_SESSION['username'] = $username;
         $_SESSION['status'] = "login";
         header("location:explore.php?pesan=udah_login");
-    } else {
-        header("location:index.php#login?pesan=password_salah");
-    }
-} else {
-    header("location:index.php#login?pesan=user_tidak_ditemukan");
+    } 
 }
