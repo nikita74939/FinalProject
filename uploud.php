@@ -159,7 +159,7 @@ if (empty($_SESSION['username'])) {
                             <select class="form-control" name="main_ingredient" id="main_ingredient"
                                 style="font-family: 'Quicksand';">
                                 <option value="Honey">Honey</option>
-                                <option value="Aloe Vera Gel">Aloe Vera Gel</option>
+                                <option value="Banan">Banana</option>
                                 <option value="Coconut Oil">Coconut Oil</option>
                                 <option value="Green Tea">Green Tea</option>
                                 <option value="Yogurt">Yogurt</option>
@@ -265,7 +265,7 @@ if (empty($_SESSION['username'])) {
             for (let i = 1; i <= x; i++) {
                 let ingredientValue = $(`#ingredient${i}`).val();
                 if (ingredientValue) {
-                    $('#ingredientList').append(`<li class="list-group-item": ">${ingredientValue}</li>`);
+                    $('#ingredientList').append(`<li>${ingredientValue}</li>`);
                 }
             }
 
@@ -274,7 +274,7 @@ if (empty($_SESSION['username'])) {
             for (let i = 1; i <= y; i++) {
                 let stepValue = $(`#step${i}`).val();
                 if (stepValue) {
-                    $('#stepList').append(`<li class="list-group-item"">${stepValue}</li>`);
+                    $('#stepList').append(`<li>${stepValue}</li>`);
                 }
             }
 

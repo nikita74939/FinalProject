@@ -201,7 +201,7 @@ if ($query) {
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <img src="<?php echo $data['main_image'] ?>" alt=""
+                                        <img src="img/<?php echo $data['main_image'] ?>" alt=""
                                             style="width: 100%; height: 240px; object-fit: cover; object-position: center;">
                                         <div style="height: 120px">
                                             <h5 class="card-title mt-2"><?php echo $data['title'] ?></h5>
