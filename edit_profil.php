@@ -98,7 +98,7 @@ if (empty($_SESSION['username'])) {
                                 </a>
                                 <a href="uploud.php" style="text-decoration: none; color: black">
                                     <li class="list-group-item" style="border: none">
-                                        <h6>Uploud</h6>
+                                        <h6>Upload</h6>
                                     </li>
                                 </a>
                                 <a href="profil.php" style="text-decoration: none; color: black">
