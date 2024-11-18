@@ -68,6 +68,10 @@ $username = $_SESSION['username'];
         .selected {
             color: rgb(140, 186, 159) !important;
         }
+
+        .custom-link:active {
+            background-color: rgb(140, 186, 159);: red; /* ubah warna sesuai keinginan */
+        }
     </style>
 </head>
 

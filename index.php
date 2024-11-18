@@ -38,8 +38,8 @@ if ($username) {
 <body>
     <nav class="navbar navbar-expand-lg bg-none fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="img/logo.png" alt="" class="img-fluid" width="30" height="24"> Beauty Recipe
+            <a class="navbar-brand ps-3" href="#">
+                Beauty Recipe
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -73,8 +73,8 @@ if ($username) {
             <div class="row justify-content-center">
                 <div class="col-6 d-flex align-items-center">
                     <div class="mx-3">
-                        <h1>Glow Up<br><span style="font-size: 4rem; color:darkslategray;">Naturally</span></h1>
-                        <h6 class="pt-2">Dive into DIY Beauty Recipes Made from Everyday Ingredients! Create Your Own, Feel the Vibe, and Embrace Your Unique Glow!</h6>
+                        <h1>Glow Up, Babe!</h1>
+                        <h6 class="pt-2">Why spend $$$ when your kitchen’s got the real tea? Whip up your own skincare potions, feel the slay, and serve that natural glow EVERYWHERE. Your skin, your vibe, your rules. PERIOD.</h6>
                         <a href="#login" class="btn btn-outline-dark mt-3" style="background-color: rgb(140, 186, 159);">Explore Now !</a>
                     </div>
                 </div>
@@ -92,9 +92,9 @@ if ($username) {
                     <div class="card mx-3 pb-3" style="background-color: white">
                         <img src="img/satu.png" class="card-img-top pt-3" width="50%" alt="..." style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Step #1 Find Recipes</h5>
+                            <h5 class="card-title">#1 Being confused</h5>
                             <hr>
-                            <p class="card-text" style="font-family: 'Quicksand';">Explore our collection of beauty recipes crafted with natural ingredients and effective formulas.</p>
+                            <p class="card-text" style="font-family: 'Quicksand';">"okay, so… what do i do first? these ingredients look cool, but like, how do i even start? is this gonna work for my skin? help pls."</p>
                         </div>
                     </div>
                 </div>
@@ -102,9 +102,9 @@ if ($username) {
                     <div class="card mx-3 pb-3" style="background-color: white">
                         <img src="img/dua.png" class="card-img-top pt-3" width="50%" alt="..." style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Step #2 Make Your Own</h5>
+                            <h5 class="card-title">#2 Happy</h5>
                             <hr>
-                            <p class="card-text" style="font-family: 'Quicksand';">Customize each recipe to make it uniquely yours!</p>
+                            <p class="card-text" style="font-family: 'Quicksand';">"omg i just tried my first diy recipe, and it’s SO FUN!! my skin feels soft already, and i didn’t even spend much. love this vibe 💕."</p>
                         </div>
                     </div>
                 </div>
@@ -112,9 +112,9 @@ if ($username) {
                     <div class="card mx-3 pb-3" style="background-color: white">
                         <img src="img/tiga.png" class="card-img-top pt-3" width="50%" alt="..." style="padding-left:70px; padding-right:70px;">
                         <div class="card-body">
-                            <h5 class="card-title">Step #3 Glow Up</h5>
+                            <h5 class="card-title">#3 Excited</h5>
                             <hr>
-                            <p class="card-text" style="font-family: ' Quicksand';">Get ready to enjoy your creation and embrace the glow!</p>
+                            <p class="card-text" style="font-family: 'Quicksand';">"guys, LISTEN!! i legit made a face mask, and my skin is glowing like never before. i’m OBSESSED. bye overpriced skincare, i’m a kitchen chemist now!!" </p>
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ if ($username) {
                         <div class="container">
                             <div class="row">
                                 <div class="col-5 pt-4">
-                                    <img src="img/most-popular.jpg" alt="" style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
+                                    <img src="img/🌙 Lunar Glow Mask 🌙.jpg" alt="" style="width: 100%; height: 180px; object-fit: cover; object-position: center; border-radius:8px">
                                     <div class="container">
                                         <div class="row" style="position: relative; top: -50px; border: none;">
                                             <div class="col-6">

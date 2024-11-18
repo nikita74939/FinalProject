@@ -77,56 +77,43 @@ if (isset($_GET['save'])) {
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        .selected {
+            color: rgb(140, 186, 159) !important;
+        }
+        .custom-link:active {
+            background-color: rgb(140, 186, 159);: red; /* ubah warna sesuai keinginan */
+        }
+    </style>
+
 </head>
 
 <body>
     <div class="container mx-3">
         <div class="row">
 
-            <!-- left -->
-
+            <!-- Left Sidebar -->
             <div class="col-2 sticky-top" style="border-right: solid 1px rgb(221, 221, 221); height: 100vh;">
                 <div class="pt-4">
                     <h5 class="ps-3">Beauty Recipe</h5>
                     <div class="d-flex flex-column" style="min-height: 90vh">
-                        <!-- bagian menu -->
                         <div class="flex-grow-1">
                             <ul class="list-group list-group-flush my-4">
-                                <a href="index.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none">
-                                        <h6>Home</h6>
-                                    </li>
-                                </a>
-                                <a href="explore.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none; color: rgb(140, 186, 159);">
-                                        <h6>Explore</h6>
-                                    </li>
-                                </a>
-                                <a href="uploud.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none">
-                                        <h6>Uploud</h6>
-                                    </li>
-                                </a>
-                                <a href="profil.php" style="text-decoration: none; color: black">
-                                    <li class="list-group-item" style="border: none">
-                                        <h6 style="font-weight: 600">Profil</h6>
-                                    </li>
-                                </a>
+                                <li class="list-group-item border-0"><a href="index.php" class="text-dark text-decoration-none">Home</a></li>
+                                <li class="list-group-item border-0"><a href="explore.php" class="text-dark text-decoration-none selected">Explore</a></li>
+                                <li class="list-group-item border-0"><a href="uploud.php" class="text-dark text-decoration-none">Upload</a></li>
+                                <li class="list-group-item border-0"><a href="profil.php" class="text-dark text-decoration-none font-weight-bold">Profil</a></li>
                             </ul>
                         </div>
-
-                        <!-- bagian logout -->
-                        <div class="py-3 rounded-pill pb-2" style="background-color: rgb(140, 186, 159);">
-                            <a href="logout.php" style="color: black; text-decoration: none;">
+                        <div class="pt-3 pb-2 rounded-pill" style="background-color: rgb(140, 186, 159);">
+                            <a href="logout.php" class="text-dark text-decoration-none">
                                 <h6 class="text-center">Logout</h6>
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-            <!-- left end -->
+            <!-- Left Sidebar End -->
 
 
             <div class="col-7">
