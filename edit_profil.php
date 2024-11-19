@@ -153,7 +153,7 @@ if (empty($_SESSION['username'])) {
                                     <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="nama" id="nama" value="<?php echo $result_users['nama']; ?>">
 
                                     <label for="" class="form-label mt-4">Username</label>
-                                    <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="username" id="username" value="<?php echo $result_users['username']; ?>">
+                                    <input style="font-family: 'Quicksand';" required type="text" class="form-control" name="username" id="username" value="<?php echo $result_users['username']; ?>" disabled readonly>
 
                                     <label for="" class="form-label mt-4">Bio</label>
                                     <textarea style="font-family: 'Quicksand'; min-height: 100px;" required type="text"  class="form-control" name="bio" id="bio"><?php echo $result_users['bio']; ?></textarea>
