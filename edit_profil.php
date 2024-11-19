@@ -130,7 +130,7 @@ if (empty($_SESSION['username'])) {
                                             $url = $data['url']; ?>
                                             <div class="col-4">
                                                 <div class="position-relative">
-                                                    <img src="<?php echo $url; ?>" id="<?php echo $id; ?>"
+                                                    <img src="users/pict<?php echo $id; ?>.jpg" id="<?php echo $id; ?>"
                                                         class="option-pict img-thumbnail rounded-circle mx-5 mb-3"
                                                         alt="Option Picture" style="position: relative;"
                                                         val="<?php echo $id; ?>">
