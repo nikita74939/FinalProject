@@ -68,7 +68,7 @@ if ($username) {
         </div>
     </nav>
 
-    <div class="hero">
+    <div class="hero" style="background: linear-gradient(#ff69b4, #ffffff, 45deg);">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-6 d-flex align-items-center">

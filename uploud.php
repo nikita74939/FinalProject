@@ -129,7 +129,7 @@ $username = $_SESSION['username'];
                                 <option value="Face Scrub">Face Scrub</option>
                                 <option value="Face Mist">Face Mist</option>
                                 <option value="Lip Care">Lip Care</option>
-                                <option value="Hair Care">Hair Care</option>
+                                <option value="Body Care">Body Care</option>
                                 <option value="Other">Other</option>
                             </select>
 

@@ -136,10 +136,10 @@ if (isset($_GET['hapus'])) {
                                     echo "selected";
                                 } ?>
                                     value="Lip Care">Lip Care</option>
-                                <option <?php if ($result_recipe['category'] == "Hair Care") {
+                                <option <?php if ($result_recipe['category'] == "Body Care") {
                                     echo "selected";
                                 } ?>
-                                    value="Hair Care">Hair Care</option>
+                                    value="Hair Care">Body Care</option>
                                 <option value="Other">Other</option>
                             </select>
 

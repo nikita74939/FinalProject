@@ -1,27 +1,21 @@
-<!-- kurang: rate, com, filter -->
 <?php
 include 'koneksi.php';
 session_start();
 
 if (empty($_SESSION['username'])) {
     header("location:index.php?pesan=belum_login");
-} else if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
+    exit();
 }
+
+$username = $_SESSION['username'];
 
 $q = "SELECT * FROM users WHERE username = '$username'";
 $query = mysqli_query($conn, $q);
 if ($query) {
-    while ($data = mysqli_fetch_array($query)) {
-        $id_acc = $data['user_id'];
-        $pict_id = $data['id_pict'];
-    }
+    $data = mysqli_fetch_array($query);
+    $id_acc = $data['user_id'];
+    $pict_id = $data['id_pict'];
 }
-
-$query = "SELECT * FROM recipes ORDER BY recipe_id desc";
-$sql = mysqli_query($conn, $query);
-
-$query2 = "SELECT * FROM recipes ";
 
 if (isset($_GET['save'])) {
     $recipe_id = $_GET['save'];
@@ -31,29 +25,64 @@ if (isset($_GET['save'])) {
     $result_recipe = mysqli_query($conn, $query_check_recipe);
 
     if (mysqli_num_rows($result_recipe) > 0) {
-        // Periksa recipe_id udah favorites
+        // Periksa apakah recipe_id sudah ada di favorites
         $query_check_favorites = "SELECT * FROM favorites WHERE recipe_id = '$recipe_id' AND user_id ='$id_acc';";
         $result_favorites = mysqli_query($conn, $query_check_favorites);
 
         if (mysqli_num_rows($result_favorites) == 0) {
-            // Jika blm
+            // Jika belum ada, tambahkan ke favorites
             $query_insert_favorites = "INSERT INTO favorites (recipe_id, user_id) VALUES ('$recipe_id', '$id_acc');";
-            if (mysqli_query($conn, $query_insert_favorites)) {
-                echo "sukses";
-            }
+            mysqli_query($conn, $query_insert_favorites);
         } else {
+            // Jika sudah ada, hapus dari favorites
             $query_delete_favorites = "DELETE FROM favorites WHERE recipe_id = '$recipe_id' AND user_id = '$id_acc';";
-            if (mysqli_query($conn, $query_delete_favorites)) {
-                echo "sukses";
-            }
+            mysqli_query($conn, $query_delete_favorites);
         }
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
     }
 }
 
+// Mengatur kategori dan bahan
+$cat = $_GET['cat'] ?? NULL;
+$ing = $_GET['ing'] ?? NULL;
 
+$categorySelected = '';
+$ingredientSelected = '';
+
+switch ($cat) {
+    case 1: $categorySelected = 'Face Mask'; break;
+    case 2: $categorySelected = 'Face Scrub'; break;
+    case 3: $categorySelected = 'Face Mist'; break;
+    case 4: $categorySelected = 'Lip Care'; break;
+    case 5: $categorySelected = 'Body Care'; break;
+}
+
+switch ($ing) {
+    case 1: $ingredientSelected = 'Honey'; break;
+    case 2: $ingredientSelected = 'Banana'; break;
+    case 3: $ingredientSelected = 'Coconut Oil'; break;
+    case 4: $ingredientSelected = 'Green Tea'; break;
+    case 5: $ingredientSelected = 'Yogurt'; break;
+    case 6: $ingredientSelected = 'Turmeric'; break;
+    case 7: $ingredientSelected = 'Oats'; break;
+}
+
+$query = "SELECT * FROM recipes";
+if ($cat || $ing) {
+    $query .= " WHERE";
+    if ($cat) {
+        $query .= " category = '$categorySelected'";
+    }
+    if ($ing) {
+        $query .= ($cat ? " AND" : "") . " main_ingredient = '$ingredientSelected'";
+    }
+}
+$query .= " ORDER BY recipe_id DESC";
+
+$sql = mysqli_query($conn, $query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,6 +112,10 @@ if (isset($_GET['save'])) {
         }
         .custom-link:active {
             background-color: rgb(140, 186, 159) !important;
+        }
+        .list-group-item.active {
+            background-color: rgb(140, 186, 159) !important;
+            border-color: rgb(140, 186, 159) !important;
         }
     </style>
 
@@ -120,7 +153,7 @@ if (isset($_GET['save'])) {
                 <!-- card -->
                 <div class="container pt-4">
                     <div class="row text-center">
-                        <div class="col-12" style="border-bottom: solid 1px black;">
+                        <div class="col-12 ps-5" style="border-bottom: solid 1px black;">
                             <a href="#popularRecipe" id="popularButton"></a>
                             <p style="font-weight: 600; color: black; font-family: 'Quicksand'; font-size: 20px">DIY
                                 Recipes
@@ -129,14 +162,19 @@ if (isset($_GET['save'])) {
                         <hr>
                         <?php if (isset($_GET['pesan'])) {
                             if (($_GET['pesan']) == "udah_login") { ?>
-                                <div class="row m-3 mx-4 text-center">
+                                <div class="row m-3 mx-4 pe-4 text-center">
                                 <p style="color: black;">"Welcome back <span style="font-style: italic;">@<?php echo $username; ?></span>. Ready to explore some magic?"</p>
                                 </div>
                             <?php } else {?>
-                                <div class="row m-3 mx-4 text-center">
+                                <div class="row m-3 mx-4 pe-4 text-center">
                                     <p style="color: black">"Yay! Recipe uploaded successfully, ready to be tried!"</p>
                                 </div>
-                        <?php }} ?>
+                        <?php }}
+                        if (mysqli_num_rows($sql) == 0) { ?>
+                            <div class="row m-3 mx-4 pe-4 text-center">
+                            <p style="color: black;">Nothing Here</p>
+                            </div>
+                        <?php } ?>
 
                     </div>
                     <div class="row group-card">
@@ -264,16 +302,11 @@ if (isset($_GET['save'])) {
                         <h6>Categorie</h6>
                         <hr>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemaskButton"
-                                value="Face Mask">Face Mask</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facescrubButton"
-                                value="Face Scrub">Face Scrub</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemistButton"
-                                value="Face Mist">Face Mist</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="lipButton"
-                                value="Lip Care">Lip Care</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="hairButton"
-                                value="Hair Care">Hair Care</li>
+                            <li class="list-group-item <?php if ($cat==1) echo "active" ?>"><a href="explore.php?cat=<?php echo ($cat == 1) ? NULL : 1; ?>&ing=<?php echo $ing ?>" class="text-dark <?php if ($cat==1) echo "text-white" ?> text-decoration-none" style="font-family: 'Quicksand';">Face Mask</a></li>
+                            <li class="list-group-item <?php if ($cat==2) echo "active" ?>"><a href="explore.php?cat=<?php echo ($cat == 2) ? NULL : 2; ?>&ing=<?php echo $ing ?>" class="text-dark <?php if ($cat==2) echo "text-white" ?> text-decoration-none" style="font-family: 'Quicksand';">Face Scrub</a></li>
+                            <li class="list-group-item <?php if ($cat==3) echo "active" ?>"><a href="explore.php?cat=<?php echo ($cat == 3) ? NULL : 3; ?>&ing=<?php echo $ing ?>" class="text-dark <?php if ($cat==3) echo "text-white" ?> text-decoration-none" style="font-family: 'Quicksand';">Face Mist</a></li>
+                            <li class="list-group-item <?php if ($cat==4) echo "active" ?>"><a href="explore.php?cat=<?php echo ($cat == 4) ? NULL : 4; ?>&ing=<?php echo $ing ?>" class="text-dark <?php if ($cat==4) echo "text-white" ?> text-decoration-none" style="font-family: 'Quicksand';">Lip Care</a></li>
+                            <li class="list-group-item <?php if ($cat==5) echo "active" ?>"><a href="explore.php?cat=<?php echo ($cat == 5) ? NULL : 5; ?>&ing=<?php echo $ing ?>" class="text-dark <?php if ($cat==5) echo "text-white" ?> text-decoration-none" style="font-family: 'Quicksand';">Body Care</a></li>
                         </ul>
 
                     </div>
@@ -281,19 +314,13 @@ if (isset($_GET['save'])) {
                         <h6>Main ingredient</h6>
                         <hr>
                         <div class="d-flex flex-wrap">
-                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton" value="Honey">Honey</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="aloeButton" value="Aloe Vera Gel">Aloe
-                                Vera Gel</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="cocoOilButton"
-                                value="Coconut Oil">Coconut Oil</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="greenTeaButton" value="Green Tea">Green
-                                Tea</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="yogurtButton"
-                                value="Yogurt">Yogurt</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="turmericButton"
-                                value="Turmeric">Turmeric</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="oatmealButton"
-                                value="Oatmeal">Oatmeal</button>
+                            <a href="explore.php?ing=<?php echo ($ing == 1) ? NULL : 1; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==1) echo "active" ?>">Honey</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 2) ? NULL : 2; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==2) echo "active" ?>">Aloe Vera Gel</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 3) ? NULL : 3; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==3) echo "active" ?>">Coconut Oil</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 4) ? NULL : 4; ?>&cat=<?php echo $cat ?>"class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==4) echo "active" ?>">Green Tea</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 5) ? NULL : 5; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==5) echo "active" ?>">Yogurt</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 6) ? NULL : 6; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==6) echo "active" ?>">Turmeric</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 7) ? NULL : 7; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==7) echo "active" ?>">Oats</a>
                         </div>
                     </div>
                 </div>
@@ -310,52 +337,6 @@ if (isset($_GET['save'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-
-
-            let selectedCategory = null;
-            let selectedIngredient = null;
-
-            // Handle category click
-            $(".list-group-item").click(function () {
-                $(".list-group-item").removeClass("active");
-                if (selectedCategory === $(this).attr("id")) {
-                    selectedCategory = null; // Deselect if clicked again
-                } else {
-                    selectedCategory = $(this).attr("id");
-                    $(this).addClass("active");
-                }
-                filterResults();
-            });
-
-            // Handle ingredient click
-            $(".btn-outline-dark").click(function () {
-                $(".btn-outline-dark").removeClass("active");
-                if (selectedIngredient === $(this).attr("id")) {
-                    selectedIngredient = null; // Deselect if clicked again
-                } else {
-                    selectedIngredient = $(this).attr("id");
-                    $(this).addClass("active");
-                }
-                filterResults();
-            });
-
-            // Filter results based on selectedCategory and selectedIngredient
-            function filterResults() {
-                $(".card-post").each(function () {
-                    let category = $(this).find(".btn-cat").val();
-                    let ingredient = $(this).find(".btn-ing").val();
-
-                    let showByCategory = !selectedCategory || category == selectedCategory;
-                    let showByIngredient = !selectedIngredient || ingredient == selectedIngredient;
-
-                    if (showByCategory && showByIngredient) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-            }
-
             $('.card-post').click(function () {
                 let recipe = $(this).attr("id");
                 window.location.href = `fullrecipe.php?lihat=${recipe}`;  // Menggunakan template literal

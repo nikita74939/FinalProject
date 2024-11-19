@@ -17,7 +17,7 @@ body {
 .hero {
     align-content: center;
     height: 100vh;
-    background-color: white;
+    background: linear-gradient(#ff69b4, #ffffff, 45deg);
 }
 
 h1 {
