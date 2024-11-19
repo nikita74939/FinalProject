@@ -14,7 +14,6 @@ $result_profil = mysqli_fetch_assoc($sql_profil);
 
 if (isset($_POST['aksiProfil']) && $_POST['aksiProfil'] == "edit") {
     $nama = $_POST['nama'];
-    $username = $_POST['username'];
     $bio = $_POST['bio'];
     $id_pict = $_POST['id_pict'];
 
@@ -22,7 +21,7 @@ if (isset($_POST['aksiProfil']) && $_POST['aksiProfil'] == "edit") {
         $id_pict = $result_users['id_pict'];  //gunakan nilai lama jk tdk diperbarui
     }
 
-    $query_edit_users = "UPDATE users SET nama='$nama', username='$username', bio='$bio', id_pict='$id_pict' WHERE user_id = '$user_id';";
+    $query_edit_users = "UPDATE users SET nama='$nama', bio='$bio', id_pict='$id_pict' WHERE user_id = '$user_id';";
     $sql_edit_users = mysqli_query($conn, $query_edit_users);
 
     header("location: profil.php");
