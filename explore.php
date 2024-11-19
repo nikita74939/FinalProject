@@ -172,7 +172,7 @@ $sql = mysqli_query($conn, $query);
                         <?php }}
                         if (mysqli_num_rows($sql) == 0) { ?>
                             <div class="row m-3 mx-4 pe-4 text-center">
-                            <p style="color: black;">Nothing Here</p>
+                            <p style="color: black;">Nothing Here!</p>
                             </div>
                         <?php } ?>
 
@@ -227,11 +227,10 @@ $sql = mysqli_query($conn, $query);
                                             <div class="container">
                                                 <div class="row" style="position: relative; top: -50px; border: none;">
                                                     <div class="col-6">
-                                                        <img src="users/pict<?php echo $id_pict ?>.jpg"
-                                                            class="img-thumbnail rounded-circle mb-1" alt="..."
-                                                            width="100px">
+                                                        <a href="otherprofil.php?profil=<?php echo $result['user_id']; ?>"><img src="users/pict<?php echo $id_pict ?>.jpg" class="img-thumbnail rounded-circle mb-1" alt="..." width="100px"></a>
+                                                        
                                                         <p class="text-nowrap" style="font-size: 14px;">
-                                                            @c<?php echo $username ?>l</p>
+                                                            @<?php echo $username ?></p>
                                                     </div>
                                                     <div class="col-6 text-end pt-5">
                                                         <p style="font-size: 14px;" class="p-1">

@@ -263,12 +263,11 @@ $average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
                                 <div class="col-5">
                                     <div class="row">
                                         <div class="col-5">
-                                            <img src="users/pict<?php echo $id_pict ?>.jpg"
-                                                class="img-thumbnail rounded-circle mb-1" alt="..." width="100px">
+                                            <a href="otherprofil.php?profil=<?php echo $result['user_id']; ?>"><img src="users/pict<?php echo $id_pict ?>.jpg" class="img-thumbnail rounded-circle mb-1" alt="..." width="100px"></a>                                            
                                         </div>
                                         <div class="col-7 pt-3">
                                             <h6 style="font-size: 20px; font-weight: 600"><?php echo $nama; ?></h6>
-                                            <p class="text-nowrap" style="font-size: 14px;">@c<?php echo $usernamee ?>l</p>
+                                            <p class="text-nowrap" style="font-size: 14px;">@<?php echo $usernamee ?></p>
                                         </div>
 
                                     </div>
@@ -364,15 +363,14 @@ $average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
                                         $namm = $result5['username'];
                                         $pict = $result5['id_pict'];
                                         $nama = $result5['nama'];
+                                        $id_com = $result5['user_id'];
                                     }
                                     ?>
                                     <div class="card mt-3">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-2 text-nowrap">
-                                                    <img src="users/pict<?php echo $pict ?>.jpg"
-                                                        class="img-thumbnail rounded-circle mb-1" alt="..." width="50px"
-                                                        style="border:none">
+                                                <div class="col-2 text-nowrap"><a href="otherprofil.php?profil=<?php echo $id_com; ?>"><img src="users/pict<?php echo $pict ?>.jpg" class="img-thumbnail rounded-circle mb-1" alt="..." width="50px" style="border:none"></a>
+                                                    
                                                 </div>
                                                 <div class="col-6" style="position: relative; left: -50px">
                                                     <p style="font-family: 'Quicksand'; font-size: 14px; font-weight: 500;">
@@ -402,51 +400,6 @@ $average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
                 <?php
             }
             ?>
-            <!-- right -->
-
-            <div class="col-3 sticky-top" style="height: 100vh; display: none" >
-                <div class="pt-4">
-                    <h5 class="ps-3" style="font-family: 'Quicksand';">Filter by</h5>
-                    <div class="mx-3 mt-4">
-                        <h6>Categorie</h6>
-                        <hr>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemaskButton"
-                                value="Face Mask">Face Mask</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facescrubButton"
-                                value="Face Scrub">Face Scrub</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="facemistButton"
-                                value="Face Mist">Face Mist</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="lipButton"
-                                value="Lip Care">Lip Care</li>
-                            <li class="list-group-item" style="font-family: 'Quicksand';" id="hairButton"
-                                value="Hair Care">Hair Care</li>
-                        </ul>
-
-                    </div>
-                    <div class="mx-3 mt-4">
-                        <h6>Main ingredient</h6>
-                        <hr>
-                        <div class="d-flex flex-wrap">
-                            <button class="btn btn-outline-dark me-3 mb-3" id="honeyButton" value="Honey">Honey</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="aloeButton" value="Aloe Vera Gel">Aloe
-                                Vera Gel</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="cocoOilButton"
-                                value="Coconut Oil">Coconut Oil</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="greenTeaButton" value="Green Tea">Green
-                                Tea</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="yogurtButton"
-                                value="Yogurt">Yogurt</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="turmericButton"
-                                value="Turmeric">Turmeric</button>
-                            <button class="btn btn-outline-dark me-3 mb-3" id="oatmealButton"
-                                value="Oatmeal">Oatmeal</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- right end -->
         </div>
     </div>
 
