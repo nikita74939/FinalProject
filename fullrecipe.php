@@ -175,7 +175,7 @@ $average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
         color: rgb(140, 186, 159) !important;
     }
     .custom-link:active {
-        background-color: rgb(140, 186, 159);: red; /* ubah warna sesuai keinginan */
+        background-color: rgb(140, 186, 159) !important;
     }
 </style>
 

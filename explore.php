@@ -82,7 +82,7 @@ if (isset($_GET['save'])) {
             color: rgb(140, 186, 159) !important;
         }
         .custom-link:active {
-            background-color: rgb(140, 186, 159);: red; /* ubah warna sesuai keinginan */
+            background-color: rgb(140, 186, 159) !important;
         }
     </style>
 
