@@ -314,7 +314,7 @@ $sql = mysqli_query($conn, $query);
                         <hr>
                         <div class="d-flex flex-wrap">
                             <a href="explore.php?ing=<?php echo ($ing == 1) ? NULL : 1; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==1) echo "active" ?>">Honey</a>
-                            <a href="explore.php?ing=<?php echo ($ing == 2) ? NULL : 2; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==2) echo "active" ?>">Aloe Vera Gel</a>
+                            <a href="explore.php?ing=<?php echo ($ing == 2) ? NULL : 2; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==2) echo "active" ?>">Banana</a>
                             <a href="explore.php?ing=<?php echo ($ing == 3) ? NULL : 3; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==3) echo "active" ?>">Coconut Oil</a>
                             <a href="explore.php?ing=<?php echo ($ing == 4) ? NULL : 4; ?>&cat=<?php echo $cat ?>"class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==4) echo "active" ?>">Green Tea</a>
                             <a href="explore.php?ing=<?php echo ($ing == 5) ? NULL : 5; ?>&cat=<?php echo $cat ?>" class="btn btn-outline-dark me-3 mb-3 <?php if ($ing==5) echo "active" ?>">Yogurt</a>
