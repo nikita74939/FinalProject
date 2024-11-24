@@ -1,5 +1,3 @@
-<!-- lagi digarap!!!! -->
-
 <?php
 include 'koneksi.php';
 session_start();
@@ -400,6 +398,32 @@ $average_rating = $row['average_rating'] ? round($row['average_rating'], 1) : 0;
                 <?php
             }
             ?>
+                <div class="col-3">
+                    <div class="pt-4">
+                        <h4 class="pt-3"></h4>
+                    </div>
+                    <div class="pt-3 text-center">
+                        <h5>Related Post</h5>
+                    </div>
+                        <div id="postRecipe" class="row pt-1" style="position: relative;">
+                        <?php
+                        $query = mysqli_query($conn, "SELECT * FROM recipes ORDER BY created_at desc LIMIT 3");
+                        while ($data = mysqli_fetch_array($query)) {
+                            ?>
+                                <div class="card border-secondary my-3 card-post" id="<?php echo htmlspecialchars($data['recipe_id']); ?>">                                   
+                                    <div class="card-body text-center">
+                                        <img src="img/<?php echo htmlspecialchars($data['main_image']); ?>" alt="" style="width: 100%; height: 140px; object-fit: cover; object-position: center;">
+                                        <div>
+                                            <h5 class="card-title mt-2" style="font-size: 14px"><?php echo htmlspecialchars($data['title']); ?></h5>
+                                            <hr>
+                                            <p class="card-text pb-2" style="font-size: 12px"><?php echo htmlspecialchars($data['description']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                        <?php } ?>
+                        </div>
+                </div>
         </div>
     </div>
 
